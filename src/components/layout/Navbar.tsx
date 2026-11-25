@@ -12,15 +12,25 @@ interface NavLinkItem {
 
 const NAV_LINKS: NavLinkItem[] = [
   { label: 'Home', href: '#top' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Safety First', href: '#safety-promise' },
+  { label: 'How it works', href: '#how-it-works' },
+  { label: 'Health awareness', href: '#health-awareness' },
+  { label: 'Safety', href: '#safety' },
 ]
 
+export interface NavbarProps {
+  onCheckSymptoms?: () => void
+}
+
 /** Responsive, kid-accessible top navigation header for VITALORA. */
-export function Navbar() {
+export function Navbar({ onCheckSymptoms }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const closeMenu = () => setMobileOpen(false)
+
+  const handleCheckClick = () => {
+    closeMenu()
+    onCheckSymptoms?.()
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-border-warm bg-cream/95">
@@ -38,33 +48,44 @@ export function Navbar() {
               <span className="font-display text-2xl font-bold tracking-tight text-ink">
                 VITALORA
               </span>
-              <span className="hidden rounded-full bg-butter-soft px-2.5 py-0.5 text-xs font-extrabold text-ink sm:inline-block">
+              <span className="hidden rounded-full bg-butter-soft px-2.5 py-0.5 text-xs font-extrabold text-ink xl:inline-block">
                 Health Guide
               </span>
             </div>
           </a>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-1 lg:flex lg:gap-2">
             {NAV_LINKS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-full px-4 py-2 text-base font-bold text-cocoa transition-colors hover:bg-linen hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
+                className="whitespace-nowrap rounded-full px-3.5 py-2 text-base font-bold text-cocoa transition-colors hover:bg-linen hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
               >
                 {item.label}
               </a>
             ))}
           </div>
 
-          <div className="hidden md:block">
-            <Button
-              href="#how-it-works"
-              variant="coral"
-              size="sm"
-              leftIcon={<SparkleIcon className="h-4 w-4" />}
-            >
-              Explore Preview
-            </Button>
+          <div className="hidden lg:block">
+            {onCheckSymptoms ? (
+              <Button
+                variant="coral"
+                size="sm"
+                onClick={handleCheckClick}
+                leftIcon={<SparkleIcon className="h-4 w-4" />}
+              >
+                Check my symptoms
+              </Button>
+            ) : (
+              <Button
+                href="#get-started"
+                variant="coral"
+                size="sm"
+                leftIcon={<SparkleIcon className="h-4 w-4" />}
+              >
+                Check my symptoms
+              </Button>
+            )}
           </div>
 
           <button
@@ -73,7 +94,7 @@ export function Navbar() {
             aria-controls="mobile-nav-drawer"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border-warm bg-warm-white text-ink transition-colors hover:bg-linen focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-border-warm bg-warm-white text-ink transition-colors hover:bg-linen focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep lg:hidden"
           >
             {mobileOpen ? (
               <CloseIcon className="h-5 w-5" />
@@ -91,7 +112,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="overflow-hidden border-t-2 border-border-warm pb-5 pt-3 md:hidden"
+              className="overflow-hidden border-t-2 border-border-warm pb-5 pt-3 lg:hidden"
             >
               <div className="flex flex-col gap-2">
                 {NAV_LINKS.map((item) => (
@@ -105,16 +126,28 @@ export function Navbar() {
                   </a>
                 ))}
                 <div className="pt-2">
-                  <Button
-                    href="#how-it-works"
-                    variant="coral"
-                    size="md"
-                    fullWidth
-                    onClick={closeMenu}
-                    leftIcon={<SparkleIcon className="h-4 w-4" />}
-                  >
-                    Explore Preview
-                  </Button>
+                  {onCheckSymptoms ? (
+                    <Button
+                      variant="coral"
+                      size="md"
+                      fullWidth
+                      onClick={handleCheckClick}
+                      leftIcon={<SparkleIcon className="h-4 w-4" />}
+                    >
+                      Check my symptoms
+                    </Button>
+                  ) : (
+                    <Button
+                      href="#get-started"
+                      variant="coral"
+                      size="md"
+                      fullWidth
+                      onClick={closeMenu}
+                      leftIcon={<SparkleIcon className="h-4 w-4" />}
+                    >
+                      Check my symptoms
+                    </Button>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -32,7 +32,7 @@ export function VitaloraLogoMark({ className = 'h-10 w-10' }: LogoMarkProps) {
   )
 }
 
-/** Expressive custom SVG scene for the homepage hero establishing VITALORA's warm illustrated style. */
+/** Expressive custom SVG scene for the homepage hero establishing VITALORA's warm healthcare style. */
 export function HeroCompanionIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-[460px] select-none">
@@ -40,7 +40,7 @@ export function HeroCompanionIllustration() {
         viewBox="0 0 460 400"
         fill="none"
         role="img"
-        aria-label="Friendly illustrated health companion holding a green leaf sprout surrounded by warm colorful shapes"
+        aria-label="Friendly illustrated health companion holding a green care heart surrounded by warm colorful shapes"
         className="h-auto w-full"
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -61,6 +61,16 @@ export function HeroCompanionIllustration() {
         <circle cx="116" cy="54" r="6" fill="#FF7B61" />
         <circle cx="394" cy="296" r="8" fill="#F9CC59" />
         <circle cx="72" cy="284" r="7" fill="#2C875C" />
+
+        {/* Cozy floating band-aid accent top-right */}
+        <g transform="translate(328 54) rotate(18)">
+          <rect x="0" y="0" width="54" height="22" rx="11" fill="#FFE5DD" stroke="#26211D" strokeWidth="2.4" />
+          <rect x="17" y="4" width="20" height="14" rx="4" fill="#FFFCF8" />
+          <circle cx="24" cy="9" r="1.4" fill="#FF7B61" />
+          <circle cx="30" cy="9" r="1.4" fill="#FF7B61" />
+          <circle cx="24" cy="13" r="1.4" fill="#FF7B61" />
+          <circle cx="30" cy="13" r="1.4" fill="#FF7B61" />
+        </g>
 
         {/* Friendly companion character */}
         <g>
@@ -145,18 +155,18 @@ export function HeroCompanionIllustration() {
         {/* Warm floating speech note top-left */}
         <g>
           <rect
-            x="40"
+            x="38"
             y="148"
-            width="112"
+            width="114"
             height="46"
             rx="23"
             fill="#FFFCF8"
             stroke="#26211D"
             strokeWidth="2.5"
           />
-          <circle cx="64" cy="171" r="9" fill="#F9CC59" />
+          <circle cx="62" cy="171" r="9" fill="#F9CC59" />
           <path
-            d="M82 167H132M82 177H118"
+            d="M80 167H130M80 177H116"
             stroke="#26211D"
             strokeWidth="3"
             strokeLinecap="round"
@@ -192,71 +202,5 @@ export function HeroCompanionIllustration() {
         </g>
       </motion.svg>
     </div>
-  )
-}
-
-export type StepIllustrationVariant = 'listen' | 'ask' | 'guide'
-
-/** Warm spot illustrations used in the homepage step placeholders. */
-export function StepIllustration({ variant }: { variant: StepIllustrationVariant }) {
-  if (variant === 'listen') {
-    return (
-      <svg viewBox="0 0 72 72" fill="none" aria-hidden="true" className="h-14 w-14">
-        <circle cx="36" cy="36" r="32" fill="#FFE5DD" />
-        <path
-          d="M20 26C20 21.6 23.6 18 28 18H46C50.4 18 54 21.6 54 26V38C54 42.4 50.4 46 46 46H32L23 53V46H28C23.6 46 20 42.4 20 38V26Z"
-          fill="#FF7B61"
-          stroke="#26211D"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M37 37.5C36.3 37.5 29 32.3 29 27.5C29 24.8 31.1 23 33.6 23C35.2 23 36.4 23.8 37 24.9C37.6 23.8 38.8 23 40.4 23C42.9 23 45 24.8 45 27.5C45 32.3 37.7 37.5 37 37.5Z"
-          fill="#FFF9F2"
-        />
-      </svg>
-    )
-  }
-
-  if (variant === 'ask') {
-    return (
-      <svg viewBox="0 0 72 72" fill="none" aria-hidden="true" className="h-14 w-14">
-        <circle cx="36" cy="36" r="32" fill="#FFF3CC" />
-        <rect
-          x="19"
-          y="17"
-          width="34"
-          height="38"
-          rx="10"
-          fill="#F9CC59"
-          stroke="#26211D"
-          strokeWidth="2.5"
-        />
-        <circle cx="28" cy="29" r="3" fill="#26211D" />
-        <path d="M35 29H46" stroke="#26211D" strokeWidth="2.8" strokeLinecap="round" />
-        <circle cx="28" cy="39" r="3" fill="#2C875C" />
-        <path d="M35 39H44" stroke="#26211D" strokeWidth="2.8" strokeLinecap="round" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 72 72" fill="none" aria-hidden="true" className="h-14 w-14">
-      <circle cx="36" cy="36" r="32" fill="#DFF4E8" />
-      <path
-        d="M36 16L51 22V35C51 44.5 44.6 52.3 36 55C27.4 52.3 21 44.5 21 35V22L36 16Z"
-        fill="#2C875C"
-        stroke="#26211D"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M29.5 35.5L34 40L43 30.5"
-        stroke="#FFF9F2"
-        strokeWidth="3.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   )
 }

@@ -1,68 +1,129 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRightIcon,
+  CheckCircleIcon,
+  ClockNoticeIcon,
   HeartIcon,
-  ShieldAlertIcon,
+  PhoneUrgentIcon,
+  SparkleIcon,
   SunIcon,
 } from '../components/illustrations/Icons'
 import {
-  HeroCompanionIllustration,
-  StepIllustration,
-  type StepIllustrationVariant,
-} from '../components/illustrations/WarmSpotShapes'
+  BodyAwarenessIllustration,
+  StoryStepIllustration,
+} from '../components/illustrations/LandingIllustrations'
+import { HeroCompanionIllustration } from '../components/illustrations/WarmSpotShapes'
 import { Container } from '../components/layout/Container'
 import { PageLayout } from '../components/layout/PageLayout'
 import { Section } from '../components/layout/Section'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { OrganicBlob } from '../components/ui/OrganicBlob'
-import { vitaloraMotion, vitaloraPaletteShowcase } from '../styles/theme'
+import { SymptomCheckComingSoonModal } from '../components/ui/SymptomCheckComingSoonModal'
+import { vitaloraMotion } from '../styles/theme'
 
-interface StepPlaceholder {
-  number: string
+interface StoryStep {
+  step: 1 | 2 | 3
   title: string
   description: string
-  stageLabel: string
-  illustration: StepIllustrationVariant
-  accentBg: string
+  badgeBg: string
+  badgeText: string
+  examples?: string[]
 }
 
-const STEP_PLACEHOLDERS: StepPlaceholder[] = [
+const STORY_STEPS: StoryStep[] = [
   {
-    number: '01',
-    title: 'Share how you feel',
+    step: 1,
+    title: "Tell us how you're feeling.",
     description:
-      'Placeholder for simple tap-friendly symptom choices and everyday words.',
-    stageLabel: 'Coming in Stage 2',
-    illustration: 'listen',
-    accentBg: 'bg-coral-soft',
+      'Pick what feels off using friendly choices or type it in your own everyday words — no tricky medical terms needed.',
+    badgeBg: 'bg-coral text-ink border-[#E3593F]',
+    badgeText: 'Step 1',
+    examples: ['Headache', 'Fever', 'Sore throat', 'Tummy ache'],
   },
   {
-    number: '02',
-    title: 'Answer gentle questions',
+    step: 2,
+    title: 'Answer a few simple questions.',
     description:
-      'Placeholder for short, child-friendly follow-ups one question at a time.',
-    stageLabel: 'Coming in Stage 3',
-    illustration: 'ask',
-    accentBg: 'bg-butter-soft',
+      'VITALORA asks one short, gentle question at a time — like when it started or what helps it feel calmer — so nothing feels rushed.',
+    badgeBg: 'bg-butter text-ink border-[#D4A22B]',
+    badgeText: 'Step 2',
   },
   {
-    number: '03',
-    title: 'Get clear next steps',
+    step: 3,
+    title: 'Understand your next steps.',
     description:
-      'Placeholder for calming care basics and clear signals to visit a doctor.',
-    stageLabel: 'Coming in Stage 4',
-    illustration: 'guide',
-    accentBg: 'bg-green-soft',
+      'Get clear everyday precautions, signs to watch out for, and plain advice on whether home rest makes sense or when to see a doctor.',
+    badgeBg: 'bg-green text-warm-white border-[#1F6644]',
+    badgeText: 'Step 3',
   },
 ]
 
-/** Stage 1 homepage skeleton establishing VITALORA's warm, illustrated design identity. */
+const AWARENESS_POINTS = [
+  {
+    icon: ClockNoticeIcon,
+    iconBg: 'bg-butter-soft text-ink',
+    title: 'Notice small changes early',
+    description:
+      'Feeling unusually tired, warm, thirsty, or achy are gentle clues your body sends before things build up.',
+  },
+  {
+    icon: SunIcon,
+    iconBg: 'bg-coral-soft text-coral-deep',
+    title: 'Pay attention to simple details',
+    description:
+      'Noting when a symptom started and whether water, rest, or sleep helps makes it easier to spot patterns.',
+  },
+  {
+    icon: CheckCircleIcon,
+    iconBg: 'bg-green-soft text-green',
+    title: 'Share clearly with someone you trust',
+    description:
+      'Turning worried thoughts into plain words helps parents, caregivers, and doctors support you faster.',
+  },
+]
+
+const SAFETY_BOUNDARIES = [
+  {
+    title: 'VITALORA provides informational guidance.',
+    detail:
+      'Explanations and comfort tips are here to help you learn and prepare — in calm, everyday words.',
+  },
+  {
+    title: 'It is not a diagnostic tool.',
+    detail:
+      'VITALORA cannot diagnose an illness, rule out serious conditions, or prescribe medicine.',
+  },
+  {
+    title: 'It does not replace professional medical advice.',
+    detail:
+      'Always talk with a qualified doctor, nurse, or trusted adult when deciding on medical care.',
+  },
+]
+
+const EMERGENCY_SIGNS = [
+  'Trouble breathing or catching your breath',
+  'Chest pain, tightness, or heavy pressure',
+  'Sudden confusion, fainting, or trouble waking up',
+  'Severe bleeding, sudden weakness, or fast swelling',
+]
+
+/** Complete Stage 2 human-centered landing page for VITALORA. */
 export function HomePage() {
+  const [checkModalOpen, setCheckModalOpen] = useState(false)
+
+  const openCheckPreview = () => setCheckModalOpen(true)
+  const closeCheckPreview = () => setCheckModalOpen(false)
+
   return (
-    <PageLayout>
-      {/* Hero section */}
-      <Section id="top" tone="cream" className="relative overflow-hidden pb-16 pt-10 sm:pb-24 sm:pt-16">
+    <PageLayout onCheckSymptoms={openCheckPreview}>
+      {/* 1. HERO SECTION */}
+      <Section
+        id="top"
+        tone="cream"
+        className="relative overflow-hidden pb-16 pt-10 sm:pb-24 sm:pt-16"
+      >
         <OrganicBlob
           variant="butter"
           className="pointer-events-none absolute -left-28 -top-16 h-72 w-72 opacity-70"
@@ -78,40 +139,44 @@ export function HomePage() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: vitaloraMotion.ease }}
-              className="space-y-6 lg:col-span-6"
+              className="space-y-5 lg:col-span-6"
             >
               <Badge tone="pink" dotColor="#FF7B61">
-                VITALORA · Human-Centered Health Guide
+                VITALORA · Friendly Health Companion
               </Badge>
 
               <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
-                Understand your symptoms. Know your next step.
+                Care that feels calm when you don&apos;t feel your best.
               </h1>
 
-              <p className="max-w-xl text-lg leading-relaxed text-cocoa sm:text-xl">
-                VITALORA is a warm, friendly health guidance companion built to help
-                you explore possible causes, spot warning signs, and learn simple
-                precautions — without scary medical jargon.
+              <p className="font-display text-xl font-bold text-coral-deep sm:text-2xl">
+                Understand your symptoms. Know your next step.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-1">
+              <p className="max-w-xl text-lg leading-relaxed text-cocoa">
+                VITALORA helps kids, families, and adults make sense of everyday
+                symptoms in plain, reassuring words — with gentle precautions and
+                clear guidance on when to see a doctor.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Button
-                  href="#how-it-works"
                   variant="coral"
                   size="lg"
+                  onClick={openCheckPreview}
                   rightIcon={<ArrowRightIcon className="h-5 w-5" />}
                 >
-                  See How It Works
+                  Check my symptoms
                 </Button>
-                <Button href="#safety-promise" variant="outline" size="lg">
-                  Safety Promise
+                <Button href="#how-it-works" variant="outline" size="lg">
+                  How it works
                 </Button>
               </div>
 
-              <p className="inline-flex items-center gap-2 text-sm font-bold text-taupe">
+              <p className="inline-flex items-center gap-2 pt-1 text-sm font-bold text-taupe">
                 <SunIcon className="h-4 w-4 text-coral-deep" />
                 <span>
-                  Foundation ready · Interactive symptom guidance arrives in the next stages.
+                  Simple everyday words · No scary charts · Informational guidance only
                 </span>
               </p>
             </motion.div>
@@ -119,7 +184,11 @@ export function HomePage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: vitaloraMotion.ease, delay: 0.08 }}
+              transition={{
+                duration: 0.5,
+                ease: vitaloraMotion.ease,
+                delay: 0.08,
+              }}
               className="lg:col-span-6"
             >
               <HeroCompanionIllustration />
@@ -128,170 +197,275 @@ export function HomePage() {
         </Container>
       </Section>
 
-      {/* Placeholder Section 1: Planned 3-step journey */}
+      {/* 2. HOW IT WORKS — Visual storytelling rather than generic cards */}
       <Section id="how-it-works" tone="linen" topWave>
         <Container>
-          <motion.div {...vitaloraMotion.fadeUp} className="mx-auto max-w-2xl text-center">
+          <motion.div
+            {...vitaloraMotion.fadeUp}
+            className="mx-auto max-w-2xl text-center"
+          >
             <Badge tone="butter" dotColor="#D4A22B">
-              How VITALORA Works · Preview
+              How it works
             </Badge>
             <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-              Three gentle steps, easy enough for anyone
+              Three gentle steps — no medical guesswork
             </h2>
             <p className="mt-3 text-base text-cocoa sm:text-lg">
-              Below are placeholder sections for the guided symptom experience we
-              will build stage by stage.
+              Follow an easy, unhurried path built to help you feel heard and
+              know what to do next.
             </p>
           </motion.div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {STEP_PLACEHOLDERS.map((step, index) => (
-              <motion.article
-                key={step.number}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.4,
-                  ease: vitaloraMotion.ease,
-                  delay: index * 0.07,
-                }}
-                className="tactile-card flex flex-col justify-between rounded-[2rem] p-7"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <StepIllustration variant={step.illustration} />
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-extrabold text-ink ${step.accentBg}`}
-                    >
-                      Step {step.number}
-                    </span>
+          <div className="mt-14 space-y-14 sm:space-y-20">
+            {STORY_STEPS.map((item, idx) => {
+              const isReversed = idx % 2 === 1
+              return (
+                <motion.div
+                  key={item.step}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, ease: vitaloraMotion.ease }}
+                  className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12"
+                >
+                  <div
+                    className={`lg:col-span-6 ${
+                      isReversed ? 'lg:order-2' : 'lg:order-1'
+                    }`}
+                  >
+                    <StoryStepIllustration step={item.step} />
                   </div>
 
-                  <h3 className="mt-5 font-display text-2xl font-bold text-ink">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2.5 text-base leading-relaxed text-cocoa">
-                    {step.description}
-                  </p>
-                </div>
+                  <div
+                    className={`space-y-4 lg:col-span-6 ${
+                      isReversed ? 'lg:order-1' : 'lg:order-2'
+                    }`}
+                  >
+                    <div className="inline-flex items-center gap-3">
+                      <span
+                        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border-2 text-lg font-extrabold ${item.badgeBg}`}
+                      >
+                        {item.step}
+                      </span>
+                      <span className="text-sm font-extrabold uppercase tracking-wider text-taupe">
+                        {item.badgeText}
+                      </span>
+                    </div>
 
-                <div className="mt-6 border-t-2 border-dashed border-border-warm pt-4">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-taupe">
-                    {step.stageLabel}
-                  </span>
-                </div>
-              </motion.article>
-            ))}
+                    <h3 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+                      {item.title}
+                    </h3>
+
+                    <p className="max-w-lg text-lg leading-relaxed text-cocoa">
+                      {item.description}
+                    </p>
+
+                    {item.examples ? (
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        {item.examples.map((example) => (
+                          <span
+                            key={example}
+                            className="rounded-full border-2 border-border-warm bg-warm-white px-3.5 py-1.5 text-sm font-bold text-cocoa"
+                          >
+                            {example}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </Container>
       </Section>
 
-      {/* Placeholder Section 2: Safety & Design System Showcase */}
-      <Section id="safety-promise" tone="mint" topWave>
+      {/* 3. HEALTH AWARENESS */}
+      <Section id="health-awareness" tone="cream" topWave>
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-12">
-            <motion.div {...vitaloraMotion.fadeUp} className="space-y-5 lg:col-span-6">
-              <Badge tone="tomato" dotColor="#DE4436">
-                Design System & Safety First
-              </Badge>
-              <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-                Warm colors that speak clearly at a glance
-              </h2>
-              <p className="text-base leading-relaxed text-cocoa sm:text-lg">
-                Instead of cold dark dashboards, VITALORA uses soft cream surfaces
-                and friendly colors so anyone can tell calm care apart from
-                urgent alerts right away.
-              </p>
-
-              <div className="rounded-3xl border-2 border-tomato/35 bg-warm-white p-5 shadow-[0_4px_0_0_rgba(222,68,54,0.12)]">
-                <div className="flex items-start gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-tomato-soft text-tomato">
-                    <ShieldAlertIcon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-ink">
-                      Safety Placeholder · Not a Medical Diagnosis
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-cocoa">
-                      In later stages, urgent warning signs will stand out clearly in
-                      tomato red so users know right away when to seek professional
-                      medical help.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-5">
+              <BodyAwarenessIllustration />
+            </div>
 
             <motion.div
               {...vitaloraMotion.fadeUp}
-              className="rounded-[2rem] border-2 border-border-warm bg-warm-white p-6 shadow-[0_6px_0_0_rgba(38,33,29,0.06)] lg:col-span-6"
+              className="space-y-6 lg:col-span-7"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-display text-xl font-bold text-ink">
-                  VITALORA Color Palette
-                </h3>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-taupe">
-                  Foundation
-                </span>
-              </div>
+              <Badge tone="green" dotColor="#2C875C">
+                Health awareness
+              </Badge>
 
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {vitaloraPaletteShowcase.map((swatch) => (
-                  <div
-                    key={swatch.name}
-                    className="rounded-2xl border-2 border-border-warm bg-cream p-3"
-                  >
-                    <div
-                      className="flex h-14 items-end rounded-xl border border-ink/10 p-2.5"
-                      style={{ backgroundColor: swatch.hex, color: swatch.textHex }}
-                    >
-                      <span className="text-xs font-extrabold tracking-wide">
-                        {swatch.hex}
+              <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+                Listening to your body doesn&apos;t have to feel scary
+              </h2>
+
+              <p className="text-base leading-relaxed text-cocoa sm:text-lg">
+                Your body gives quiet signals every day. Paying calm attention
+                to how you feel helps you take simple steps early and talk more
+                clearly with someone who can help.
+              </p>
+
+              <ul className="space-y-5 pt-1">
+                {AWARENESS_POINTS.map((point) => {
+                  const Icon = point.icon
+                  return (
+                    <li key={point.title} className="flex items-start gap-4">
+                      <span
+                        className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-border-warm ${point.iconBg}`}
+                      >
+                        <Icon className="h-5 w-5" />
                       </span>
-                    </div>
-                    <p className="mt-2.5 text-sm font-extrabold text-ink">
-                      {swatch.name}
-                    </p>
-                    <p className="text-xs font-semibold text-cocoa">
-                      {swatch.role}
+                      <div>
+                        <h3 className="font-display text-xl font-bold text-ink">
+                          {point.title}
+                        </h3>
+                        <p className="mt-1 text-base leading-relaxed text-cocoa">
+                          {point.description}
+                        </p>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </motion.div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* 4. SAFETY */}
+      <Section id="safety" tone="mint" topWave>
+        <Container>
+          <motion.div {...vitaloraMotion.fadeUp} className="max-w-2xl">
+            <Badge tone="tomato" dotColor="#DE4436">
+              Safety first
+            </Badge>
+            <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
+              Helpful guidance with clear, honest boundaries
+            </h2>
+          </motion.div>
+
+          <div className="mt-10 grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
+            {/* Calm non-diagnostic boundaries */}
+            <motion.div
+              {...vitaloraMotion.fadeUp}
+              className="space-y-5 lg:col-span-6"
+            >
+              {SAFETY_BOUNDARIES.map((item) => (
+                <div
+                  key={item.title}
+                  className="flex items-start gap-3.5 rounded-3xl border-2 border-green/25 bg-warm-white p-5"
+                >
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-soft text-green">
+                    <CheckCircleIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-bold text-ink">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-base leading-relaxed text-cocoa">
+                      {item.detail}
                     </p>
                   </div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Clear tomato-red emergency guidance */}
+            <motion.div
+              {...vitaloraMotion.fadeUp}
+              className="rounded-[2rem] border-2 border-tomato/55 bg-warm-white p-6 shadow-[0_8px_0_0_rgba(222,68,54,0.12)] sm:p-8 lg:col-span-6"
+            >
+              <div className="flex items-center gap-3.5">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-tomato text-warm-white">
+                  <PhoneUrgentIcon className="h-6 w-6" />
+                </span>
+                <div>
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-tomato">
+                    Urgent care warning
+                  </span>
+                  <h3 className="font-display text-2xl font-bold text-ink">
+                    Emergency symptoms require immediate medical attention
+                  </h3>
+                </div>
+              </div>
+
+              <p className="mt-4 text-base leading-relaxed text-cocoa">
+                Do not wait for an online check-in if you or someone near you
+                notices sudden or severe signs like:
+              </p>
+
+              <ul className="mt-4 space-y-2.5">
+                {EMERGENCY_SIGNS.map((sign) => (
+                  <li
+                    key={sign}
+                    className="flex items-start gap-2.5 text-base font-bold text-ink"
+                  >
+                    <span
+                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-tomato"
+                      aria-hidden="true"
+                    />
+                    <span>{sign}</span>
+                  </li>
                 ))}
+              </ul>
+
+              <div className="mt-6 rounded-2xl bg-tomato-soft px-4 py-3.5 text-sm font-extrabold text-[#8F2118]">
+                Call your local emergency number or go to the nearest emergency
+                room right away.
               </div>
             </motion.div>
           </div>
         </Container>
       </Section>
 
-      {/* Placeholder Section 3: Closing CTA & Button Showcase */}
-      <Section tone="pink" topWave>
+      {/* 5. FINAL CTA */}
+      <Section id="get-started" tone="pink" topWave>
         <Container size="narrow">
           <motion.div
             {...vitaloraMotion.fadeUp}
-            className="rounded-[2.25rem] border-2 border-border-warm bg-warm-white px-6 py-10 text-center shadow-[0_8px_0_0_rgba(38,33,29,0.06)] sm:px-12 sm:py-14"
+            className="rounded-[2.5rem] border-2 border-border-warm bg-warm-white px-6 py-12 text-center shadow-[0_10px_0_0_rgba(38,33,29,0.06)] sm:px-14 sm:py-16"
           >
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-coral-soft text-coral-deep">
               <HeartIcon className="h-7 w-7" />
             </div>
-            <h2 className="mt-5 font-display text-3xl font-bold text-ink sm:text-4xl">
-              VITALORA foundation is ready
+
+            <div className="mt-4">
+              <Badge tone="butter" dotColor="#D4A22B">
+                Understand your symptoms. Know your next step.
+              </Badge>
+            </div>
+
+            <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
+              Ready to feel a little clearer about what&apos;s going on?
             </h2>
-            <p className="mx-auto mt-3 max-w-lg text-base text-cocoa sm:text-lg">
-              Understand your symptoms. Know your next step. Layout shells, warm
-              typography, and accessible buttons are ready for the interactive stages ahead.
+
+            <p className="mx-auto mt-3 max-w-lg text-base leading-relaxed text-cocoa sm:text-lg">
+              Begin with a calm check-in preview, or review how our simple
+              step-by-step guidance works for you and your family.
             </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
-              <Button href="#top" variant="coral" size="lg">
-                Back to Top
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Button
+                variant="coral"
+                size="lg"
+                onClick={openCheckPreview}
+                leftIcon={<SparkleIcon className="h-5 w-5" />}
+              >
+                Check my symptoms
               </Button>
               <Button href="#how-it-works" variant="green" size="lg">
-                Review Step Preview
+                How it works
               </Button>
             </div>
           </motion.div>
         </Container>
       </Section>
+
+      <SymptomCheckComingSoonModal
+        open={checkModalOpen}
+        onClose={closeCheckPreview}
+      />
     </PageLayout>
   )
 }

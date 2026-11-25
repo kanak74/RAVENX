@@ -3,8 +3,12 @@ import { VitaloraLogoMark } from '../illustrations/WarmSpotShapes'
 import { Badge } from '../ui/Badge'
 import { Container } from './Container'
 
-/** Warm, clear footer with hackathon prototype disclaimer and simple navigation. */
-export function Footer() {
+export interface FooterProps {
+  onCheckSymptoms?: () => void
+}
+
+/** Warm, clear footer with hackathon prototype disclaimer and consistent navigation. */
+export function Footer({ onCheckSymptoms }: FooterProps) {
   return (
     <footer className="border-t-2 border-border-warm bg-warm-white py-12 text-cocoa">
       <Container>
@@ -15,29 +19,43 @@ export function Footer() {
               <span className="font-display text-xl font-bold text-ink">
                 VITALORA
               </span>
-              <Badge tone="butter">Prototype · Stage 1</Badge>
+              <Badge tone="butter">Health Guide</Badge>
             </div>
-            <p className="text-sm font-bold text-ink">
+            <p className="text-sm font-extrabold text-ink">
               Understand your symptoms. Know your next step.
             </p>
             <p className="text-sm leading-relaxed text-cocoa">
-              A warm, human-centered health guidance prototype made to feel calm
-              and simple for everyone.
+              A warm, human-centered health guidance platform made to feel calm,
+              friendly, and effortless for everyone.
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-            <div className="flex flex-wrap gap-5 text-sm font-bold text-ink">
-              <a href="#top" className="hover:text-coral-deep">
-                Home
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-bold text-ink">
+            <a href="#top" className="hover:text-coral-deep">
+              Home
+            </a>
+            <a href="#how-it-works" className="hover:text-coral-deep">
+              How it works
+            </a>
+            <a href="#health-awareness" className="hover:text-coral-deep">
+              Health awareness
+            </a>
+            <a href="#safety" className="hover:text-coral-deep">
+              Safety
+            </a>
+            {onCheckSymptoms ? (
+              <button
+                type="button"
+                onClick={onCheckSymptoms}
+                className="cursor-pointer rounded-full bg-coral-soft px-3.5 py-1.5 text-sm font-extrabold text-ink transition-colors hover:bg-coral/40 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
+              >
+                Check my symptoms
+              </button>
+            ) : (
+              <a href="#get-started" className="text-coral-deep hover:underline">
+                Check my symptoms
               </a>
-              <a href="#how-it-works" className="hover:text-coral-deep">
-                How It Works
-              </a>
-              <a href="#safety-promise" className="hover:text-coral-deep">
-                Safety First
-              </a>
-            </div>
+            )}
           </div>
         </div>
 
@@ -45,8 +63,8 @@ export function Footer() {
           <p className="flex items-start gap-2.5 font-semibold text-cocoa">
             <HeartIcon className="mt-0.5 h-4 w-4 shrink-0 text-tomato" />
             <span>
-              Hackathon educational prototype — not a medical diagnostic tool.
-              Always talk with a doctor or trusted adult when you need care.
+              Informational health guidance prototype — not a medical diagnostic
+              tool. Always consult a doctor or seek emergency care when needed.
             </span>
           </p>
           <span className="shrink-0 text-xs font-bold text-taupe">

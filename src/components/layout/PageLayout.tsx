@@ -5,10 +5,11 @@ import { Navbar } from './Navbar'
 
 export interface PageLayoutProps {
   children: ReactNode
+  onCheckSymptoms?: () => void
 }
 
 /** Top-level layout shell supplying motion preferences, skip link, header, and footer. */
-export function PageLayout({ children }: PageLayoutProps) {
+export function PageLayout({ children, onCheckSymptoms }: PageLayoutProps) {
   return (
     <MotionConfig reducedMotion="user">
       <div className="flex min-h-screen flex-col bg-cream text-ink">
@@ -18,11 +19,11 @@ export function PageLayout({ children }: PageLayoutProps) {
         >
           Skip to main content
         </a>
-        <Navbar />
+        <Navbar onCheckSymptoms={onCheckSymptoms} />
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <Footer />
+        <Footer onCheckSymptoms={onCheckSymptoms} />
       </div>
     </MotionConfig>
   )
