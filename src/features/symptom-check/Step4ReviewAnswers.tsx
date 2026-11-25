@@ -1,7 +1,6 @@
 import {
   ArrowRightIcon,
   CheckCircleIcon,
-  HeartIcon,
 } from '../../components/illustrations/Icons'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
@@ -17,13 +16,10 @@ import type { SymptomCheckInData } from './types'
 
 export interface Step4ReviewAnswersProps {
   data: SymptomCheckInData
-  assessmentPreviewOpen: boolean
   onEditStep: (step: CheckInStep) => void
   onBack: () => void
   onContinueToAssessment: () => void
-  onCloseAssessmentPreview: () => void
   onStartOver: () => void
-  onBackToHome: () => void
 }
 
 function getOptionLabel(
@@ -37,13 +33,10 @@ function getOptionLabel(
 /** Step 4: Clean summary sheet with quick edit controls and honest Stage 4 handoff. */
 export function Step4ReviewAnswers({
   data,
-  assessmentPreviewOpen,
   onEditStep,
   onBack,
   onContinueToAssessment,
-  onCloseAssessmentPreview,
   onStartOver,
-  onBackToHome,
 }: Step4ReviewAnswersProps) {
   const selectedLabels = data.selectedIds
     .map((id) => getSymptomById(id)?.label)
@@ -51,48 +44,9 @@ export function Step4ReviewAnswers({
 
   const relevantQuestions = getContextualQuestions(data.selectedIds)
 
-  if (assessmentPreviewOpen) {
-    return (
-      <div className="rounded-3xl border border-hairline bg-paper p-7 text-center shadow-[0_14px_38px_-14px_rgba(30,36,33,0.08)] sm:p-12">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-coral-soft text-coral">
-          <HeartIcon className="h-6 w-6" />
-        </div>
-
-        <div className="mt-4">
-          <Badge tone="sand">Stage 4 · Coming Next</Badge>
-        </div>
-
-        <h1 className="mt-4 font-display text-3xl font-semibold text-charcoal sm:text-4xl">
-          Assessment coming in Stage 4
-        </h1>
-
-        <p className="mx-auto mt-3.5 max-w-xl text-base leading-relaxed text-slate">
-          Your check-in answers are neatly summarized, and{' '}
-          <strong>no automated medical assessment has been run yet</strong>. In
-          Stage 4, VITALORA will turn these details into clear health
-          information, everyday precautions, and guidance on when to visit a
-          doctor.
-        </p>
-
-        <div className="mx-auto mt-6 max-w-xl rounded-xl border border-forest/20 bg-sage-mist px-5 py-3.5 text-sm font-medium text-forest">
-          VITALORA provides informational guidance only — never a medical
-          diagnosis or replacement for professional care.
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-          <Button variant="coral" size="lg" onClick={onCloseAssessmentPreview}>
-            Review or edit answers
-          </Button>
-          <Button variant="outline" size="lg" onClick={onStartOver}>
-            Start new check-in
-          </Button>
-          <Button variant="ghost" size="lg" onClick={onBackToHome}>
-            Back to VITALORA home
-          </Button>
-        </div>
-      </div>
-    )
-  }
+  const confirmedNaturalSuggestions = data.naturalDescription.suggestions.filter(
+    (s) => s.confirmed,
+  )
 
   return (
     <div className="space-y-7">
@@ -142,6 +96,35 @@ export function Step4ReviewAnswers({
               No specific symptoms selected (exploring mode).
             </p>
           )}
+
+          {confirmedNaturalSuggestions.length > 0 ? (
+            <div className="mt-3">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-stone">
+                Confirmed from your description
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {confirmedNaturalSuggestions.map((s) => (
+                  <span
+                    key={s.symptomId}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-sage/40 bg-sage-mist/60 px-3 py-1 text-xs font-semibold text-forest"
+                  >
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {data.naturalDescription.rawText.trim() ? (
+            <div className="mt-3 rounded-xl border border-hairline bg-ivory px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-stone">
+                Your description
+              </p>
+              <p className="mt-1 text-sm text-slate italic">
+                &ldquo;{data.naturalDescription.rawText.trim()}&rdquo;
+              </p>
+            </div>
+          ) : null}
         </section>
 
         {/* Symptom details */}
@@ -185,6 +168,47 @@ export function Step4ReviewAnswers({
               </dd>
             </div>
           </dl>
+
+          {/* Fever / temperature summary */}
+          {data.feverCheck.sensations.length > 0 || data.feverCheck.measurementStatus ? (
+            <div className="mt-3 rounded-xl border border-coral/15 bg-coral-soft/30 px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-coral">
+                Fever / Temperature
+              </p>
+              {data.feverCheck.sensations.length > 0 ? (
+                <p className="mt-1 text-sm text-charcoal">
+                  Sensations: {data.feverCheck.sensations.map((s) => s.replace(/-/g, ' ')).join(', ')}
+                </p>
+              ) : null}
+              {data.feverCheck.measuredTemperature?.value ? (
+                <p className="mt-0.5 text-sm text-charcoal">
+                  Measured: {data.feverCheck.measuredTemperature.value}°{data.feverCheck.measuredTemperature.unit}
+                  {data.feverCheck.measuredTemperature.site ? ` (${data.feverCheck.measuredTemperature.site})` : ''}
+                  {' '}— <span className="text-xs text-stone italic">Unverified self-entered reading</span>
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+
+          {/* Health measurements summary */}
+          {(data.measurements.bloodPressure || data.measurements.heartRate || data.measurements.spo2) ? (
+            <div className="mt-3 rounded-xl border border-hairline bg-ivory px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-stone">
+                Health readings <span className="font-normal text-stone/70">(unverified)</span>
+              </p>
+              <div className="mt-2 flex flex-wrap gap-3 text-sm">
+                {data.measurements.bloodPressure?.systolic ? (
+                  <span className="text-charcoal">BP: {data.measurements.bloodPressure.systolic}/{data.measurements.bloodPressure.diastolic} mmHg</span>
+                ) : null}
+                {data.measurements.heartRate ? (
+                  <span className="text-charcoal">HR: {data.measurements.heartRate} bpm</span>
+                ) : null}
+                {data.measurements.spo2 ? (
+                  <span className="text-charcoal">SpO2: {data.measurements.spo2}%</span>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
         </section>
 
         {/* Follow-up answers */}
@@ -202,45 +226,59 @@ export function Step4ReviewAnswers({
             </Button>
           </div>
 
-          <dl className="mt-4 space-y-2.5">
-            {relevantQuestions.map((question) => {
-              const rawAnswer = data.contextualAnswers[question.id]
-              const displayAnswer =
-                rawAnswer === 'skipped'
-                  ? 'Skipped'
-                  : rawAnswer
-                    ? getOptionLabel(question.options, rawAnswer)
-                    : 'Not answered'
+          {relevantQuestions.length === 0 ? (
+            <p className="mt-3 text-sm font-medium text-slate">No follow-up questions for your selected symptoms.</p>
+          ) : (
+            <dl className="mt-4 space-y-2.5">
+              {relevantQuestions.map((question) => {
+                const rawAnswer = data.contextualAnswers[question.id]
+                const displayAnswer =
+                  rawAnswer === 'skipped'
+                    ? 'Skipped'
+                    : rawAnswer
+                      ? getOptionLabel(question.options, rawAnswer)
+                      : 'Not answered'
 
-              return (
-                <div
-                  key={question.id}
-                  className="flex flex-col justify-between gap-1 rounded-xl border border-hairline bg-ivory px-4 py-3 sm:flex-row sm:items-center sm:gap-4"
-                >
-                  <dt className="text-sm font-medium text-slate">
-                    {question.question}
-                  </dt>
-                  <dd className="shrink-0 text-sm font-semibold text-charcoal">
-                    {displayAnswer}
-                  </dd>
-                </div>
-              )
-            })}
-          </dl>
+                return (
+                  <div
+                    key={question.id}
+                    className="flex flex-col justify-between gap-1 rounded-xl border border-hairline bg-ivory px-4 py-3 sm:flex-row sm:items-center sm:gap-4"
+                  >
+                    <dt className="text-sm font-medium text-slate">
+                      {question.question}
+                    </dt>
+                    <dd className="shrink-0 text-sm font-semibold text-charcoal">
+                      {displayAnswer}
+                    </dd>
+                  </div>
+                )
+              })}
+            </dl>
+          )}
         </section>
       </div>
 
+      {/* Disclaimer notice */}
+      <div className="rounded-xl border border-forest/20 bg-sage-mist px-5 py-3.5 text-sm font-medium text-forest">
+        VITALORA provides informational guidance only — never a medical diagnosis or replacement for professional care.
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6">
-        <Button variant="outline" size="lg" onClick={onBack}>
-          Back
-        </Button>
+        <div className="flex gap-3">
+          <Button variant="outline" size="lg" onClick={onBack}>
+            Back
+          </Button>
+          <Button variant="ghost" size="sm" onClick={onStartOver}>
+            Start over
+          </Button>
+        </div>
         <Button
           variant="forest"
           size="lg"
           onClick={onContinueToAssessment}
           rightIcon={<ArrowRightIcon className="h-4 w-4" />}
         >
-          Continue to assessment
+          Get my assessment
         </Button>
       </div>
     </div>

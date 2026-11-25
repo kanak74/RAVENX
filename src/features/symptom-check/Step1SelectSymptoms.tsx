@@ -14,16 +14,23 @@ import {
   getRegionsForSymptomIds,
   type BodyRegionId,
 } from './bodyRegions'
+import { interpretNaturalSymptomText } from './symptomInterpreter'
 import {
   SYMPTOM_CATEGORIES,
   filterSymptoms,
   getSymptomById,
 } from './symptomCatalog'
-import type { SymptomCategoryId } from './types'
+import type {
+  NaturalDescriptionState,
+  NaturalDescriptionSuggestion,
+  SymptomCategoryId,
+} from './types'
 
 export interface Step1SelectSymptomsProps {
   selectedIds: string[]
+  naturalDescription: NaturalDescriptionState
   onToggleSymptom: (id: string) => void
+  onChangeNaturalDescription: (next: NaturalDescriptionState) => void
   onContinue: () => void
 }
 
@@ -35,10 +42,12 @@ const CATEGORY_DOT: Record<SymptomCategoryId, string> = {
   urgent: 'bg-urgent',
 }
 
-/** Step 1: Searchable symptom selector paired with a live anatomical body-region visualizer. */
+/** Step 1: Searchable symptom selector with plain-language descriptions and natural input. */
 export function Step1SelectSymptoms({
   selectedIds,
+  naturalDescription,
   onToggleSymptom,
+  onChangeNaturalDescription,
   onContinue,
 }: Step1SelectSymptomsProps) {
   const [searchQuery, setSearchQuery] = useState('')
@@ -72,6 +81,33 @@ export function Step1SelectSymptoms({
     setRegionFilter((prev) => (prev === regionId ? null : regionId))
   }
 
+  const handleNaturalDescriptionChange = (text: string) => {
+    const result = interpretNaturalSymptomText(text, naturalDescription.suggestions)
+    onChangeNaturalDescription({
+      rawText: text,
+      suggestions: result.suggestions,
+      suggestedFeverSensations: result.suggestedFeverSensations,
+    })
+  }
+
+  const handleConfirmSuggestion = (symptomId: string) => {
+    const nextSuggestions: NaturalDescriptionSuggestion[] = naturalDescription.suggestions.map((s) =>
+      s.symptomId === symptomId ? { ...s, confirmed: true } : s,
+    )
+    onChangeNaturalDescription({ ...naturalDescription, suggestions: nextSuggestions })
+    // Also add to selectedIds
+    if (!selectedIds.includes(symptomId)) {
+      onToggleSymptom(symptomId)
+    }
+  }
+
+  const handleDismissSuggestion = (symptomId: string) => {
+    const nextSuggestions = naturalDescription.suggestions.filter((s) => s.symptomId !== symptomId)
+    onChangeNaturalDescription({ ...naturalDescription, suggestions: nextSuggestions })
+  }
+
+  const unconfirmedSuggestions = naturalDescription.suggestions.filter((s) => !s.confirmed)
+
   return (
     <div className="space-y-7">
       <div className="space-y-2.5">
@@ -82,9 +118,71 @@ export function Step1SelectSymptoms({
           What symptoms are bothering you today?
         </h1>
         <p className="max-w-2xl text-base leading-relaxed text-slate">
-          Select everything that feels relevant, filter by body area on the map,
-          or press <strong>Continue</strong> at any time to explore.
+          Select everything that feels relevant, describe it in your own words,
+          filter by body area on the map, or press <strong>Continue</strong> at
+          any time to explore.
         </p>
+      </div>
+
+      {/* Natural language description input */}
+      <div className="rounded-2xl border border-forest/20 bg-sage-mist/40 p-5">
+        <label
+          htmlFor="natural-description"
+          className="mb-2 block text-sm font-semibold text-charcoal"
+        >
+          Describe what you&rsquo;re feeling in your own words{' '}
+          <span className="font-normal text-stone">(optional)</span>
+        </label>
+        <p className="mb-3 text-xs text-stone">
+          For example: &ldquo;My head feels hot but my hands are cold.&rdquo; or
+          &ldquo;I feel weak and shaky.&rdquo; VITALORA will suggest matching
+          symptoms — you choose which ones to add.
+        </p>
+        <textarea
+          id="natural-description"
+          value={naturalDescription.rawText}
+          onChange={(e) => handleNaturalDescriptionChange(e.target.value)}
+          rows={3}
+          placeholder="Describe how you feel..."
+          className="w-full resize-none rounded-xl border border-hairline bg-paper px-4 py-3 text-sm text-charcoal placeholder:text-stone focus:border-forest focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+        />
+
+        {/* Unconfirmed suggestions */}
+        {unconfirmedSuggestions.length > 0 ? (
+          <div className="mt-4">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-forest">
+              Suggested from your description — tap to add:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {unconfirmedSuggestions.map((suggestion) => (
+                <div
+                  key={suggestion.symptomId}
+                  className="inline-flex items-center gap-1 overflow-hidden rounded-full border border-forest/25 bg-paper"
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleConfirmSuggestion(suggestion.symptomId)}
+                    className="cursor-pointer px-3 py-1.5 text-xs font-semibold text-charcoal hover:bg-sage-mist transition-colors"
+                    title={`Matched: "${suggestion.matchedPhrase}"`}
+                  >
+                    + {suggestion.label}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDismissSuggestion(suggestion.symptomId)}
+                    aria-label={`Dismiss ${suggestion.label}`}
+                    className="cursor-pointer px-2 py-1.5 text-stone hover:text-urgent transition-colors"
+                  >
+                    <CloseIcon className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-stone">
+              These are suggestions based on keywords — not a diagnosis. Only add ones that match how you feel.
+            </p>
+          </div>
+        ) : null}
       </div>
 
       <div className="grid items-start gap-8 lg:grid-cols-12">
@@ -122,11 +220,10 @@ export function Step1SelectSymptoms({
             <button
               type="button"
               onClick={() => setRegionFilter(null)}
-              className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
-                regionFilter === null
-                  ? 'border-forest bg-forest text-paper'
-                  : 'border-hairline bg-paper text-slate hover:border-hairline-strong hover:text-charcoal'
-              }`}
+              className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${regionFilter === null
+                ? 'border-forest bg-forest text-paper'
+                : 'border-hairline bg-paper text-slate hover:border-hairline-strong hover:text-charcoal'
+                }`}
             >
               All areas
             </button>
@@ -138,11 +235,10 @@ export function Step1SelectSymptoms({
                   type="button"
                   aria-pressed={active}
                   onClick={() => handleToggleRegionFilter(reg.id)}
-                  className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    active
-                      ? 'border-coral bg-coral-soft text-coral'
-                      : 'border-hairline bg-paper text-slate hover:border-hairline-strong hover:text-charcoal'
-                  }`}
+                  className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${active
+                    ? 'border-coral bg-coral-soft text-coral'
+                    : 'border-hairline bg-paper text-slate hover:border-hairline-strong hover:text-charcoal'
+                    }`}
                 >
                   {reg.shortLabel}
                 </button>
@@ -224,9 +320,8 @@ export function Step1SelectSymptoms({
                       />
                       <h2
                         id={`cat-${category.id}`}
-                        className={`font-sans text-sm font-semibold tracking-wide ${
-                          isUrgentCategory ? 'text-urgent' : 'text-charcoal'
-                        }`}
+                        className={`font-sans text-sm font-semibold tracking-wide ${isUrgentCategory ? 'text-urgent' : 'text-charcoal'
+                          }`}
                       >
                         {category.title}
                       </h2>
@@ -248,31 +343,33 @@ export function Step1SelectSymptoms({
                             type="button"
                             aria-pressed={isSelected}
                             onClick={() => onToggleSymptom(symptom.id)}
-                            className={`flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${
-                              isSelected
-                                ? activeClasses
-                                : 'border-hairline bg-paper text-charcoal hover:border-hairline-strong hover:bg-sand/40'
-                            }`}
+                            className={`flex min-h-[60px] w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${isSelected
+                              ? activeClasses
+                              : 'border-hairline bg-paper text-charcoal hover:border-hairline-strong hover:bg-sand/40'
+                              }`}
                           >
                             <div className="min-w-0">
                               <span className="block text-sm font-semibold leading-snug text-charcoal sm:text-[15px]">
                                 {symptom.label}
                               </span>
+                              {/* Plain description shown below label */}
+                              <span className="mt-0.5 block text-xs italic text-stone leading-snug">
+                                {symptom.plainDescription}
+                              </span>
                               {symptom.helperText ? (
-                                <span className="mt-0.5 block text-xs text-stone">
+                                <span className="mt-0.5 block text-xs text-stone/70">
                                   {symptom.helperText}
                                 </span>
                               ) : null}
                             </div>
 
                             <span
-                              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                                isSelected
-                                  ? isUrgentCategory
-                                    ? 'border-urgent bg-urgent text-paper'
-                                    : 'border-coral bg-coral text-paper'
-                                  : 'border-hairline-strong bg-ivory text-transparent'
-                              }`}
+                              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${isSelected
+                                ? isUrgentCategory
+                                  ? 'border-urgent bg-urgent text-paper'
+                                  : 'border-coral bg-coral text-paper'
+                                : 'border-hairline-strong bg-ivory text-transparent'
+                                }`}
                               aria-hidden="true"
                             >
                               <CheckCircleIcon className="h-3.5 w-3.5" />

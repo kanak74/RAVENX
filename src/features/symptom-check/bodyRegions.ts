@@ -36,6 +36,7 @@ export const BODY_REGIONS: BodyRegionDefinition[] = [
     symptomIds: [
       'headache',
       'fever',
+      'chills',
       'sore-throat',
       'runny-nose',
       'dizziness',
@@ -49,9 +50,9 @@ export const BODY_REGIONS: BodyRegionDefinition[] = [
     shortLabel: 'Chest & Lungs',
     systemLabel: 'Thoracic · Respiratory',
     summary:
-      'Persistent cough, feeling winded at rest, chest tightness, or uncomfortable pressure.',
+      'Persistent cough, feeling winded at rest, chest tightness, or heart palpitations.',
     whatToNotice:
-      'New chest pressure or shortness of breath triggers immediate urgent guidance instead of waiting.',
+      'New chest pressure, palpitations with dizziness, or shortness of breath should receive prompt urgent evaluation.',
     hotspotPercent: { x: 52.4, y: 31.8 },
     anchorSvg: { x: 220, y: 178 },
     calloutTargetSvg: { x: 364, y: 172, align: 'right' },
@@ -59,6 +60,7 @@ export const BODY_REGIONS: BodyRegionDefinition[] = [
       'cough',
       'shortness-of-breath',
       'chest-discomfort',
+      'palpitations',
     ],
     accentHex: '#174B42',
   },

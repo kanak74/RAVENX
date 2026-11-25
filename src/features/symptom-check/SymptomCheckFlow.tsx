@@ -11,7 +11,15 @@ import { Step1SelectSymptoms } from './Step1SelectSymptoms'
 import { Step2SymptomDetails } from './Step2SymptomDetails'
 import { Step3ContextualQuestions } from './Step3ContextualQuestions'
 import { Step4ReviewAnswers } from './Step4ReviewAnswers'
-import type { SymptomCheckInData, SymptomDetailsState } from './types'
+import { Step5AssessmentResult } from './Step5AssessmentResult'
+import { generateAssessmentReport } from './assessmentEngine'
+import type {
+  FeverCheckState,
+  HealthMeasurementsState,
+  NaturalDescriptionState,
+  SymptomCheckInData,
+  SymptomDetailsState,
+} from './types'
 
 export interface SymptomCheckFlowProps {
   onExitCheckIn: () => void
@@ -21,7 +29,10 @@ export interface SymptomCheckFlowProps {
 function createInitialData(initialSymptomIds?: string[]): SymptomCheckInData {
   return {
     selectedIds: initialSymptomIds ? [...initialSymptomIds] : [],
+    naturalDescription: { rawText: '', suggestions: [], suggestedFeverSensations: [] },
     details: {},
+    feverCheck: { sensations: [] },
+    measurements: {},
     contextualAnswers: {},
   }
 }
@@ -40,11 +51,16 @@ export function SymptomCheckFlow({
   const [data, setData] = useState<SymptomCheckInData>(() =>
     createInitialData(initialSymptomIds),
   )
-  const [assessmentPreviewOpen, setAssessmentPreviewOpen] = useState(false)
+  const [showAssessment, setShowAssessment] = useState(false)
 
   const emergencyAssessment = useMemo(
     () => evaluateEmergencySafety(data),
     [data],
+  )
+
+  const assessmentReport = useMemo(
+    () => (showAssessment ? generateAssessmentReport(data) : null),
+    [showAssessment, data],
   )
 
   const scrollTop = () => {
@@ -52,7 +68,7 @@ export function SymptomCheckFlow({
   }
 
   const goToStep = (nextStep: CheckInStep) => {
-    setAssessmentPreviewOpen(false)
+    setShowAssessment(false)
     setStep(nextStep)
     setHighestStepReached((prev) => (nextStep > prev ? nextStep : prev))
     scrollTop()
@@ -67,6 +83,18 @@ export function SymptomCheckFlow({
 
       return { ...prev, selectedIds }
     })
+  }
+
+  const handleChangeNaturalDescription = (next: NaturalDescriptionState) => {
+    setData((prev) => ({ ...prev, naturalDescription: next }))
+  }
+
+  const handleChangeFeverCheck = (next: FeverCheckState) => {
+    setData((prev) => ({ ...prev, feverCheck: next }))
+  }
+
+  const handleChangeMeasurements = (next: HealthMeasurementsState) => {
+    setData((prev) => ({ ...prev, measurements: next }))
   }
 
   const handleChangeDetails = (details: SymptomDetailsState) => {
@@ -104,14 +132,20 @@ export function SymptomCheckFlow({
 
   const handleStartOver = () => {
     setData(createInitialData())
-    setAssessmentPreviewOpen(false)
+    setShowAssessment(false)
     setStep(1)
     setHighestStepReached(1)
     scrollTop()
   }
 
+  const handleContinueToAssessment = () => {
+    setShowAssessment(true)
+    scrollTop()
+  }
+
   const hasAnyInput =
     data.selectedIds.length > 0 ||
+    data.naturalDescription.rawText.trim().length > 0 ||
     Object.keys(data.details).length > 0 ||
     Object.keys(data.contextualAnswers).length > 0
 
@@ -136,41 +170,58 @@ export function SymptomCheckFlow({
             ) : null}
           </div>
 
-          <CheckInProgress
-            currentStep={step}
-            highestStepReached={highestStepReached}
-            onSelectStep={goToStep}
-          />
+          {!showAssessment ? (
+            <CheckInProgress
+              currentStep={step}
+              highestStepReached={highestStepReached}
+              onSelectStep={goToStep}
+            />
+          ) : null}
 
           <EmergencyAlertBanner assessment={emergencyAssessment} />
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${step}-${assessmentPreviewOpen ? 'stage4' : 'active'}`}
+              key={showAssessment ? 'assessment' : `step-${step}`}
               initial={prefersReduced ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReduced ? undefined : { opacity: 0, y: -6 }}
               transition={{ duration: prefersReduced ? 0 : 0.2 }}
             >
-              {step === 1 ? (
+              {showAssessment && assessmentReport ? (
+                <Step5AssessmentResult
+                  report={assessmentReport}
+                  onEditAnswers={() => setShowAssessment(false)}
+                  onStartOver={handleStartOver}
+                  onBackToHome={onExitCheckIn}
+                />
+              ) : null}
+
+              {!showAssessment && step === 1 ? (
                 <Step1SelectSymptoms
                   selectedIds={data.selectedIds}
+                  naturalDescription={data.naturalDescription}
                   onToggleSymptom={handleToggleSymptom}
+                  onChangeNaturalDescription={handleChangeNaturalDescription}
                   onContinue={() => goToStep(2)}
                 />
               ) : null}
 
-              {step === 2 ? (
+              {!showAssessment && step === 2 ? (
                 <Step2SymptomDetails
                   details={data.details}
                   hasSelectedSymptoms={data.selectedIds.length > 0}
+                  feverCheck={data.feverCheck}
+                  measurements={data.measurements}
                   onChangeDetails={handleChangeDetails}
+                  onChangeFeverCheck={handleChangeFeverCheck}
+                  onChangeMeasurements={handleChangeMeasurements}
                   onBack={() => goToStep(1)}
                   onContinue={() => goToStep(3)}
                 />
               ) : null}
 
-              {step === 3 ? (
+              {!showAssessment && step === 3 ? (
                 <Step3ContextualQuestions
                   selectedIds={data.selectedIds}
                   answers={data.contextualAnswers}
@@ -181,19 +232,13 @@ export function SymptomCheckFlow({
                 />
               ) : null}
 
-              {step === 4 ? (
+              {!showAssessment && step === 4 ? (
                 <Step4ReviewAnswers
                   data={data}
-                  assessmentPreviewOpen={assessmentPreviewOpen}
                   onEditStep={goToStep}
                   onBack={() => goToStep(3)}
-                  onContinueToAssessment={() => {
-                    setAssessmentPreviewOpen(true)
-                    scrollTop()
-                  }}
-                  onCloseAssessmentPreview={() => setAssessmentPreviewOpen(false)}
+                  onContinueToAssessment={handleContinueToAssessment}
                   onStartOver={handleStartOver}
-                  onBackToHome={onExitCheckIn}
                 />
               ) : null}
             </motion.div>

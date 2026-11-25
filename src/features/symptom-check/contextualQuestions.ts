@@ -3,11 +3,12 @@ import type { ContextualQuestion } from './types'
 const CONTEXTUAL_QUESTION_BANK: ContextualQuestion[] = [
   {
     id: 'fever-temp',
-    symptomIds: ['fever'],
-    question: 'Have you measured your temperature?',
-    helper: 'If you do not have a thermometer nearby, that is completely okay.',
+    symptomIds: ['fever', 'chills'],
+    question: 'Have you measured your temperature with a thermometer?',
+    helper:
+      'If you entered a reading in Step 2 or Optional Measurements, select what fits or skip this.',
     options: [
-      { value: 'low', label: 'Yes — mild fever (under 100.4°F / 38°C)' },
+      { value: 'low', label: 'Yes — mild elevation (under 100.4°F / 38°C)' },
       { value: 'moderate', label: 'Yes — 100.4°F to 102°F (38°C to 39°C)' },
       { value: 'high', label: 'Yes — above 102°F (39°C)' },
       { value: 'not-checked', label: 'No, I have not checked yet' },
@@ -21,6 +22,28 @@ const CONTEXTUAL_QUESTION_BANK: ContextualQuestion[] = [
       { value: 'gradual', label: 'Built up gradually' },
       { value: 'sudden', label: 'Started very suddenly' },
       { value: 'unsure', label: 'Not sure' },
+    ],
+  },
+  {
+    id: 'headache-redflags',
+    symptomIds: ['headache'],
+    question: 'Do you also notice neck stiffness or eyes hurting in bright light?',
+    helper: 'Helping check warning signs that need fast medical attention.',
+    options: [
+      { value: 'neither', label: 'No, neither of those' },
+      { value: 'light-sensitive', label: 'Yes, bright light hurts my eyes' },
+      { value: 'stiff-neck', label: 'Yes, neck feels stiff when bending forward' },
+      { value: 'both', label: 'Yes, both stiff neck and light sensitivity' },
+    ],
+  },
+  {
+    id: 'palpitations-pattern',
+    symptomIds: ['palpitations'],
+    question: 'What is the racing or pounding heartbeat doing right now?',
+    options: [
+      { value: 'brief-stopped', label: 'It happened briefly and already settled' },
+      { value: 'comes-and-goes', label: 'It keeps coming and going' },
+      { value: 'ongoing-now', label: 'My heart is still racing right now' },
     ],
   },
   {
@@ -57,11 +80,12 @@ const CONTEXTUAL_QUESTION_BANK: ContextualQuestion[] = [
   {
     id: 'rash-spread',
     symptomIds: ['skin-rash'],
-    question: 'Is the skin rash spreading or staying in one place?',
+    question: 'Does the rash stay red when a clear glass is pressed against it?',
+    helper: 'NHS checks advise watching rashes that do not fade under glass pressure.',
     options: [
-      { value: 'one-spot', label: 'Staying in one spot' },
-      { value: 'slowly-spreading', label: 'Spreading slowly' },
-      { value: 'quickly-spreading', label: 'Spreading quickly' },
+      { value: 'fades', label: 'Yes, spots fade briefly when pressed' },
+      { value: 'slowly-spreading', label: 'Unsure / spreading slowly' },
+      { value: 'does-not-fade', label: 'No, spots do not fade under glass' },
     ],
   },
   {
@@ -76,7 +100,7 @@ const CONTEXTUAL_QUESTION_BANK: ContextualQuestion[] = [
   },
   {
     id: 'fluids-hydration',
-    symptomIds: ['vomiting', 'diarrhea'],
+    symptomIds: ['vomiting', 'diarrhea', 'nausea'],
     question: 'Are you able to keep water or fluids down?',
     options: [
       { value: 'yes', label: 'Yes, sipping water okay' },
@@ -115,7 +139,7 @@ const MAX_CONTEXTUAL_QUESTIONS = 4
 /**
  * Selects up to 4 plain-English follow-up questions tailored to the user's
  * selected symptoms, falling back to a single optional comfort question when
- * none of the chosen symptoms require specifics (or when exploring).
+ * none of the chosen symptoms require specifics.
  */
 export function getContextualQuestions(
   selectedIds: string[],
