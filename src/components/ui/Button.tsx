@@ -32,13 +32,13 @@ export type ButtonLinkProps = SharedButtonProps &
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {
   coral:
-    'bg-coral text-paper border border-coral shadow-[0_2px_8px_rgba(196,83,59,0.22)] hover:bg-coral-hover hover:border-coral-hover hover:shadow-[0_6px_16px_rgba(196,83,59,0.25)]',
+    'bg-coral text-paper border border-coral shadow-[0_2px_8px_rgba(190,79,54,0.22)] hover:bg-coral-hover hover:border-coral-hover hover:shadow-[0_6px_16px_rgba(190,79,54,0.25)]',
   forest:
-    'bg-forest text-paper border border-forest shadow-[0_2px_8px_rgba(30,77,59,0.18)] hover:bg-forest-hover hover:border-forest-hover hover:shadow-[0_6px_16px_rgba(30,77,59,0.22)]',
+    'bg-forest text-paper border border-forest shadow-[0_2px_8px_rgba(15,92,83,0.2)] hover:bg-forest-hover hover:border-forest-hover hover:shadow-[0_6px_16px_rgba(15,92,83,0.26)]',
   urgent:
-    'bg-urgent text-paper border border-urgent shadow-[0_2px_8px_rgba(184,58,50,0.22)] hover:bg-urgent-hover hover:border-urgent-hover',
+    'bg-urgent text-paper border border-urgent shadow-[0_2px_8px_rgba(184,56,48,0.22)] hover:bg-urgent-hover hover:border-urgent-hover',
   outline:
-    'bg-paper text-charcoal border border-hairline-strong shadow-[0_1px_2px_rgba(30,36,33,0.04)] hover:bg-sand/70 hover:border-stone/50',
+    'bg-paper text-charcoal border border-hairline-strong shadow-[0_1px_2px_rgba(23,35,32,0.04)] hover:bg-sand/70 hover:border-stone/50',
   ghost:
     'bg-transparent text-slate border border-transparent hover:bg-sand/80 hover:text-charcoal',
 }

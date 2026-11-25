@@ -68,11 +68,10 @@ export function Step3ContextualQuestions({
                   onClick={() =>
                     onSelectAnswer(q.id, isSkipped ? undefined : 'skipped')
                   }
-                  className={`min-h-[34px] shrink-0 cursor-pointer rounded-full border px-3.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${
-                    isSkipped
-                      ? 'border-amber-ink/30 bg-amber-soft text-amber-ink'
-                      : 'border-hairline bg-ivory text-slate hover:bg-sand hover:text-charcoal'
-                  }`}
+                  className={`min-h-[34px] shrink-0 cursor-pointer rounded-full border px-3.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${isSkipped
+                    ? 'border-amber-ink/30 bg-amber-soft text-amber-ink'
+                    : 'border-hairline bg-ivory text-slate hover:bg-sand hover:text-charcoal'
+                    }`}
                 >
                   {isSkipped ? 'Skipped ✓' : 'Skip this question'}
                 </button>
@@ -89,11 +88,10 @@ export function Step3ContextualQuestions({
                       onClick={() =>
                         onSelectAnswer(q.id, isSelected ? undefined : opt.value)
                       }
-                      className={`flex min-h-[48px] cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left text-sm font-semibold transition-colors sm:text-[15px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${
-                        isSelected
-                          ? 'border-forest bg-sage-mist text-forest'
-                          : 'border-hairline bg-ivory/70 text-charcoal hover:border-hairline-strong hover:bg-sand/60'
-                      }`}
+                      className={`flex min-h-[48px] cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left text-sm font-semibold transition-colors sm:text-[15px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${isSelected
+                        ? 'border-forest bg-sage-mist text-forest'
+                        : 'border-hairline bg-ivory/70 text-charcoal hover:border-hairline-strong hover:bg-sand/60'
+                        }`}
                     >
                       <span>{opt.label}</span>
                       {isSelected ? (
@@ -118,7 +116,7 @@ export function Step3ContextualQuestions({
             Skip all
           </Button>
           <Button
-            variant="coral"
+            variant="forest"
             size="lg"
             onClick={onContinue}
             rightIcon={<ArrowRightIcon className="h-4 w-4" />}

@@ -11,14 +11,14 @@ export interface SectionProps {
 }
 
 const TONE_BG: Record<SectionTone, string> = {
-  ivory: 'bg-ivory',
-  sand: 'bg-sand/75',
-  sage: 'bg-sage-mist/80',
-  peach: 'bg-peach-mist/85',
-  paper: 'bg-paper',
+  ivory: 'bg-ivory/75',
+  sand: 'bg-sand/60',
+  sage: 'bg-sage-mist/60',
+  peach: 'bg-peach-mist/65',
+  paper: 'bg-paper/85',
 }
 
-/** Semantic page section with subtle warm tonal shifts and generous editorial spacing. */
+/** Semantic page band using light translucent washes over the ambient background layer. */
 export function Section({
   children,
   id,
@@ -29,8 +29,9 @@ export function Section({
   return (
     <section
       id={id}
-      className={`scroll-mt-20 transition-colors duration-300 ${bordered ? 'border-t border-hairline/80' : ''
-        } ${TONE_BG[tone]} py-16 sm:py-24 ${className}`}
+      className={`scroll-mt-20 transition-colors duration-300 ${
+        bordered ? 'border-t border-hairline/80' : ''
+      } ${TONE_BG[tone]} py-16 sm:py-24 ${className}`}
     >
       {children}
     </section>

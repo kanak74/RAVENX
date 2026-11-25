@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   AnimatePresence,
   motion,
@@ -29,7 +29,7 @@ export interface NavbarProps {
   isCheckInActive?: boolean
 }
 
-/** Refined sticky editorial header for VITALORA with subtle scroll-depth feedback. */
+/** Sticky editorial header with active scroll-spy pill indicator and scroll progress hairline. */
 export function Navbar({
   onCheckSymptoms,
   onNavigateSection,
@@ -37,12 +37,41 @@ export function Navbar({
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>('')
   const prefersReduced = useReducedMotion()
   const { scrollY, scrollYProgress } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 12)
   })
+
+  useEffect(() => {
+    if (isCheckInActive) {
+      setActiveSection('')
+      return
+    }
+
+    const ids = NAV_LINKS.map((item) => item.sectionId)
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el))
+
+    if (elements.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        }
+      },
+      { rootMargin: '-35% 0px -50% 0px' },
+    )
+
+    for (const el of elements) observer.observe(el)
+    return () => observer.disconnect()
+  }, [isCheckInActive])
 
   const closeMenu = () => setMobileOpen(false)
 
@@ -64,10 +93,11 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-colors duration-200 ${scrolled
-        ? 'border-hairline-strong bg-ivory shadow-[0_6px_20px_-10px_rgba(30,36,33,0.08)]'
-        : 'border-hairline bg-ivory'
-        }`}
+      className={`sticky top-0 z-40 border-b transition-all duration-200 ${
+        scrolled
+          ? 'border-hairline-strong bg-ivory/95 shadow-[0_8px_24px_-12px_rgba(23,35,32,0.1)]'
+          : 'border-hairline bg-ivory/95'
+      }`}
     >
       <Container>
         <nav
@@ -77,7 +107,7 @@ export function Navbar({
           <a
             href="#top"
             onClick={(e) => handleLinkClick(e, 'top')}
-            className="group inline-flex items-center gap-3 rounded-xl pr-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-coral"
+            className="group inline-flex items-center gap-3 rounded-xl pr-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-forest"
           >
             <VitaloraLogoMark className="h-9 w-9 transition-transform duration-200 group-hover:scale-[1.03]" />
             <div className="flex items-baseline gap-2.5">
@@ -91,22 +121,36 @@ export function Navbar({
           </a>
 
           <div className="hidden items-center gap-1 lg:flex">
-            {NAV_LINKS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleLinkClick(e, item.sectionId)}
-                className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold text-slate transition-colors hover:bg-sand hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral"
-              >
-                {item.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((item) => {
+              const isActive = activeSection === item.sectionId
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleLinkClick(e, item.sectionId)}
+                  className={`relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest ${
+                    isActive
+                      ? 'text-forest'
+                      : 'text-slate hover:bg-sand/80 hover:text-charcoal'
+                  }`}
+                >
+                  {isActive ? (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      transition={{ duration: prefersReduced ? 0 : 0.25 }}
+                      className="absolute inset-0 -z-10 rounded-full bg-sage-mist"
+                    />
+                  ) : null}
+                  {item.label}
+                </a>
+              )
+            })}
           </div>
 
           <div className="hidden lg:block">
             {onCheckSymptoms ? (
               <Button
-                variant={isCheckInActive ? 'forest' : 'coral'}
+                variant={isCheckInActive ? 'coral' : 'forest'}
                 size="sm"
                 onClick={handleCheckClick}
                 leftIcon={<SparkleIcon className="h-4 w-4" />}
@@ -116,7 +160,7 @@ export function Navbar({
             ) : (
               <Button
                 href="#get-started"
-                variant="coral"
+                variant="forest"
                 size="sm"
                 leftIcon={<SparkleIcon className="h-4 w-4" />}
               >
@@ -131,7 +175,7 @@ export function Navbar({
             aria-controls="mobile-nav-drawer"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-hairline-strong bg-paper text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-hairline-strong bg-paper text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest lg:hidden"
           >
             {mobileOpen ? (
               <CloseIcon className="h-5 w-5" />
@@ -165,7 +209,7 @@ export function Navbar({
                 <div className="pt-2.5">
                   {onCheckSymptoms ? (
                     <Button
-                      variant={isCheckInActive ? 'forest' : 'coral'}
+                      variant={isCheckInActive ? 'coral' : 'forest'}
                       size="md"
                       fullWidth
                       onClick={handleCheckClick}
@@ -176,7 +220,7 @@ export function Navbar({
                   ) : (
                     <Button
                       href="#get-started"
-                      variant="coral"
+                      variant="forest"
                       size="md"
                       fullWidth
                       onClick={closeMenu}
@@ -192,11 +236,10 @@ export function Navbar({
         </AnimatePresence>
       </Container>
 
-      {/* Subtle reading progress hairline */}
       {!prefersReduced && !isCheckInActive ? (
         <motion.div
           style={{ scaleX: scrollYProgress }}
-          className="h-[2px] origin-left bg-coral-accent/70"
+          className="h-[2px] origin-left bg-forest/75"
           aria-hidden="true"
         />
       ) : null}

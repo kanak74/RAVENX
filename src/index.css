@@ -4,36 +4,37 @@
   --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Refined warm ivory & botanical health-tech surfaces */
-  --color-ivory: #faf8f4;
-  --color-sand: #f3efe7;
+  /* Fresh Alabaster, Botanical Teal, Warm Terracotta & Seafoam palette */
+  --color-ivory: #f8f7f3;
+  --color-sand: #efece3;
   --color-paper: #ffffff;
-  --color-sage-mist: #edf2ee;
-  --color-peach-mist: #fbf1eb;
+  --color-sage-mist: #e3f0ed;
+  --color-peach-mist: #f7ece4;
 
-  /* Charcoal & warm neutral inks */
-  --color-charcoal: #1e2421;
-  --color-slate: #4d5651;
-  --color-stone: #6f7872;
-  --color-hairline: #e4dfd5;
-  --color-hairline-strong: #cfc8ba;
+  /* Deep Botanical Charcoal & Slate */
+  --color-charcoal: #172320;
+  --color-slate: #43524d;
+  --color-stone: #677670;
+  --color-hairline: #e0ddd3;
+  --color-hairline-strong: #c9c4b7;
 
-  /* Strategic editorial accents */
-  --color-coral: #c4533b;
-  --color-coral-hover: #ae4630;
-  --color-coral-accent: #d96b52;
-  --color-coral-soft: #f9eae5;
+  /* Primary: Deep Botanical Teal & Soft Seafoam */
+  --color-forest: #0f5c53;
+  --color-forest-hover: #0a4740;
+  --color-sage: #5c8a80;
 
-  --color-forest: #1e4d3b;
-  --color-forest-hover: #163b2d;
-  --color-sage: #6b8f7e;
+  /* Secondary Warmth: Terracotta Copper & Honey Amber */
+  --color-coral: #be4f36;
+  --color-coral-hover: #a7422b;
+  --color-coral-accent: #d4694f;
+  --color-coral-soft: #faeae5;
 
-  --color-urgent: #b83a32;
-  --color-urgent-hover: #9e2f28;
+  --color-urgent: #b83830;
+  --color-urgent-hover: #9c2d26;
   --color-urgent-soft: #fceceb;
 
-  --color-amber-soft: #f6efe0;
-  --color-amber-ink: #76521b;
+  --color-amber-soft: #f6ead6;
+  --color-amber-ink: #7d5318;
 }
 
 @layer base {
@@ -58,6 +59,7 @@
     background-color: var(--color-ivory);
     color: var(--color-charcoal);
     line-height: 1.65;
+    overflow-x: hidden;
   }
 
   h1,
@@ -71,15 +73,7 @@
   }
 
   ::selection {
-    background-color: var(--color-coral-soft);
-    color: var(--color-charcoal);
+    background-color: var(--color-sage-mist);
+    color: var(--color-forest);
   }
-}
-
-.editorial-surface {
-  background-color: var(--color-paper);
-  border: 1px solid var(--color-hairline);
-  box-shadow:
-    0 1px 2px rgba(30, 36, 33, 0.04),
-    0 10px 28px -10px rgba(30, 36, 33, 0.06);
 }

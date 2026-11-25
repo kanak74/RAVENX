@@ -233,7 +233,7 @@ export function Step1SelectSymptoms({
             : `${selectedIds.length} symptom${selectedIds.length === 1 ? '' : 's'} selected`}
         </p>
         <Button
-          variant="coral"
+          variant="forest"
           size="lg"
           onClick={onContinue}
           rightIcon={<ArrowRightIcon className="h-4 w-4" />}

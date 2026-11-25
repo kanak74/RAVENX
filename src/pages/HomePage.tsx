@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowRightIcon,
@@ -17,7 +17,9 @@ import { Container } from '../components/layout/Container'
 import { PageLayout } from '../components/layout/PageLayout'
 import { Section } from '../components/layout/Section'
 import {
+  CursorHighlightCard,
   Reveal,
+  ScrollProgressSpine,
   StaggerGroup,
   StaggerItem,
 } from '../components/motion/MotionPrimitives'
@@ -123,9 +125,10 @@ const EMERGENCY_SIGNS = [
 
 type ActiveView = 'landing' | 'check-in'
 
-/** VITALORA redesigned editorial health-tech landing page and check-in router. */
+/** VITALORA editorial health-tech landing page and check-in router. */
 export function HomePage() {
   const prefersReduced = useReducedMotion()
+  const timelineRef = useRef<HTMLDivElement>(null)
   const [activeView, setActiveView] = useState<ActiveView>(() =>
     window.location.hash === '#check-in' ? 'check-in' : 'landing',
   )
@@ -194,7 +197,7 @@ export function HomePage() {
             id="top"
             tone="ivory"
             bordered={false}
-            className="pb-16 pt-10 sm:pb-24 sm:pt-16"
+            className="pb-12 pt-10 sm:pb-20 sm:pt-16"
           >
             <Container>
               <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
@@ -207,8 +210,8 @@ export function HomePage() {
                   }}
                   className="space-y-6 lg:col-span-6"
                 >
-                  <Badge tone="forest" dotColor="#1E4D3B">
-                    Guided Symptom Information · Responsible Health Care
+                  <Badge tone="forest" dotColor="#0F5C53">
+                    Guided Symptom Information · Responsible Care
                   </Badge>
 
                   <h1 className="font-display text-4xl font-semibold tracking-tight text-charcoal sm:text-5xl lg:text-[3.2rem] lg:leading-[1.1]">
@@ -225,7 +228,7 @@ export function HomePage() {
 
                   <div className="flex flex-wrap items-center gap-3.5 pt-1">
                     <Button
-                      variant="coral"
+                      variant="forest"
                       size="lg"
                       onClick={startSymptomCheck}
                       rightIcon={<ArrowRightIcon className="h-4 w-4" />}
@@ -259,17 +262,38 @@ export function HomePage() {
                   <HeroEditorialVisual />
                 </motion.div>
               </div>
+
+              {/* Subtle scroll-down prompt cue */}
+              <div className="mt-10 flex justify-center sm:mt-14">
+                <a
+                  href="#how-it-works"
+                  className="group inline-flex items-center gap-2.5 rounded-full border border-hairline bg-paper/90 px-4 py-2 text-xs font-semibold text-slate transition-colors hover:border-forest/35 hover:text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+                >
+                  <span>Scroll to see how it works</span>
+                  <motion.span
+                    animate={prefersReduced ? undefined : { y: [0, 3, 0] }}
+                    transition={{
+                      duration: 2.2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    aria-hidden="true"
+                  >
+                    ↓
+                  </motion.span>
+                </a>
+              </div>
             </Container>
           </Section>
 
           {/* VALUE PILLARS STRIP */}
-          <div className="border-y border-hairline bg-paper py-10 sm:py-12">
+          <div className="border-y border-hairline bg-paper/90 py-10 sm:py-12">
             <Container>
               <StaggerGroup className="grid gap-8 md:grid-cols-3 md:gap-10">
                 {VALUE_PILLARS.map((pillar) => (
                   <StaggerItem
                     key={pillar.number}
-                    className="space-y-2 border-l-2 border-hairline pl-5"
+                    className="space-y-2 border-l-2 border-forest/25 pl-5"
                   >
                     <span className="text-xs font-semibold tracking-wider text-coral">
                       {pillar.number}
@@ -286,11 +310,11 @@ export function HomePage() {
             </Container>
           </div>
 
-          {/* 2. HOW IT WORKS */}
+          {/* 2. HOW IT WORKS WITH SCROLL-DRAWN TIMELINE SPINE */}
           <Section id="how-it-works" tone="sand" bordered={false}>
             <Container>
               <Reveal className="max-w-2xl">
-                <Badge tone="coral" dotColor="#C4533B">
+                <Badge tone="coral" dotColor="#BE4F36">
                   How it works
                 </Badge>
                 <h2 className="mt-4 font-display text-3xl font-semibold text-charcoal sm:text-4xl">
@@ -302,39 +326,43 @@ export function HomePage() {
                 </p>
               </Reveal>
 
-              <div className="mt-14 space-y-14 sm:space-y-20">
-                {STORY_STEPS.map((item, idx) => {
-                  const isReversed = idx % 2 === 1
-                  return (
-                    <Reveal key={item.step} delay={0.05}>
-                      <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
-                        <div
-                          className={`lg:col-span-6 ${
-                            isReversed ? 'lg:order-2' : 'lg:order-1'
-                          }`}
-                        >
-                          <StoryStepIllustration step={item.step} />
-                        </div>
+              <div ref={timelineRef} className="relative mt-14">
+                <ScrollProgressSpine containerRef={timelineRef} />
 
-                        <div
-                          className={`space-y-3.5 lg:col-span-6 ${
-                            isReversed ? 'lg:order-1' : 'lg:order-2'
-                          }`}
-                        >
-                          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-forest">
-                            {item.badgeLabel}
-                          </span>
-                          <h3 className="font-display text-2xl font-semibold text-charcoal sm:text-3xl">
-                            {item.title}
-                          </h3>
-                          <p className="max-w-lg text-base leading-relaxed text-slate sm:text-lg">
-                            {item.description}
-                          </p>
+                <div className="space-y-14 sm:space-y-20">
+                  {STORY_STEPS.map((item, idx) => {
+                    const isReversed = idx % 2 === 1
+                    return (
+                      <Reveal key={item.step} delay={0.05}>
+                        <div className="relative grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
+                          <div
+                            className={`lg:col-span-6 ${
+                              isReversed ? 'lg:order-2' : 'lg:order-1'
+                            }`}
+                          >
+                            <StoryStepIllustration step={item.step} />
+                          </div>
+
+                          <div
+                            className={`space-y-3.5 lg:col-span-6 ${
+                              isReversed ? 'lg:order-1' : 'lg:order-2'
+                            }`}
+                          >
+                            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-forest">
+                              {item.badgeLabel}
+                            </span>
+                            <h3 className="font-display text-2xl font-semibold text-charcoal sm:text-3xl">
+                              {item.title}
+                            </h3>
+                            <p className="max-w-lg text-base leading-relaxed text-slate sm:text-lg">
+                              {item.description}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </Reveal>
-                  )
-                })}
+                      </Reveal>
+                    )
+                  })}
+                </div>
               </div>
             </Container>
           </Section>
@@ -349,7 +377,7 @@ export function HomePage() {
 
                 <div className="space-y-6 lg:col-span-7">
                   <Reveal>
-                    <Badge tone="forest" dotColor="#1E4D3B">
+                    <Badge tone="forest" dotColor="#0F5C53">
                       Why it matters
                     </Badge>
                     <h2 className="mt-4 font-display text-3xl font-semibold text-charcoal sm:text-4xl">
@@ -394,7 +422,7 @@ export function HomePage() {
           <Section id="safety" tone="sage">
             <Container>
               <Reveal className="max-w-2xl">
-                <Badge tone="urgent" dotColor="#B83A32">
+                <Badge tone="urgent" dotColor="#B83830">
                   Safety & responsibility
                 </Badge>
                 <h2 className="mt-4 font-display text-3xl font-semibold text-charcoal sm:text-4xl">
@@ -405,25 +433,26 @@ export function HomePage() {
               <div className="mt-10 grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
                 <StaggerGroup className="space-y-4 lg:col-span-6">
                   {SAFETY_BOUNDARIES.map((item) => (
-                    <StaggerItem
-                      key={item.title}
-                      className="flex items-start gap-3.5 rounded-2xl border border-hairline bg-paper p-5"
-                    >
-                      <CheckCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-forest" />
-                      <div>
-                        <h3 className="font-display text-lg font-semibold text-charcoal">
-                          {item.title}
-                        </h3>
-                        <p className="mt-1 text-sm leading-relaxed text-slate sm:text-base">
-                          {item.detail}
-                        </p>
-                      </div>
+                    <StaggerItem key={item.title}>
+                      <CursorHighlightCard className="rounded-2xl border border-hairline bg-paper p-5">
+                        <div className="flex items-start gap-3.5">
+                          <CheckCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-forest" />
+                          <div>
+                            <h3 className="font-display text-lg font-semibold text-charcoal">
+                              {item.title}
+                            </h3>
+                            <p className="mt-1 text-sm leading-relaxed text-slate sm:text-base">
+                              {item.detail}
+                            </p>
+                          </div>
+                        </div>
+                      </CursorHighlightCard>
                     </StaggerItem>
                   ))}
                 </StaggerGroup>
 
                 <Reveal delay={0.08} className="lg:col-span-6">
-                  <div className="rounded-2xl border border-urgent/35 border-l-4 border-l-urgent bg-paper p-6 shadow-[0_12px_32px_-14px_rgba(184,58,50,0.16)] sm:p-8">
+                  <div className="rounded-2xl border border-urgent/35 border-l-4 border-l-urgent bg-paper p-6 shadow-[0_12px_32px_-14px_rgba(184,56,48,0.16)] sm:p-8">
                     <div className="flex items-center gap-3.5">
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-urgent-soft text-urgent">
                         <PhoneUrgentIcon className="h-5 w-5" />
@@ -472,12 +501,12 @@ export function HomePage() {
           <Section id="get-started" tone="peach">
             <Container size="narrow">
               <Reveal>
-                <div className="rounded-3xl border border-hairline bg-paper px-6 py-12 text-center shadow-[0_18px_48px_-16px_rgba(30,36,33,0.08)] sm:px-14 sm:py-16">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-coral-soft text-coral">
+                <CursorHighlightCard className="rounded-3xl border border-hairline bg-paper px-6 py-12 text-center shadow-[0_18px_48px_-16px_rgba(23,35,32,0.08)] sm:px-14 sm:py-16">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-sage-mist text-forest">
                     <HeartIcon className="h-6 w-6" />
                   </div>
 
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-forest">
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-coral">
                     Understand your symptoms. Know your next step.
                   </p>
 
@@ -493,7 +522,7 @@ export function HomePage() {
 
                   <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
                     <Button
-                      variant="coral"
+                      variant="forest"
                       size="lg"
                       onClick={startSymptomCheck}
                       rightIcon={<ArrowRightIcon className="h-4 w-4" />}
@@ -504,7 +533,7 @@ export function HomePage() {
                       How it works
                     </Button>
                   </div>
-                </div>
+                </CursorHighlightCard>
               </Reveal>
             </Container>
           </Section>

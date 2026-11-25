@@ -235,7 +235,7 @@ export function Step4ReviewAnswers({
           Back
         </Button>
         <Button
-          variant="coral"
+          variant="forest"
           size="lg"
           onClick={onContinueToAssessment}
           rightIcon={<ArrowRightIcon className="h-4 w-4" />}

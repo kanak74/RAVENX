@@ -186,7 +186,7 @@ export function Step2SymptomDetails({
           Back
         </Button>
         <Button
-          variant="coral"
+          variant="forest"
           size="lg"
           onClick={onContinue}
           rightIcon={<ArrowRightIcon className="h-4 w-4" />}
