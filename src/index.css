@@ -4,37 +4,37 @@
   --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Fresh Alabaster, Botanical Teal, Warm Terracotta & Seafoam palette */
-  --color-ivory: #f8f7f3;
-  --color-sand: #efece3;
+  /* Warm Ivory, Muted Coral, Soft Terracotta, Sage Green & Charcoal palette */
+  --color-ivory: #f9f7f2;
+  --color-sand: #f0ece3;
   --color-paper: #ffffff;
-  --color-sage-mist: #e3f0ed;
-  --color-peach-mist: #f7ece4;
+  --color-sage-mist: #e4ede8;
+  --color-peach-mist: #f6ebe4;
 
-  /* Deep Botanical Charcoal & Slate */
-  --color-charcoal: #172320;
-  --color-slate: #43524d;
-  --color-stone: #677670;
-  --color-hairline: #e0ddd3;
-  --color-hairline-strong: #c9c4b7;
+  /* Editorial Charcoal & Warm Grey */
+  --color-charcoal: #18201e;
+  --color-slate: #444e4a;
+  --color-stone: #6e756f;
+  --color-hairline: #e2ded3;
+  --color-hairline-strong: #cac4b6;
 
-  /* Primary: Deep Botanical Teal & Soft Seafoam */
-  --color-forest: #0f5c53;
-  --color-forest-hover: #0a4740;
-  --color-sage: #5c8a80;
+  /* Primary: Deep Botanical Pine & Muted Sage Green */
+  --color-forest: #174b42;
+  --color-forest-hover: #103b34;
+  --color-sage: #5b8577;
 
-  /* Secondary Warmth: Terracotta Copper & Honey Amber */
-  --color-coral: #be4f36;
-  --color-coral-hover: #a7422b;
-  --color-coral-accent: #d4694f;
-  --color-coral-soft: #faeae5;
+  /* Secondary Warmth: Soft Terracotta & Muted Coral */
+  --color-coral: #c25941;
+  --color-coral-hover: #ab4b35;
+  --color-coral-accent: #d6735c;
+  --color-coral-soft: #f7eae4;
 
-  --color-urgent: #b83830;
-  --color-urgent-hover: #9c2d26;
+  --color-urgent: #b4372e;
+  --color-urgent-hover: #992d25;
   --color-urgent-soft: #fceceb;
 
-  --color-amber-soft: #f6ead6;
-  --color-amber-ink: #7d5318;
+  --color-amber-soft: #f5ead7;
+  --color-amber-ink: #7d5418;
 }
 
 @layer base {
@@ -59,7 +59,7 @@
     background-color: var(--color-ivory);
     color: var(--color-charcoal);
     line-height: 1.65;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   h1,

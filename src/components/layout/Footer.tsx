@@ -48,6 +48,13 @@ export function Footer({ onCheckSymptoms, onNavigateSection }: FooterProps) {
               Home
             </a>
             <a
+              href="#body-atlas"
+              onClick={(e) => handleLinkClick(e, 'body-atlas')}
+              className="transition-colors hover:text-charcoal"
+            >
+              Body map
+            </a>
+            <a
               href="#how-it-works"
               onClick={(e) => handleLinkClick(e, 'how-it-works')}
               className="transition-colors hover:text-charcoal"

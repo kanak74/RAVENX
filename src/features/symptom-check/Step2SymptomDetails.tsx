@@ -78,7 +78,7 @@ export function Step2SymptomDetails({
   return (
     <div className="space-y-8">
       <div className="space-y-2.5">
-        <Badge tone="coral" dotColor="#C4533B">
+        <Badge tone="coral" dotColor="#C25941">
           Step 2 of 4 · Symptom details
         </Badge>
         <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">

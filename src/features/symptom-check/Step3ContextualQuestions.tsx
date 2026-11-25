@@ -27,7 +27,7 @@ export function Step3ContextualQuestions({
   return (
     <div className="space-y-7">
       <div className="space-y-2.5">
-        <Badge tone="forest" dotColor="#1E4D3B">
+        <Badge tone="forest" dotColor="#174B42">
           Step 3 of 4 · Follow-up questions
         </Badge>
         <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">

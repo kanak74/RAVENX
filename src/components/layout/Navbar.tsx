@@ -18,6 +18,7 @@ interface NavLinkItem {
 }
 
 const NAV_LINKS: NavLinkItem[] = [
+  { label: 'Body map', sectionId: 'body-atlas', href: '#body-atlas' },
   { label: 'How it works', sectionId: 'how-it-works', href: '#how-it-works' },
   { label: 'Why it matters', sectionId: 'health-awareness', href: '#health-awareness' },
   { label: 'Safety', sectionId: 'safety', href: '#safety' },

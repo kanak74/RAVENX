@@ -15,23 +15,31 @@ import type { SymptomCheckInData, SymptomDetailsState } from './types'
 
 export interface SymptomCheckFlowProps {
   onExitCheckIn: () => void
+  initialSymptomIds?: string[]
 }
 
-const INITIAL_DATA: SymptomCheckInData = {
-  selectedIds: [],
-  details: {},
-  contextualAnswers: {},
+function createInitialData(initialSymptomIds?: string[]): SymptomCheckInData {
+  return {
+    selectedIds: initialSymptomIds ? [...initialSymptomIds] : [],
+    details: {},
+    contextualAnswers: {},
+  }
 }
 
 /**
  * Calm, clinical-grade guided symptom check-in workspace inside VITALORA.
  * Keeps rule-based emergency safety evaluation active on every step.
  */
-export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
+export function SymptomCheckFlow({
+  onExitCheckIn,
+  initialSymptomIds,
+}: SymptomCheckFlowProps) {
   const prefersReduced = useReducedMotion()
   const [step, setStep] = useState<CheckInStep>(1)
   const [highestStepReached, setHighestStepReached] = useState<CheckInStep>(1)
-  const [data, setData] = useState<SymptomCheckInData>(INITIAL_DATA)
+  const [data, setData] = useState<SymptomCheckInData>(() =>
+    createInitialData(initialSymptomIds),
+  )
   const [assessmentPreviewOpen, setAssessmentPreviewOpen] = useState(false)
 
   const emergencyAssessment = useMemo(
@@ -95,7 +103,7 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
   }
 
   const handleStartOver = () => {
-    setData(INITIAL_DATA)
+    setData(createInitialData())
     setAssessmentPreviewOpen(false)
     setStep(1)
     setHighestStepReached(1)
@@ -114,7 +122,7 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
       bordered={false}
       className="min-h-[75vh] py-8 sm:py-12"
     >
-      <Container size="narrow">
+      <Container size={step === 1 ? 'default' : 'narrow'}>
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Button variant="outline" size="sm" onClick={onExitCheckIn}>

@@ -97,7 +97,7 @@ export function Step4ReviewAnswers({
   return (
     <div className="space-y-7">
       <div className="space-y-2.5">
-        <Badge tone="forest" dotColor="#1E4D3B">
+        <Badge tone="forest" dotColor="#174B42">
           Step 4 of 4 · Review answers
         </Badge>
         <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
