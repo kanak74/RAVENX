@@ -1,9 +1,9 @@
 {
-  "model_type": "Calibrated RandomForestClassifier (5-fold Sigmoid)",
+  "model_type": "Multinomial LogisticRegression (scikit-learn, 5-fold CV)",
   "dataset_rows": 2000,
   "num_conditions": 20,
-  "cv_accuracy_mean": 0.835,
-  "cv_accuracy_std": 0.0178,
+  "cv_accuracy_mean": 0.8515,
+  "cv_accuracy_std": 0.0207,
   "features": [
     "headache",
     "fever",

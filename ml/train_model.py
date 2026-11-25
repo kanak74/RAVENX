@@ -18,8 +18,7 @@ from typing import Dict, List, Tuple
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 
 SYMPTOM_FEATURES: List[str] = [
@@ -263,22 +262,17 @@ def train() -> None:
     X = df[SYMPTOM_FEATURES].values
     y = df["condition"].values
 
-    base_rf = RandomForestClassifier(
-        n_estimators=60,
-        max_depth=10,
-        min_samples_leaf=3,
+    clf = LogisticRegression(
+        C=2.5,
+        max_iter=1000,
         random_state=42,
-        n_jobs=-1,
     )
-    calibrated = CalibratedClassifierCV(base_rf, method="sigmoid", cv=5)
 
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-    cv_scores = cross_val_score(calibrated, X, y, cv=cv, scoring="accuracy")
+    cv_scores = cross_val_score(clf, X, y, cv=cv, scoring="accuracy")
 
-    calibrated.fit(X, y)
+    clf.fit(X, y)
 
-    # Also fit an uncalibrated RF on the full dataset for global feature importances
-    # and per-condition conditional symptom prevalence for transparent explanations.
     condition_symptom_rates: Dict[str, Dict[str, float]] = {}
     for condition, group in df.groupby("condition"):
         rates = {
@@ -288,10 +282,18 @@ def train() -> None:
         condition_symptom_rates[str(condition)] = rates
 
     model_path = out_dir / "model.joblib"
-    joblib.dump(calibrated, model_path, compress=3)
+    joblib.dump(clf, model_path, compress=3)
+
+    weights_path = out_dir / "model_weights.json"
+    weights_payload = {
+        "classes": [str(c) for c in clf.classes_],
+        "coef": clf.coef_.tolist(),
+        "intercept": clf.intercept_.tolist(),
+    }
+    weights_path.write_text(json.dumps(weights_payload), encoding="utf-8")
 
     metadata = {
-        "model_type": "Calibrated RandomForestClassifier (5-fold Sigmoid)",
+        "model_type": "Multinomial LogisticRegression (scikit-learn, 5-fold CV)",
         "dataset_rows": int(len(df)),
         "num_conditions": len(CONDITION_PROFILES),
         "cv_accuracy_mean": round(float(cv_scores.mean()), 4),

@@ -13,25 +13,36 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-import joblib
 import numpy as np
 from pydantic import BaseModel, Field, field_validator
 
 ML_DIR = Path(__file__).resolve().parent
-MODEL_PATH = ML_DIR / "model.joblib"
+WEIGHTS_PATH = ML_DIR / "model_weights.json"
 META_PATH = ML_DIR / "metadata.json"
 
-_model_cache = None
+_weights_cache: Optional[Dict[str, Any]] = None
 _meta_cache: Optional[Dict[str, Any]] = None
 
 
 def _load_artifacts():
-    global _model_cache, _meta_cache
-    if _model_cache is None:
-        _model_cache = joblib.load(MODEL_PATH)
+    global _weights_cache, _meta_cache
+    if _weights_cache is None:
+        raw = json.loads(WEIGHTS_PATH.read_text(encoding="utf-8"))
+        _weights_cache = {
+            "classes": raw["classes"],
+            "coef": np.array(raw["coef"], dtype=np.float64),
+            "intercept": np.array(raw["intercept"], dtype=np.float64),
+        }
     if _meta_cache is None:
         _meta_cache = json.loads(META_PATH.read_text(encoding="utf-8"))
-    return _model_cache, _meta_cache
+    return _weights_cache, _meta_cache
+
+
+def _predict_proba(weights: Dict[str, Any], vec: np.ndarray) -> np.ndarray:
+    logits = vec @ weights["coef"].T + weights["intercept"]
+    logits = logits - np.max(logits, axis=1, keepdims=True)
+    exp_logits = np.exp(logits)
+    return (exp_logits / np.sum(exp_logits, axis=1, keepdims=True))[0]
 
 
 class PredictRequest(BaseModel):
@@ -137,9 +148,9 @@ def run_prediction(payload: PredictRequest) -> Dict[str, Any]:
             ),
         }
 
-    vec = np.array([[1 if feat in active_features else 0 for feat in features]])
-    probs = model.predict_proba(vec)[0]
-    classes = list(model.classes_)
+    vec = np.array([[1 if feat in active_features else 0 for feat in features]], dtype=np.float64)
+    probs = _predict_proba(model, vec)
+    classes = list(model["classes"])
 
     ranked_indices = np.argsort(probs)[::-1][:4]
     predictions: List[Dict[str, Any]] = []
