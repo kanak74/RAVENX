@@ -23,6 +23,10 @@ import {
 } from '../components/motion/MotionPrimitives'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
+import { AuthPanel } from '../features/auth/AuthPanel'
+import { MedicalChatbot } from '../features/chatbot/MedicalChatbot'
+import { NearbyFacilities } from '../features/facilities/NearbyFacilities'
+import { HealthHistoryView } from '../features/history/HealthHistoryView'
 import { SymptomCheckFlow } from '../features/symptom-check/SymptomCheckFlow'
 import { vitaloraMotion } from '../styles/theme'
 
@@ -93,7 +97,7 @@ const EMERGENCY_SIGNS = [
   'Severe allergic swelling of the face, lips, or throat',
 ]
 
-type ActiveView = 'landing' | 'check-in'
+type ActiveView = 'landing' | 'check-in' | 'assistant' | 'facilities' | 'auth' | 'history'
 
 /** VITALORA editorial health-tech landing page, anatomical scroll narrative, and check-in router. */
 export function HomePage() {
@@ -154,18 +158,78 @@ export function HomePage() {
     }
   }
 
+  const openStandaloneView = (
+    view: 'assistant' | 'facilities' | 'auth' | 'history',
+  ) => {
+    setActiveView(view)
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  }
+
   return (
     <PageLayout
       onCheckSymptoms={() => startSymptomCheck()}
       onNavigateSection={navigateToSection}
-      isCheckInActive={activeView === 'check-in'}
+      onOpenView={openStandaloneView}
+      isCheckInActive={activeView !== 'landing'}
     >
       {activeView === 'check-in' ? (
         <SymptomCheckFlow
           key={preselectedSymptoms.join(',') || 'blank'}
           initialSymptomIds={preselectedSymptoms}
           onExitCheckIn={exitSymptomCheck}
+          onOpenAuth={() => openStandaloneView('auth')}
         />
+      ) : activeView === 'auth' ? (
+        <AuthPanel
+          onBack={exitSymptomCheck}
+          onOpenHistory={() => openStandaloneView('history')}
+        />
+      ) : activeView === 'history' ? (
+        <HealthHistoryView
+          onBack={exitSymptomCheck}
+          onStartCheck={() => startSymptomCheck()}
+          onOpenAuth={() => openStandaloneView('auth')}
+        />
+      ) : activeView === 'assistant' ? (
+        <Section tone="ivory" bordered={false} className="min-h-[75vh] py-10">
+          <Container size="narrow">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button variant="outline" size="sm" onClick={exitSymptomCheck}>
+                  ← Back to VITALORA
+                </Button>
+                <Button
+                  variant="forest"
+                  size="sm"
+                  onClick={() => startSymptomCheck()}
+                >
+                  Start full symptom check
+                </Button>
+              </div>
+              <MedicalChatbot />
+            </div>
+          </Container>
+        </Section>
+      ) : activeView === 'facilities' ? (
+        <Section tone="ivory" bordered={false} className="min-h-[75vh] py-10">
+          <Container size="narrow">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button variant="outline" size="sm" onClick={exitSymptomCheck}>
+                  ← Back to VITALORA
+                </Button>
+                <Button
+                  variant="forest"
+                  size="sm"
+                  onClick={() => startSymptomCheck()}
+                >
+                  Start full symptom check
+                </Button>
+              </div>
+              <NearbyFacilities />
+            </div>
+          </Container>
+        </Section>
       ) : (
         <ScrollColorCanvas>
           {/* 1. ARCHITECTURAL EDITORIAL HERO */}

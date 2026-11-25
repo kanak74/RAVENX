@@ -1,0 +1,2001 @@
+headache,fever,chills,cough,sore-throat,runny-nose,dizziness,shortness-of-breath,stomach-pain,nausea,vomiting,diarrhea,constipation,fatigue,body-aches,back-pain,joint-pain,skin-rash,itching,palpitations,chest-discomfort,difficulty-sleeping,anxiety,condition
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,1,0,1,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,Functional Constipation
+0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,1,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,Acute Stress / Anxiety Episode
+0,1,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,Acute Stress / Anxiety Episode
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,1,Functional Constipation
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Tension-Type Headache
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,1,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,1,0,0,0,0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Dehydration or Heat Exhaustion
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,0,1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,Allergic Rhinitis (Nasal Allergies)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,Musculoskeletal Strain / Myalgia
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,1,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+1,1,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,1,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,Acute Stress / Anxiety Episode
+0,0,1,0,0,1,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,1,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,1,Acute Stress / Anxiety Episode
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,Acute Bronchitis (Chest Cold)
+1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,1,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,Migraine
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,Functional Constipation
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,Allergic Rhinitis (Nasal Allergies)
+1,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,Contact Dermatitis / Skin Allergy
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,Tension-Type Headache
+0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Acid Reflux / Gastritis
+1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,1,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,1,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,0,0,0,1,0,0,0,1,0,1,1,1,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,1,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,1,1,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,Migraine
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,Acid Reflux / Gastritis
+1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,1,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,Acid Reflux / Gastritis
+0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,1,0,1,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,Dehydration or Heat Exhaustion
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,Migraine
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Migraine
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,1,0,0,Acid Reflux / Gastritis
+1,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,1,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,1,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,Acid Reflux / Gastritis
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,Acute Bronchitis (Chest Cold)
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,Post-Viral Fatigue / Recovery Phase
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,1,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,1,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,1,0,0,0,0,0,1,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,1,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,1,0,0,1,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,1,0,0,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+1,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Insomnia / Sleep Deprivation
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Acute Bronchitis (Chest Cold)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+1,1,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,0,0,0,0,1,1,1,1,0,1,1,0,0,1,0,1,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,1,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,Musculoskeletal Strain / Myalgia
+0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,Functional Constipation
+0,1,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+1,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,1,0,0,0,0,0,Migraine
+1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,1,1,1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,1,0,0,1,1,1,0,0,1,0,1,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,1,1,1,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,Viral Exanthem (Viral Skin Rash)
+0,0,1,0,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,1,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Insomnia / Sleep Deprivation
+0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,1,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,1,0,0,1,0,1,1,0,0,0,0,1,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,1,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,1,1,Musculoskeletal Strain / Myalgia
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,1,1,0,0,0,1,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Dehydration or Heat Exhaustion
+1,1,1,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,1,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Migraine
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,0,0,1,0,1,0,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,Post-Viral Fatigue / Recovery Phase
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,1,1,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,1,0,0,1,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,1,1,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+1,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,Migraine
+0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,1,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,1,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,1,1,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,1,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,1,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,1,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,1,1,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,1,0,0,0,1,0,Migraine
+0,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Insomnia / Sleep Deprivation
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+0,1,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,Contact Dermatitis / Skin Allergy
+0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,1,1,1,0,Acid Reflux / Gastritis
+0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Acute Stress / Anxiety Episode
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,1,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,Migraine
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,1,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,1,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,1,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Insomnia / Sleep Deprivation
+0,1,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,0,0,Functional Constipation
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,1,1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+1,0,1,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Acute Viral Pharyngitis (Sore Throat)
+1,0,0,0,0,0,1,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,0,1,0,0,0,0,0,1,0,1,1,0,0,0,0,1,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+1,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,1,0,0,0,Functional Constipation
+1,0,0,0,1,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,1,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Post-Viral Fatigue / Recovery Phase
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Common Cold (Upper Respiratory Viral Infection)
+0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,1,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,Tension-Type Headache
+0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,Migraine
+0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,1,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,0,1,0,0,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,Contact Dermatitis / Skin Allergy
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Tension-Type Headache
+0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,Post-Viral Fatigue / Recovery Phase
+1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Migraine
+0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,Benign Palpitations (Caffeine / Stress / Fever-Related)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,Acid Reflux / Gastritis
+1,0,0,0,0,0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,Migraine
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,Insomnia / Sleep Deprivation
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,Tension-Type Headache
+0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,Functional Constipation
+1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Dehydration or Heat Exhaustion
+0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Common Cold (Upper Respiratory Viral Infection)
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,Acute Viral Pharyngitis (Sore Throat)
+0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,Acid Reflux / Gastritis
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+0,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,Non-Urgent Joint Inflammation (Arthralgia)
+0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,Acute Bronchitis (Chest Cold)
+1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,Dehydration or Heat Exhaustion
+1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,Acute Stress / Anxiety Episode
+0,1,1,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,1,0,0,0,0,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Benign Positional Vertigo / Inner-Ear Imbalance
+1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,Viral Exanthem (Viral Skin Rash)
+1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,Common Cold (Upper Respiratory Viral Infection)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,Musculoskeletal Strain / Myalgia
+0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Acute Bronchitis (Chest Cold)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,Allergic Rhinitis (Nasal Allergies)
+0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,Seasonal Influenza (Flu-like Illness)
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,Acute Stress / Anxiety Episode
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Functional Constipation
+0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,Insomnia / Sleep Deprivation
+0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,Functional Constipation
+0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,Contact Dermatitis / Skin Allergy
+0,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,Viral Gastroenteritis (Stomach Flu)
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,Musculoskeletal Strain / Myalgia
+1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Benign Positional Vertigo / Inner-Ear Imbalance

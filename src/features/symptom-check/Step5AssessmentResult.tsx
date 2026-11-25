@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   CheckCircleIcon,
   HeartIcon,
@@ -5,112 +6,241 @@ import {
 } from '../../components/illustrations/Icons'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
-import type { AssessmentReport } from './types'
+import { useAuth } from '../auth/AuthContext'
+import { MedicalChatbot } from '../chatbot/MedicalChatbot'
+import { NearbyFacilities } from '../facilities/NearbyFacilities'
+import { downloadAssessmentPdf, type MlPredictionItem } from '../../utils/pdfReport'
+import type { AssessmentReport, SymptomCheckInData } from './types'
+import { getConfirmedSymptomIds } from './emergencyRules'
 
 export interface Step5AssessmentResultProps {
   report: AssessmentReport
+  rawData?: SymptomCheckInData
   onEditAnswers: () => void
   onStartOver: () => void
   onBackToHome: () => void
+  onOpenAuth?: () => void
+}
+
+interface PredictApiResponse {
+  status: 'ok' | 'emergency' | 'insufficient_data'
+  insufficientData?: boolean
+  predictions: MlPredictionItem[]
+  modelInfo?: {
+    modelType: string
+    cvAccuracy: number
+    datasetRows: number
+  }
+  disclaimer?: string
 }
 
 /**
- * Plain-language Assessment Result screen.
+ * Connected Stage 4–6 Assessment Result Dashboard.
  * - Priority 1: Non-bypassable emergency interruption when safety rules trigger.
- * - Otherwise follows a clear patient-guide hierarchy:
- *   How urgent is it -> What might be happening -> What should I do now ->
- *   When should I seek medical help -> What information did I provide -> Transparency.
+ * - Integrates real Python ML disease pattern predictions (/api/predict),
+ *   downloadable PDF export, Neon Postgres history saving, Hindi/English AI Medical
+ *   Assistant (/api/chat), and verified nearby healthcare facilities (/api/facilities).
  */
 export function Step5AssessmentResult({
   report,
+  rawData,
   onEditAnswers,
   onStartOver,
   onBackToHome,
+  onOpenAuth,
 }: Step5AssessmentResultProps) {
+  const { user } = useAuth()
+  const [mlResult, setMlResult] = useState<PredictApiResponse | null>(null)
+  const [mlLoading, setMlLoading] = useState(false)
+  const [mlError, setMlError] = useState('')
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+
+  useEffect(() => {
+    if (report.isEmergencyInterrupted || report.insufficientInformation || !rawData) {
+      return
+    }
+
+    let cancelled = false
+    const runMl = async () => {
+      setMlLoading(true)
+      setMlError('')
+      try {
+        const confirmedIds = getConfirmedSymptomIds(rawData)
+        const res = await fetch('/api/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            symptoms: confirmedIds,
+            duration: rawData.details.duration,
+            severity: rawData.details.severity,
+            progression: rawData.details.progression,
+          }),
+        })
+        if (!res.ok) {
+          throw new Error(`ML service returned ${res.status}`)
+        }
+        const data = (await res.json()) as PredictApiResponse
+        if (!cancelled) {
+          setMlResult(data)
+        }
+      } catch {
+        if (!cancelled) {
+          setMlError('ML pattern service is unavailable in this environment.')
+        }
+      } finally {
+        if (!cancelled) setMlLoading(false)
+      }
+    }
+
+    void runMl()
+    return () => {
+      cancelled = true
+    }
+  }, [report.isEmergencyInterrupted, report.insufficientInformation, rawData])
+
+  const handleSaveToHistory = async () => {
+    if (!user) {
+      onOpenAuth?.()
+      return
+    }
+    setSaveState('saving')
+    try {
+      const res = await fetch('/api/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          symptoms: report.reportedSymptoms.confirmedSymptomLabels,
+          details: rawData?.details ?? {},
+          measurements: rawData?.measurements ?? {},
+          careLevel: report.careGuidance.level,
+          mlPredictions: mlResult?.predictions ?? [],
+          summaryText: report.careGuidance.summary,
+        }),
+      })
+      setSaveState(res.ok ? 'saved' : 'error')
+    } catch {
+      setSaveState('error')
+    }
+  }
+
   if (report.isEmergencyInterrupted) {
     return (
-      <div
-        role="alert"
-        aria-live="assertive"
-        className="space-y-6 rounded-3xl border-2 border-urgent bg-urgent-soft p-6 sm:p-10 shadow-[0_18px_42px_-16px_rgba(184,58,50,0.25)]"
-      >
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-urgent text-paper">
-            <ShieldAlertIcon className="h-6 w-6" />
+      <div className="space-y-6">
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="space-y-6 rounded-3xl border-2 border-urgent bg-urgent-soft p-6 sm:p-10 shadow-[0_18px_42px_-16px_rgba(184,58,50,0.25)]"
+        >
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-urgent text-paper">
+              <ShieldAlertIcon className="h-6 w-6" />
+            </div>
+            <div>
+              <Badge tone="urgent">Emergency — Get emergency help now</Badge>
+              <h1 className="mt-1 font-display text-2xl font-semibold text-charcoal sm:text-3xl">
+                {report.safety.headline}
+              </h1>
+            </div>
           </div>
-          <div>
-            <Badge tone="urgent">Emergency — Get emergency help now</Badge>
-            <h1 className="mt-1 font-display text-2xl font-semibold text-charcoal sm:text-3xl">
-              {report.safety.headline}
-            </h1>
-          </div>
-        </div>
 
-        <p className="text-base leading-relaxed text-charcoal">
-          {report.safety.message}
-        </p>
-
-        <div className="rounded-2xl border border-urgent/30 bg-paper p-5">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-urgent">
-            Why this emergency warning appeared
-          </h2>
-          <ul className="mt-2.5 space-y-2 text-sm font-semibold text-charcoal">
-            {report.safety.triggers.map((trigger) => (
-              <li key={trigger} className="flex items-start gap-2">
-                <span aria-hidden="true" className="text-urgent">
-                  •
-                </span>
-                <span>{trigger}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={`tel:${report.safety.emergencyNumber}`}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-urgent px-6 py-3 text-base font-semibold text-paper shadow-sm transition-opacity hover:opacity-95"
-          >
-            Call Emergency ({report.safety.emergencyNumber})
-          </a>
-          <Button variant="outline" size="lg" onClick={onEditAnswers}>
-            Change my answers
-          </Button>
-          <Button variant="ghost" size="lg" onClick={onStartOver}>
-            Start over
-          </Button>
-        </div>
-
-        <div className="space-y-1.5 border-t border-urgent/20 pt-4 text-xs text-charcoal/85">
-          <p className="font-semibold">{report.disclaimer}</p>
-          <p>
-            Emergency rules cannot be skipped and always take priority over
-            general information.
+          <p className="text-base leading-relaxed text-charcoal">
+            {report.safety.message}
           </p>
+
+          <div className="rounded-2xl border border-urgent/30 bg-paper p-5">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-urgent">
+              Why this emergency warning appeared
+            </h2>
+            <ul className="mt-2.5 space-y-2 text-sm font-semibold text-charcoal">
+              {report.safety.triggers.map((trigger) => (
+                <li key={trigger} className="flex items-start gap-2">
+                  <span aria-hidden="true" className="text-urgent">
+                    •
+                  </span>
+                  <span>{trigger}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={`tel:${report.safety.emergencyNumber}`}
+              className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-urgent px-6 py-3 text-base font-semibold text-paper shadow-sm transition-opacity hover:opacity-95"
+            >
+              Call Emergency ({report.safety.emergencyNumber})
+            </a>
+            <Button variant="outline" size="lg" onClick={onEditAnswers}>
+              Change my answers
+            </Button>
+            <Button variant="ghost" size="lg" onClick={onStartOver}>
+              Start over
+            </Button>
+          </div>
+
+          <div className="space-y-1.5 border-t border-urgent/20 pt-4 text-xs text-charcoal/85">
+            <p className="font-semibold">{report.disclaimer}</p>
+            <p>
+              Emergency rules cannot be skipped and always take priority over
+              ML predictions and general information.
+            </p>
+          </div>
         </div>
+
+        <NearbyFacilities />
       </div>
     )
   }
 
   const isPromptAttention = report.careGuidance.level === 'medical-attention'
+  const mlPredictions = mlResult?.predictions ?? []
 
   return (
     <div className="space-y-7">
-      {/* Header */}
-      <div className="space-y-2">
-        <Badge tone="forest" dotColor="#174B42">
-          Your Health Guide
-        </Badge>
-        <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
-          Here is what your answers suggest
-        </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate">
-          Plain-language health information based only on what you shared. This
-          is a helpful guide — not a medical diagnosis.
-        </p>
+      {/* Header + Actions */}
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="space-y-2">
+          <Badge tone="forest" dotColor="#174B42">
+            Your Health Guide
+          </Badge>
+          <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
+            Here is what your answers suggest
+          </h1>
+          <p className="max-w-2xl text-base leading-relaxed text-slate">
+            Plain-language guidance combined with statistical symptom pattern
+            analysis. Never a medical diagnosis.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2.5">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              downloadAssessmentPdf(report, mlPredictions, user?.name)
+            }
+          >
+            Download PDF report
+          </Button>
+          <Button
+            variant="forest"
+            size="sm"
+            onClick={() => void handleSaveToHistory()}
+            disabled={saveState === 'saving' || saveState === 'saved'}
+          >
+            {saveState === 'saved'
+              ? 'Saved to history'
+              : saveState === 'saving'
+                ? 'Saving...'
+                : user
+                  ? 'Save to history'
+                  : 'Sign in to save'}
+          </Button>
+        </div>
       </div>
 
-      {/* B. HOW URGENT IS IT? — Immediately visible at the top */}
+      {/* B. HOW URGENT IS IT? */}
       <section
         aria-labelledby="care-guidance-heading"
         className={`rounded-2xl border-2 p-5 sm:p-6 ${
@@ -147,6 +277,96 @@ export function Step5AssessmentResult({
           </ul>
         ) : null}
       </section>
+
+      {/* STAGE 3 & 4: REAL PYTHON ML DISEASE PATTERN ANALYSIS */}
+      {!report.insufficientInformation ? (
+        <section
+          aria-labelledby="ml-prediction-heading"
+          className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <Badge tone="sand">ML Pattern Analysis</Badge>
+              <h2
+                id="ml-prediction-heading"
+                className="mt-1.5 font-display text-xl font-semibold text-charcoal sm:text-2xl"
+              >
+                Possible conditions matching these symptoms
+              </h2>
+            </div>
+            {mlResult?.modelInfo ? (
+              <span className="text-xs text-stone">
+                {mlResult.modelInfo.modelType} · {mlResult.modelInfo.datasetRows}{' '}
+                training cases
+              </span>
+            ) : null}
+          </div>
+
+          <p className="text-xs leading-relaxed text-stone">
+            Confidence bars show how closely your symptom pattern matches
+            historical cases in our dataset. They are{' '}
+            <strong>not confirmed medical probabilities or diagnoses</strong>.
+          </p>
+
+          {mlLoading ? (
+            <p className="text-sm text-stone">
+              Running Python ML symptom analysis...
+            </p>
+          ) : mlError ? (
+            <p className="text-xs text-stone">{mlError}</p>
+          ) : mlPredictions.length > 0 ? (
+            <div className="space-y-3">
+              {mlPredictions.map((pred) => (
+                <div
+                  key={pred.condition}
+                  className="rounded-xl border border-hairline bg-ivory p-4 space-y-2.5"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-base font-semibold text-charcoal">
+                      {pred.condition}
+                    </h3>
+                    <span className="rounded-full border border-forest/25 bg-sage-mist px-3 py-0.5 text-xs font-semibold text-forest">
+                      {pred.confidencePercent}% pattern match
+                    </span>
+                  </div>
+
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-sand">
+                    <div
+                      className="h-full rounded-full bg-forest transition-all"
+                      style={{ width: `${pred.confidencePercent}%` }}
+                    />
+                  </div>
+
+                  <p className="text-sm text-slate">{pred.summary}</p>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="font-semibold text-stone">
+                        Influenced by:
+                      </span>
+                      {pred.influencingSymptoms.map((s) => (
+                        <span
+                          key={s.id}
+                          className="rounded-full border border-hairline bg-paper px-2.5 py-0.5 font-medium text-charcoal"
+                        >
+                          {s.label}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="font-semibold text-coral">
+                      Suggested doctor: {pred.recommendedSpecialist}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-slate">
+              Not enough recognized symptoms for statistical pattern matching.
+            </p>
+          )}
+        </section>
+      ) : null}
 
       {/* A. WHAT MIGHT BE HAPPENING? */}
       <section
@@ -196,7 +416,6 @@ export function Step5AssessmentResult({
           </div>
         )}
 
-        {/* How your answers fit together */}
         {report.whyThisIsRelevant.length > 0 && !report.insufficientInformation ? (
           <div className="border-t border-hairline pt-3.5">
             <h3 className="text-sm font-semibold text-charcoal">
@@ -215,7 +434,6 @@ export function Step5AssessmentResult({
           </div>
         ) : null}
 
-        {/* Progressive disclosure: Dedicated fever/temperature pathway only when relevant */}
         {report.feverAssessment.mode !== 'none' ? (
           <div className="rounded-xl border border-forest/20 bg-sage-mist/45 p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-forest">
@@ -259,7 +477,7 @@ export function Step5AssessmentResult({
         </ul>
       </section>
 
-      {/* D. WHEN SHOULD I SEEK MEDICAL HELP? (Warning signs clearly placed here) */}
+      {/* D. WHEN SHOULD I SEEK MEDICAL HELP? */}
       <section
         aria-labelledby="when-seek-help-heading"
         className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-5"
@@ -299,6 +517,22 @@ export function Step5AssessmentResult({
           </ul>
         </div>
       </section>
+
+      {/* STAGE 5: AI MEDICAL CHATBOT (ENGLISH & HINDI) */}
+      <MedicalChatbot
+        initialLanguage={user?.preferredLanguage ?? 'en'}
+        context={{
+          symptoms: report.reportedSymptoms.confirmedSymptomLabels,
+          careLevel: report.careGuidance.label,
+          predictions: mlPredictions.map((p) => ({
+            condition: p.condition,
+            confidencePercent: p.confidencePercent,
+          })),
+        }}
+      />
+
+      {/* STAGE 6: VERIFIED NEARBY HEALTHCARE FACILITIES */}
+      <NearbyFacilities />
 
       {/* E. WHAT INFORMATION DID I PROVIDE? */}
       <section
@@ -353,28 +587,6 @@ export function Step5AssessmentResult({
           </div>
         </dl>
 
-        {report.reportedSymptoms.feverSensations.length > 0 ? (
-          <p className="text-sm text-slate">
-            <strong>Fever sensations:</strong>{' '}
-            {report.reportedSymptoms.feverSensations.join(', ')}
-          </p>
-        ) : null}
-
-        {report.reportedSymptoms.contextualQA.length > 0 ? (
-          <dl className="space-y-1.5 border-t border-hairline pt-3">
-            {report.reportedSymptoms.contextualQA.map((qa) => (
-              <div
-                key={qa.question}
-                className="flex flex-wrap justify-between gap-2 text-xs sm:text-sm"
-              >
-                <dt className="text-slate">{qa.question}</dt>
-                <dd className="font-semibold text-charcoal">{qa.answer}</dd>
-              </div>
-            ))}
-          </dl>
-        ) : null}
-
-        {/* Only display measurements the user actually entered */}
         {report.healthMeasurements.hasAnyValidMeasurement ? (
           <div className="space-y-2.5 border-t border-hairline pt-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -414,22 +626,9 @@ export function Step5AssessmentResult({
             </div>
           </div>
         ) : null}
-
-        {report.healthMeasurements.invalidEntries.length > 0 ? (
-          <div className="rounded-xl border border-urgent/25 bg-urgent-soft/45 p-3 text-xs text-charcoal">
-            <p className="font-semibold text-urgent">
-              Numbers we left out because they looked unrealistic:
-            </p>
-            <ul className="mt-1 list-disc pl-4">
-              {report.healthMeasurements.invalidEntries.map((err) => (
-                <li key={err}>{err}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
       </section>
 
-      {/* Transparency & Medical Reliability Notice */}
+      {/* Transparency */}
       <section
         aria-labelledby="transparency-heading"
         className="rounded-2xl border border-forest/20 bg-sage-mist/60 p-5 text-xs leading-relaxed text-forest sm:text-sm"

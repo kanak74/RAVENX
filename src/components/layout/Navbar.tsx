@@ -8,6 +8,7 @@ import {
 } from 'framer-motion'
 import { CloseIcon, MenuIcon, SparkleIcon } from '../illustrations/Icons'
 import { VitaloraLogoMark } from '../illustrations/WarmSpotShapes'
+import { useAuth } from '../../features/auth/AuthContext'
 import { Button } from '../ui/Button'
 import { Container } from './Container'
 
@@ -27,6 +28,7 @@ const NAV_LINKS: NavLinkItem[] = [
 export interface NavbarProps {
   onCheckSymptoms?: () => void
   onNavigateSection?: (sectionId: string) => void
+  onOpenView?: (view: 'assistant' | 'facilities' | 'history' | 'auth') => void
   isCheckInActive?: boolean
 }
 
@@ -34,8 +36,10 @@ export interface NavbarProps {
 export function Navbar({
   onCheckSymptoms,
   onNavigateSection,
+  onOpenView,
   isCheckInActive = false,
 }: NavbarProps) {
+  const { user } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string>('')
@@ -148,7 +152,32 @@ export function Navbar({
             })}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-2 lg:flex">
+            {onOpenView ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => onOpenView('assistant')}
+                  className="cursor-pointer rounded-full px-3 py-1.5 text-xs font-semibold text-slate transition-colors hover:bg-sand hover:text-charcoal"
+                >
+                  AI Assistant
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onOpenView('facilities')}
+                  className="cursor-pointer rounded-full px-3 py-1.5 text-xs font-semibold text-slate transition-colors hover:bg-sand hover:text-charcoal"
+                >
+                  Nearby Care
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onOpenView(user ? 'history' : 'auth')}
+                  className="cursor-pointer rounded-full border border-hairline bg-paper px-3 py-1.5 text-xs font-semibold text-charcoal transition-colors hover:bg-sand"
+                >
+                  {user ? user.name.split(' ')[0] : 'Sign in'}
+                </button>
+              </>
+            ) : null}
             {onCheckSymptoms ? (
               <Button
                 variant={isCheckInActive ? 'coral' : 'forest'}
@@ -207,6 +236,50 @@ export function Navbar({
                     {item.label}
                   </a>
                 ))}
+                {onOpenView ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMenu()
+                        onOpenView('assistant')
+                      }}
+                      className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
+                    >
+                      AI Assistant (EN / हिन्दी)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMenu()
+                        onOpenView('facilities')
+                      }}
+                      className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
+                    >
+                      Nearby Hospitals &amp; Clinics
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMenu()
+                        onOpenView('history')
+                      }}
+                      className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
+                    >
+                      Health History
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMenu()
+                        onOpenView('auth')
+                      }}
+                      className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-forest transition-colors hover:bg-sand"
+                    >
+                      {user ? `Account (${user.name})` : 'Sign in / Register'}
+                    </button>
+                  </>
+                ) : null}
                 <div className="pt-2.5">
                   {onCheckSymptoms ? (
                     <Button

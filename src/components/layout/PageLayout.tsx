@@ -9,6 +9,7 @@ export interface PageLayoutProps {
   children: ReactNode
   onCheckSymptoms?: () => void
   onNavigateSection?: (sectionId: string) => void
+  onOpenView?: (view: 'assistant' | 'facilities' | 'history' | 'auth') => void
   isCheckInActive?: boolean
 }
 
@@ -17,6 +18,7 @@ export function PageLayout({
   children,
   onCheckSymptoms,
   onNavigateSection,
+  onOpenView,
   isCheckInActive = false,
 }: PageLayoutProps) {
   return (
@@ -36,6 +38,7 @@ export function PageLayout({
           <Navbar
             onCheckSymptoms={onCheckSymptoms}
             onNavigateSection={onNavigateSection}
+            onOpenView={onOpenView}
             isCheckInActive={isCheckInActive}
           />
           <main id="main-content" className="flex-1">

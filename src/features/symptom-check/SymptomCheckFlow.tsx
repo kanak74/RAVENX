@@ -23,6 +23,7 @@ import type {
 
 export interface SymptomCheckFlowProps {
   onExitCheckIn: () => void
+  onOpenAuth?: () => void
   initialSymptomIds?: string[]
 }
 
@@ -43,6 +44,7 @@ function createInitialData(initialSymptomIds?: string[]): SymptomCheckInData {
  */
 export function SymptomCheckFlow({
   onExitCheckIn,
+  onOpenAuth,
   initialSymptomIds,
 }: SymptomCheckFlowProps) {
   const prefersReduced = useReducedMotion()
@@ -191,9 +193,11 @@ export function SymptomCheckFlow({
               {showAssessment && assessmentReport ? (
                 <Step5AssessmentResult
                   report={assessmentReport}
+                  rawData={data}
                   onEditAnswers={() => setShowAssessment(false)}
                   onStartOver={handleStartOver}
                   onBackToHome={onExitCheckIn}
+                  onOpenAuth={onOpenAuth}
                 />
               ) : null}
 
