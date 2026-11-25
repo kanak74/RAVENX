@@ -351,3 +351,14 @@ test('13. Scope check: no diabetes, blood sugar, or glucose screening features e
 
   assert.equal(/diabetes|blood sugar|glucose|insulin|a1c/.test(allText), false)
 })
+
+test('14. Stale contextual answers do not trigger emergency if parent symptom was removed', () => {
+  const report = generateAssessmentReport(
+    baseData({
+      selectedIds: ['headache'],
+      contextualAnswers: { 'rash-spread': 'does-not-fade' },
+    }),
+  )
+  assert.equal(report.isEmergencyInterrupted, false)
+  assert.equal(report.safety.level, 'none')
+})

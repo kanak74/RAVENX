@@ -85,7 +85,10 @@ export function evaluateEmergencySafety(
   }
 
   // Non-blanching rash (does not fade under clear glass — NHS meningitis warning)
-  if (contextualAnswers['rash-spread'] === 'does-not-fade') {
+  if (
+    effectiveIds.includes('skin-rash') &&
+    contextualAnswers['rash-spread'] === 'does-not-fade'
+  ) {
     extraEmergencyTriggers.push(
       'Skin rash that does not fade when a clear glass is pressed against it',
     )

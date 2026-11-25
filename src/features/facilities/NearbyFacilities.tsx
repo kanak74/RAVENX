@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { ShieldAlertIcon } from '../../components/illustrations/Icons'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
 
@@ -8,21 +9,29 @@ interface FacilityItem {
   type: string
   address: string
   phone: string | null
+  openingHours: string | null
   emergency: boolean
   distanceKm: number
   mapsUrl: string
+  osmUrl?: string
 }
 
 export function NearbyFacilities() {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [hasSearched, setHasSearched] = useState(false)
   const [areaLabel, setAreaLabel] = useState('')
   const [facilities, setFacilities] = useState<FacilityItem[]>([])
+  const [lastRequest, setLastRequest] = useState<
+    { type: 'coords'; lat: number; lon: number } | { type: 'query'; q: string } | null
+  >(null)
 
   const fetchByCoords = async (lat: number, lon: number) => {
     setLoading(true)
     setError('')
+    setHasSearched(true)
+    setLastRequest({ type: 'coords', lat, lon })
     try {
       const res = await fetch(`/api/facilities?lat=${lat}&lon=${lon}`)
       const data = (await res.json()) as {
@@ -31,13 +40,49 @@ export function NearbyFacilities() {
         error?: string
       }
       if (!res.ok) {
+        setFacilities([])
         setError(data.error ?? 'Could not load nearby facilities.')
         return
       }
       setFacilities(data.facilities ?? [])
       setAreaLabel(data.resolvedArea ?? 'Your location')
     } catch {
-      setError('Unable to reach nearby healthcare facility service.')
+      setFacilities([])
+      setError('Unable to reach nearby healthcare facility service. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchByQuery = async (searchText: string) => {
+    const trimmed = searchText.trim()
+    if (trimmed.length < 2) {
+      setError('Please enter a valid city, neighborhood, or pincode.')
+      return
+    }
+    setLoading(true)
+    setError('')
+    setHasSearched(true)
+    setLastRequest({ type: 'query', q: trimmed })
+    try {
+      const res = await fetch(
+        `/api/facilities?query=${encodeURIComponent(trimmed)}`,
+      )
+      const data = (await res.json()) as {
+        facilities?: FacilityItem[]
+        resolvedArea?: string
+        error?: string
+      }
+      if (!res.ok) {
+        setFacilities([])
+        setError(data.error ?? 'No facilities found for that location.')
+        return
+      }
+      setFacilities(data.facilities ?? [])
+      setAreaLabel(data.resolvedArea ?? trimmed)
+    } catch {
+      setFacilities([])
+      setError('Unable to reach nearby healthcare facility service. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -45,7 +90,9 @@ export function NearbyFacilities() {
 
   const handleUseGps = () => {
     if (!navigator.geolocation) {
-      setError('Location access is not supported by your browser. Search by city or pincode instead.')
+      setError(
+        'Location access is not supported by your browser. Search by city or pincode below instead.',
+      )
       return
     }
     setLoading(true)
@@ -54,37 +101,37 @@ export function NearbyFacilities() {
       (pos) => {
         void fetchByCoords(pos.coords.latitude, pos.coords.longitude)
       },
-      () => {
+      (geoErr) => {
         setLoading(false)
-        setError('Location permission denied. Enter a city or pincode below instead.')
+        if (geoErr.code === geoErr.PERMISSION_DENIED) {
+          setError(
+            'Location permission was denied. Enter a city or pincode below to search manually.',
+          )
+        } else if (geoErr.code === geoErr.TIMEOUT) {
+          setError(
+            'Location lookup timed out. Try again or enter a city/pincode below.',
+          )
+        } else {
+          setError(
+            'Your location is currently unavailable. Enter a city or pincode below instead.',
+          )
+        }
       },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 },
     )
   }
 
-  const handleSearch = async (e: FormEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault()
-    if (!query.trim()) return
-    setLoading(true)
-    setError('')
-    try {
-      const res = await fetch(
-        `/api/facilities?query=${encodeURIComponent(query.trim())}`,
-      )
-      const data = (await res.json()) as {
-        facilities?: FacilityItem[]
-        resolvedArea?: string
-        error?: string
-      }
-      if (!res.ok) {
-        setError(data.error ?? 'No facilities found for that location.')
-        return
-      }
-      setFacilities(data.facilities ?? [])
-      setAreaLabel(data.resolvedArea ?? query.trim())
-    } catch {
-      setError('Unable to reach nearby healthcare facility service.')
-    } finally {
-      setLoading(false)
+    void fetchByQuery(query)
+  }
+
+  const handleRetry = () => {
+    if (!lastRequest) return
+    if (lastRequest.type === 'coords') {
+      void fetchByCoords(lastRequest.lat, lastRequest.lon)
+    } else {
+      void fetchByQuery(lastRequest.q)
     }
   }
 
@@ -93,6 +140,23 @@ export function NearbyFacilities() {
       aria-labelledby="nearby-facilities-heading"
       className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4"
     >
+      {/* Instant Emergency Notice — never blocked by location or API */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-urgent/25 bg-urgent-soft/50 px-4 py-3 text-xs text-charcoal">
+        <div className="flex items-center gap-2">
+          <ShieldAlertIcon className="h-4 w-4 shrink-0 text-urgent" />
+          <span>
+            <strong>Medical emergency?</strong> Do not wait for search results — call{' '}
+            <strong>112</strong> right away.
+          </span>
+        </div>
+        <a
+          href="tel:112"
+          className="inline-flex items-center rounded-lg bg-urgent px-3 py-1 font-semibold text-paper"
+        >
+          Call 112
+        </a>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <Badge tone="coral" dotColor="#C25941">
@@ -105,7 +169,7 @@ export function NearbyFacilities() {
             Find verified nearby hospitals &amp; clinics
           </h2>
           <p className="text-xs text-stone">
-            Live public healthcare listings from OpenStreetMap within 6 km.
+            Live public healthcare listings from OpenStreetMap within 5 km.
           </p>
         </div>
         <Button
@@ -127,15 +191,37 @@ export function NearbyFacilities() {
           placeholder="Or enter city, neighborhood, or pincode (e.g. Bengaluru 560001)..."
           className="flex-1 rounded-xl border border-hairline-strong bg-ivory px-4 py-2.5 text-sm text-charcoal placeholder:text-stone focus:border-forest focus:outline-none"
         />
-        <Button type="submit" variant="forest" size="md" disabled={loading || !query.trim()}>
+        <Button type="submit" variant="forest" size="md" disabled={loading}>
           {loading ? 'Searching...' : 'Find clinics'}
         </Button>
       </form>
 
       {error ? (
-        <p role="alert" className="text-xs font-medium text-urgent">
-          {error}
-        </p>
+        <div
+          role="alert"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-urgent/25 bg-urgent-soft/40 p-3 text-xs text-charcoal"
+        >
+          <span className="font-medium text-urgent">{error}</span>
+          {lastRequest ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleRetry}
+              disabled={loading}
+            >
+              Retry
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
+
+      {!loading && !error && hasSearched && facilities.length === 0 ? (
+        <div className="rounded-xl border border-hairline bg-ivory p-4 text-sm text-slate">
+          No hospitals or clinics were found in OpenStreetMap near{' '}
+          <strong>{areaLabel}</strong>. Try searching a broader city name or
+          nearby neighborhood.
+        </div>
       ) : null}
 
       {facilities.length > 0 ? (
@@ -163,20 +249,37 @@ export function NearbyFacilities() {
                     {f.emergency ? ' · Emergency services' : ''}
                   </p>
                   <p className="mt-1 text-xs text-slate">{f.address}</p>
+                  {f.openingHours ? (
+                    <p className="mt-1 text-xs text-stone">
+                      Hours: {f.openingHours}
+                    </p>
+                  ) : null}
                   {f.phone ? (
                     <p className="mt-1 text-xs font-medium text-charcoal">
                       Tel: {f.phone}
                     </p>
                   ) : null}
                 </div>
-                <a
-                  href={f.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex text-xs font-semibold text-forest hover:underline"
-                >
-                  Open in Google Maps →
-                </a>
+                <div className="flex flex-wrap gap-3 pt-1">
+                  <a
+                    href={f.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex text-xs font-semibold text-forest hover:underline"
+                  >
+                    Directions (Google Maps) →
+                  </a>
+                  {f.osmUrl ? (
+                    <a
+                      href={f.osmUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex text-xs font-medium text-stone hover:underline"
+                    >
+                      View on OSM
+                    </a>
+                  ) : null}
+                </div>
               </div>
             ))}
           </div>

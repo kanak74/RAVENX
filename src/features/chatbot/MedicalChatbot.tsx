@@ -40,15 +40,23 @@ export function MedicalChatbot({
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [failedMessage, setFailedMessage] = useState<string | null>(null)
 
-  const sendMessage = async (text: string) => {
+  const sendMessage = async (text: string, isRetry = false) => {
     const trimmed = text.trim()
     if (!trimmed || loading) return
 
-    const nextMessages: ChatTurn[] = [...messages, { role: 'user', content: trimmed }]
-    setMessages(nextMessages)
-    setInput('')
+    const historyForRequest = isRetry
+      ? messages
+      : [...messages, { role: 'user' as const, content: trimmed }]
+
+    if (!isRetry) {
+      setMessages(historyForRequest)
+      setInput('')
+    }
+
     setError('')
+    setFailedMessage(null)
     setLoading(true)
 
     try {
@@ -56,7 +64,10 @@ export function MedicalChatbot({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
+          messages: historyForRequest.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
           language,
           context,
         }),
@@ -69,6 +80,7 @@ export function MedicalChatbot({
       }
 
       if (!res.ok || !data.reply) {
+        setFailedMessage(trimmed)
         setError(
           data.message ??
             data.error ??
@@ -86,7 +98,8 @@ export function MedicalChatbot({
         },
       ])
     } catch {
-      setError('Unable to reach the AI Medical Assistant right now.')
+      setFailedMessage(trimmed)
+      setError('Unable to reach the AI Medical Assistant right now. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -94,7 +107,22 @@ export function MedicalChatbot({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (!input.trim()) {
+      setError(
+        language === 'hi'
+          ? 'कृपया अपना प्रश्न लिखें।'
+          : 'Please enter a health question before sending.',
+      )
+      return
+    }
     void sendMessage(input)
+  }
+
+  const handleReset = () => {
+    setMessages([])
+    setInput('')
+    setError('')
+    setFailedMessage(null)
   }
 
   return (
@@ -122,33 +150,45 @@ export function MedicalChatbot({
           </p>
         </div>
 
-        <div
-          role="group"
-          aria-label="Assistant language"
-          className="inline-flex rounded-xl border border-hairline bg-ivory p-1"
-        >
-          <button
-            type="button"
-            onClick={() => setLanguage('en')}
-            className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-              language === 'en'
-                ? 'bg-forest text-paper'
-                : 'text-slate hover:text-charcoal'
-            }`}
+        <div className="flex flex-wrap items-center gap-2">
+          {messages.length > 0 ? (
+            <button
+              type="button"
+              onClick={handleReset}
+              className="cursor-pointer rounded-xl border border-hairline px-3 py-1.5 text-xs font-semibold text-slate transition-colors hover:bg-sand hover:text-charcoal"
+            >
+              {language === 'hi' ? 'रीसेट करें' : 'Reset chat'}
+            </button>
+          ) : null}
+
+          <div
+            role="group"
+            aria-label="Assistant language"
+            className="inline-flex rounded-xl border border-hairline bg-ivory p-1"
           >
-            English
-          </button>
-          <button
-            type="button"
-            onClick={() => setLanguage('hi')}
-            className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-              language === 'hi'
-                ? 'bg-forest text-paper'
-                : 'text-slate hover:text-charcoal'
-            }`}
-          >
-            हिन्दी
-          </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                language === 'en'
+                  ? 'bg-forest text-paper'
+                  : 'text-slate hover:text-charcoal'
+              }`}
+            >
+              English
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('hi')}
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                language === 'hi'
+                  ? 'bg-forest text-paper'
+                  : 'text-slate hover:text-charcoal'
+              }`}
+            >
+              हिन्दी
+            </button>
+          </div>
         </div>
       </div>
 
@@ -216,9 +256,20 @@ export function MedicalChatbot({
       {error ? (
         <div
           role="alert"
-          className="rounded-xl border border-coral/35 bg-coral-soft/50 p-3 text-xs text-charcoal"
+          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-coral/35 bg-coral-soft/50 p-3 text-xs text-charcoal"
         >
-          {error}
+          <span>{error}</span>
+          {failedMessage ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => void sendMessage(failedMessage, true)}
+              disabled={loading}
+            >
+              {language === 'hi' ? 'पुनः प्रयास करें' : 'Retry'}
+            </Button>
+          ) : null}
         </div>
       ) : null}
 
@@ -238,7 +289,7 @@ export function MedicalChatbot({
           type="submit"
           variant="forest"
           size="md"
-          disabled={loading || !input.trim()}
+          disabled={loading}
           leftIcon={<SparkleIcon className="h-4 w-4" />}
         >
           {language === 'hi' ? 'पूछें' : 'Ask'}
