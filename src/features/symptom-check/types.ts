@@ -217,10 +217,21 @@ export interface AssessmentExplanationBlock {
   sourceLabel: string
 }
 
+export type CareGuidanceLevel = 'emergency' | 'medical-attention' | 'monitor'
+
+export interface CareGuidanceSummary {
+  level: CareGuidanceLevel
+  label: string
+  summary: string
+  reasons: string[]
+}
+
 export interface AssessmentReport {
   isEmergencyInterrupted: boolean
   insufficientInformation: boolean
+  insufficientInfoMessage?: string
   safety: EmergencyAssessment
+  careGuidance: CareGuidanceSummary
   reportedSymptoms: {
     confirmedSymptomLabels: string[]
     userDescribedNotes?: string
@@ -249,6 +260,7 @@ export interface AssessmentReport {
   whatYouCanDoNext: string[]
   whenToSeekMedicalCare: string[]
   warningSigns: string[]
+  transparencyPoints: string[]
   disclaimer: string
   generatedBy: 'deterministic-clinical-rules-v1'
 }

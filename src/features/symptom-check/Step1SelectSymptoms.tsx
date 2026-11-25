@@ -353,14 +353,9 @@ export function Step1SelectSymptoms({
                                 {symptom.label}
                               </span>
                               {/* Plain description shown below label */}
-                              <span className="mt-0.5 block text-xs italic text-stone leading-snug">
+                              <span className="mt-0.5 block text-xs text-stone leading-snug">
                                 {symptom.plainDescription}
                               </span>
-                              {symptom.helperText ? (
-                                <span className="mt-0.5 block text-xs text-stone/70">
-                                  {symptom.helperText}
-                                </span>
-                              ) : null}
                             </div>
 
                             <span

@@ -1,114 +1,168 @@
 import type { AssessmentExplanationBlock } from './types'
 
 /**
- * Curated, public-health-grounded medical reference content.
- * Separated from application logic so clinical reviewers can audit and update
- * explanations, warning signs, and disclaimers independently.
+ * Curated, plain-language health information grounded in public-health guidance.
+ * Separated from application logic so reviewers can audit and update content easily.
  *
- * Sources referenced: NHS (nhs.uk), MedlinePlus (medlineplus.gov), CDC (cdc.gov).
+ * Sources referenced: NHS (nhs.uk), MedlinePlus (medlineplus.gov), CDC (cdc.gov), WHO (who.int).
  */
 
 export const MEDICAL_DISCLAIMER =
   'VITALORA provides informational health guidance and does not replace a qualified healthcare professional.'
 
+export const INSUFFICIENT_INFORMATION_MESSAGE =
+  "We don't have enough information to understand what may be causing these symptoms. If you're concerned or your symptoms persist or worsen, please contact a healthcare professional."
+
 export const UNVERIFIED_MEASUREMENT_NOTICE =
-  'Readings shown here were entered manually by you and have not been verified by a clinical device or healthcare provider.'
+  'These numbers were typed in by you and have not been checked by a medical device or healthcare professional.'
+
+export const TRANSPARENCY_POINTS: string[] = [
+  'This guide gives general health information only — it is not a medical diagnosis.',
+  'It only looks at the symptoms, answers, and unverified numbers you entered.',
+  'Because it cannot examine you or run tests, it can miss important conditions.',
+  'It never replaces advice from a doctor, nurse, or pharmacist.',
+  'Emergency warning signs always take priority over everything else here.',
+]
 
 export const GENERAL_WARNING_SIGNS: string[] = [
-  'Sudden or severe chest pain, pressure, tightness, or pain spreading to the arm, jaw, or back.',
-  'Difficulty breathing, gasping, or struggling to speak in full sentences.',
-  'Fainting, collapse, new confusion, or difficulty waking up.',
-  'Sudden weakness or numbness on one side of the face, arm, or leg, or sudden trouble speaking.',
-  'Severe headache with a stiff neck, sensitivity to light, or a rash that does not fade when pressed with a glass.',
-  'Coughing or vomiting blood, or signs of severe dehydration (unable to keep fluids down, very little urine).',
+  'Chest pain, squeezing, tightness, or pain spreading to your arm, neck, jaw, or back.',
+  'Trouble breathing, gasping, or not being able to speak in full sentences.',
+  'Fainting, passing out, sudden confusion, or trouble waking up.',
+  'Sudden weakness or numbness in your face, arm, or leg, or sudden trouble speaking.',
+  'A severe headache with a stiff neck, bright light hurting your eyes, or a rash that stays visible when pressed with a clear glass.',
+  'Throwing up blood, coughing up blood, or being unable to keep any fluids down for 24 hours.',
 ]
 
-export const DEFAULT_SELF_CARE_STEPS: string[] = [
-  'Rest and avoid strenuous activity while your body recovers.',
-  'Drink fluids regularly (water, clear broths, or oral rehydration fluids if needed).',
-  'If you feel feverish or chilled, check your temperature with a reliable thermometer if one is available.',
-  'Keep track of whether symptoms improve, stay steady, or worsen over the next 24–48 hours.',
-  'Do not self-diagnose or start leftover prescription medicines without speaking to a doctor or pharmacist.',
-]
-
-export const WHEN_TO_SEEK_CARE_DEFAULT: string[] = [
-  'If symptoms are getting steadily worse, feel severe, or do not start improving after a few days.',
-  'If you have an underlying health condition (such as heart, lung, kidney, or immune conditions) or are pregnant.',
-  'If you are unsure what your symptoms mean — a doctor, clinic, or pharmacist can give personal advice.',
-  'Call 112 (or go to the nearest emergency department) immediately if any emergency warning signs appear.',
+export const WHEN_TO_CALL_DOCTOR: string[] = [
+  'Symptoms are getting worse, feel severe, or do not start improving after a few days.',
+  'You have a long-term health condition (like heart, lung, or kidney trouble), a weak immune system, or you are pregnant.',
+  'You are worried or unsure about what your symptoms mean.',
 ]
 
 export const EXPLANATION_LIBRARY: Record<string, AssessmentExplanationBlock> = {
   'viral-respiratory-cluster': {
     id: 'viral-respiratory-cluster',
-    title: 'Upper respiratory or viral-style symptom pattern',
+    title: 'Common cold or flu-like viral infection',
     summary:
-      'Combinations such as fever or feverish sensations, chills, fatigue, body aches, sore throat, cough, or a runny nose commonly occur together during everyday viral infections (such as a common cold or flu-like illness).',
+      'Symptoms like fever or feeling hot and cold, tiredness, body aches, cough, sore throat, and a stuffy or runny nose often happen together with an everyday viral bug (such as a cold or flu).',
     relevance:
-      'Because several viral and non-viral conditions share these overlapping symptoms, symptoms alone cannot identify a specific germ or confirm a diagnosis.',
+      'Many everyday infections cause overlapping symptoms, so symptoms alone cannot tell one germ from another or rule out something that needs treatment.',
     sourceLabel: 'NHS / MedlinePlus',
   },
-  'fever-chills-fatigue': {
-    id: 'fever-chills-fatigue',
-    title: 'Feverish sensations, chills, and fatigue together',
+  'fever-only-or-chills': {
+    id: 'fever-only-or-chills',
+    title: 'Your body may be fighting off a mild infection',
     summary:
-      'Chills and shivering often happen when the body is raising its internal temperature or responding to an infection, and fatigue commonly accompanies this response.',
+      'Feeling unusually hot, chilled, or shivery often happens when your body temperature shifts to fight off an infection or inflammation.',
     relevance:
-      'A subjective feeling of heat or cold cannot confirm a fever by itself; measuring with a thermometer helps clarify whether your core temperature is elevated.',
-    sourceLabel: 'MedlinePlus',
+      'Feeling hot or cold by itself does not prove you have a fever. A thermometer reading helps show what your temperature actually is, though the number alone still does not show the cause.',
+    sourceLabel: 'MedlinePlus / NHS',
+  },
+  'cough-or-throat-isolated': {
+    id: 'cough-or-throat-isolated',
+    title: 'Mild throat, nose, or airway irritation',
+    summary:
+      'A cough, sore throat, or runny nose often comes from a common cold virus, dry air, or allergies.',
+    relevance:
+      'Most mild upper-airway symptoms improve with rest and fluids over several days, but you should have a doctor listen to your chest if breathing feels hard or a cough lingers.',
+    sourceLabel: 'NHS / CDC',
   },
   'headache-mild-isolated': {
     id: 'headache-mild-isolated',
-    title: 'Isolated headache without red-flag features',
+    title: 'Everyday tension, dehydration, or mild illness headache',
     summary:
-      'Everyday headaches are frequently linked to tension, dehydration, poor sleep, eye strain, or mild viral illness, and often settle with rest and hydration.',
+      'A mild or moderate headache that builds gradually is often linked to muscle tension, not drinking enough water, poor sleep, eye strain, or coming down with a cold.',
     relevance:
-      'The absence of sudden "thunderclap" onset, stiff neck, light sensitivity, or neurological changes is reassuring, though worsening or persistent headaches still warrant medical advice.',
-    sourceLabel: 'NHS',
+      'It is helpful that you have not reported sudden severe pain, stiff neck, or light sensitivity, though any headache that gets worse or keeps coming back should be checked by a doctor.',
+    sourceLabel: 'NHS / MedlinePlus',
   },
   'headache-dizziness-cluster': {
     id: 'headache-dizziness-cluster',
-    title: 'Headache paired with dizziness or lightheadedness',
+    title: 'Headache along with feeling dizzy or lightheaded',
     summary:
-      'Headache and dizziness can appear together with dehydration, inner-ear balance changes, migraine, blood pressure shifts, or viral illness.',
+      'Headache and dizziness can show up together when you are dehydrated (low on fluids), overtired, having a migraine, experiencing a change in blood pressure, or recovering from a viral illness.',
     relevance:
-      'Pay close attention to whether dizziness worsens when standing, or if any sudden severe headache, vision change, or weakness appears.',
+      'Notice whether dizziness worsens when you stand up, and get urgent help if a sudden severe headache, blurred vision, or weakness appears.',
+    sourceLabel: 'NHS / MedlinePlus',
+  },
+  'dizziness-isolated': {
+    id: 'dizziness-isolated',
+    title: 'Lightheadedness or inner-ear balance changes',
+    summary:
+      'Feeling dizzy or unsteady can happen when you stand up too quickly, have not had enough water or food, feel anxious, or have mild inner-ear irritation.',
+    relevance:
+      'Sit or lie down right away if you feel faint so you do not fall. A doctor should check dizziness that keeps returning or comes with chest, breathing, or weakness signs.',
     sourceLabel: 'NHS / MedlinePlus',
   },
   'digestive-cluster': {
     id: 'digestive-cluster',
-    title: 'Stomach upset, nausea, vomiting, or diarrhea',
+    title: 'Stomach upset or mild stomach bug',
     summary:
-      'Gastrointestinal symptoms together are often related to mild stomach infections (gastroenteritis) or dietary irritation, where staying hydrated is the main priority.',
+      'Tummy pain, feeling sick (nausea), throwing up, or loose stools often happen together when your stomach is irritated or fighting off a mild stomach bug.',
     relevance:
-      'Seek medical care if you cannot keep fluids down for 24 hours, notice blood in vomit or stool, or feel increasingly dizzy when standing.',
+      'Losing too much fluid and salt (dehydration) is the main thing to watch out for. Seek medical care if you cannot keep small sips of water down.',
     sourceLabel: 'NHS / CDC',
+  },
+  'constipation-mild': {
+    id: 'constipation-mild',
+    title: 'Slow digestion or constipation',
+    summary:
+      'Hard or infrequent stools are commonly related to not drinking enough water, eating less fiber, moving less, or stress.',
+    relevance:
+      'See a doctor promptly if constipation comes with severe tummy pain, throwing up, or lasts more than a week.',
+    sourceLabel: 'NHS / MedlinePlus',
+  },
+  'musculoskeletal-aches': {
+    id: 'musculoskeletal-aches',
+    title: 'Muscle or joint strain or viral body aches',
+    summary:
+      'Sore muscles, back ache, or stiff joints can come from physical strain, sleeping in an awkward position, or the early stages of a viral illness.',
+    relevance:
+      'Gentle rest helps everyday strain, while sudden swelling, numbness, or pain after a fall needs a doctor to check it.',
+    sourceLabel: 'NHS / MedlinePlus',
+  },
+  'fatigue-isolated': {
+    id: 'fatigue-isolated',
+    title: 'General tiredness or low energy',
+    summary:
+      'Feeling unusually tired or weak can happen with poor sleep, stress, not drinking enough fluids, or the start or tail end of a mild viral bug.',
+    relevance:
+      'Tiredness by itself has many possible causes. If low energy lasts more than a couple of weeks or gets worse, a doctor can check simple causes like low iron or thyroid changes.',
+    sourceLabel: 'NHS / MedlinePlus',
   },
   'palpitations-isolated': {
     id: 'palpitations-isolated',
-    title: 'Brief heart palpitations without chest pain or breathlessness',
+    title: 'Heart palpitations (noticeable fast or fluttering heartbeat)',
     summary:
-      'Noticing a fast or fluttering heartbeat can sometimes be triggered by caffeine, stress, poor sleep, dehydration, or fever, though heart rhythm causes also exist.',
+      'Feeling your heart race, pound, or skip a beat can sometimes be triggered by stress, worry, caffeine, poor sleep, dehydration, or fever — though heart rhythm issues can also cause it.',
     relevance:
-      'Even when brief and without red flags, new or recurring palpitations are worth discussing with a GP or clinician.',
+      'Even without chest pain or dizziness, new or repeated heart palpitations should be checked by a doctor so they can listen to your heart rhythm.',
     sourceLabel: 'NHS',
   },
-  'skin-rash-general': {
-    id: 'skin-rash-general',
-    title: 'Skin rash or spots',
+  'skin-rash-or-itching': {
+    id: 'skin-rash-or-itching',
+    title: 'Skin irritation, allergy, or viral rash',
     summary:
-      'Rashes have many possible causes, from mild allergic irritation to viral infections. Pressing a clear drinking glass against the rash helps check whether spots fade.',
+      'New spots, bumps, or itchy skin often come from contact with something irritating, a mild allergy, or a viral infection.',
     relevance:
-      'A rash that does not fade under a glass, especially alongside fever, drowsiness, or stiff neck, requires immediate emergency attention.',
+      'Use the clear-glass press test on new spots: if spots stay bright red and do not fade when you press a glass against them, get emergency medical help right away.',
     sourceLabel: 'NHS',
+  },
+  'sleep-or-worry': {
+    id: 'sleep-or-worry',
+    title: 'Stress, worry, or disrupted sleep',
+    summary:
+      'Feeling unusually worried, tense, or struggling to sleep often affect each other and can also make physical symptoms feel stronger.',
+    relevance:
+      'If worry or poor sleep makes daily life hard, talking with a doctor or trusted healthcare professional can help you find safe support.',
+    sourceLabel: 'NHS / WHO',
   },
   'insufficient-info': {
     id: 'insufficient-info',
-    title: 'Limited information available for a specific pattern',
-    summary:
-      'Based on the details provided, there is not enough specific symptom or measurement information to associate this safely with a known clinical pattern.',
+    title: 'Not enough information for a specific pattern',
+    summary: INSUFFICIENT_INFORMATION_MESSAGE,
     relevance:
-      'Rather than guessing, VITALORA recommends sharing your full symptoms and history with a healthcare professional if you feel unwell.',
+      'Because key details were not provided, VITALORA will not guess what is causing how you feel.',
     sourceLabel: 'VITALORA Safety Policy',
   },
 }
