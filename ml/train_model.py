@@ -264,9 +264,9 @@ def train() -> None:
     y = df["condition"].values
 
     base_rf = RandomForestClassifier(
-        n_estimators=220,
-        max_depth=14,
-        min_samples_leaf=2,
+        n_estimators=60,
+        max_depth=10,
+        min_samples_leaf=3,
         random_state=42,
         n_jobs=-1,
     )
@@ -288,7 +288,7 @@ def train() -> None:
         condition_symptom_rates[str(condition)] = rates
 
     model_path = out_dir / "model.joblib"
-    joblib.dump(calibrated, model_path)
+    joblib.dump(calibrated, model_path, compress=3)
 
     metadata = {
         "model_type": "Calibrated RandomForestClassifier (5-fold Sigmoid)",
