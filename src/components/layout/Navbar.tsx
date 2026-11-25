@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CloseIcon, MenuIcon, SparkleIcon } from '../illustrations/Icons'
-import { RavenxLogoMark } from '../illustrations/WarmSpotShapes'
+import { VitaloraLogoMark } from '../illustrations/WarmSpotShapes'
 import { Button } from '../ui/Button'
 import { Container } from './Container'
 
@@ -16,7 +16,7 @@ const NAV_LINKS: NavLinkItem[] = [
   { label: 'Safety First', href: '#safety-promise' },
 ]
 
-/** Responsive, kid-accessible top navigation header for RAVENX. */
+/** Responsive, kid-accessible top navigation header for VITALORA. */
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -33,10 +33,10 @@ export function Navbar() {
             href="#top"
             className="group inline-flex items-center gap-3 rounded-full pr-2 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-coral-deep"
           >
-            <RavenxLogoMark className="h-11 w-11 transition-transform duration-200 group-hover:rotate-[-4deg]" />
+            <VitaloraLogoMark className="h-11 w-11 transition-transform duration-200 group-hover:rotate-[-4deg]" />
             <div className="flex items-baseline gap-2">
               <span className="font-display text-2xl font-bold tracking-tight text-ink">
-                RAVENX
+                VITALORA
               </span>
               <span className="hidden rounded-full bg-butter-soft px-2.5 py-0.5 text-xs font-extrabold text-ink sm:inline-block">
                 Health Guide

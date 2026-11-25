@@ -4,8 +4,8 @@ export interface LogoMarkProps {
   className?: string
 }
 
-/** Warm illustrated brand mark for RAVENX — friendly coral circle with sunlit leaf-heart. */
-export function RavenxLogoMark({ className = 'h-10 w-10' }: LogoMarkProps) {
+/** Warm illustrated brand mark for VITALORA — friendly coral circle with sunlit leaf-heart. */
+export function VitaloraLogoMark({ className = 'h-10 w-10' }: LogoMarkProps) {
   return (
     <svg
       viewBox="0 0 48 48"
@@ -32,7 +32,7 @@ export function RavenxLogoMark({ className = 'h-10 w-10' }: LogoMarkProps) {
   )
 }
 
-/** Expressive custom SVG scene for the homepage hero establishing RAVENX's warm illustrated style. */
+/** Expressive custom SVG scene for the homepage hero establishing VITALORA's warm illustrated style. */
 export function HeroCompanionIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-[460px] select-none">

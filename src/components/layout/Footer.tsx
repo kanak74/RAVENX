@@ -1,5 +1,5 @@
 import { HeartIcon } from '../illustrations/Icons'
-import { RavenxLogoMark } from '../illustrations/WarmSpotShapes'
+import { VitaloraLogoMark } from '../illustrations/WarmSpotShapes'
 import { Badge } from '../ui/Badge'
 import { Container } from './Container'
 
@@ -11,12 +11,15 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-md space-y-3">
             <div className="flex items-center gap-3">
-              <RavenxLogoMark className="h-9 w-9" />
+              <VitaloraLogoMark className="h-9 w-9" />
               <span className="font-display text-xl font-bold text-ink">
-                RAVENX
+                VITALORA
               </span>
               <Badge tone="butter">Prototype · Stage 1</Badge>
             </div>
+            <p className="text-sm font-bold text-ink">
+              Understand your symptoms. Know your next step.
+            </p>
             <p className="text-sm leading-relaxed text-cocoa">
               A warm, human-centered health guidance prototype made to feel calm
               and simple for everyone.
@@ -47,7 +50,7 @@ export function Footer() {
             </span>
           </p>
           <span className="shrink-0 text-xs font-bold text-taupe">
-            Built with care · RAVENX
+            Built with care · VITALORA
           </span>
         </div>
       </Container>

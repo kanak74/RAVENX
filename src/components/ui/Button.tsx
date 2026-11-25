@@ -73,7 +73,7 @@ function buildButtonClasses(
 }
 
 /**
- * Large, accessible, tactile pill button aligned with the RAVENX design system.
+ * Large, accessible, tactile pill button aligned with the VITALORA design system.
  * Pass `href` to render an identically styled anchor link.
  */
 export function Button(props: ButtonProps | ButtonLinkProps) {

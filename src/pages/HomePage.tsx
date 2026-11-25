@@ -16,7 +16,7 @@ import { Section } from '../components/layout/Section'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { OrganicBlob } from '../components/ui/OrganicBlob'
-import { ravenxMotion, ravenxPaletteShowcase } from '../styles/theme'
+import { vitaloraMotion, vitaloraPaletteShowcase } from '../styles/theme'
 
 interface StepPlaceholder {
   number: string
@@ -57,7 +57,7 @@ const STEP_PLACEHOLDERS: StepPlaceholder[] = [
   },
 ]
 
-/** Stage 1 homepage skeleton establishing RAVENX's warm, illustrated design identity. */
+/** Stage 1 homepage skeleton establishing VITALORA's warm, illustrated design identity. */
 export function HomePage() {
   return (
     <PageLayout>
@@ -77,21 +77,21 @@ export function HomePage() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: ravenxMotion.ease }}
+              transition={{ duration: 0.45, ease: vitaloraMotion.ease }}
               className="space-y-6 lg:col-span-6"
             >
               <Badge tone="pink" dotColor="#FF7B61">
-                Human-Centered Health Companion
+                VITALORA · Human-Centered Health Guide
               </Badge>
 
               <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
-                When you feel unwell, get calm guidance — without the scary jargon.
+                Understand your symptoms. Know your next step.
               </h1>
 
               <p className="max-w-xl text-lg leading-relaxed text-cocoa sm:text-xl">
-                RAVENX is a friendly health guidance prototype built to help people
-                understand everyday symptoms, recognize warning signs, and know
-                when to seek medical care.
+                VITALORA is a warm, friendly health guidance companion built to help
+                you explore possible causes, spot warning signs, and learn simple
+                precautions — without scary medical jargon.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-1">
@@ -111,7 +111,7 @@ export function HomePage() {
               <p className="inline-flex items-center gap-2 text-sm font-bold text-taupe">
                 <SunIcon className="h-4 w-4 text-coral-deep" />
                 <span>
-                  Stage 1 layout foundation · Interactive health flow arrives next.
+                  Foundation ready · Interactive symptom guidance arrives in the next stages.
                 </span>
               </p>
             </motion.div>
@@ -119,7 +119,7 @@ export function HomePage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: ravenxMotion.ease, delay: 0.08 }}
+              transition={{ duration: 0.5, ease: vitaloraMotion.ease, delay: 0.08 }}
               className="lg:col-span-6"
             >
               <HeroCompanionIllustration />
@@ -131,9 +131,9 @@ export function HomePage() {
       {/* Placeholder Section 1: Planned 3-step journey */}
       <Section id="how-it-works" tone="linen" topWave>
         <Container>
-          <motion.div {...ravenxMotion.fadeUp} className="mx-auto max-w-2xl text-center">
+          <motion.div {...vitaloraMotion.fadeUp} className="mx-auto max-w-2xl text-center">
             <Badge tone="butter" dotColor="#D4A22B">
-              Homepage Skeleton · Upcoming Flow
+              How VITALORA Works · Preview
             </Badge>
             <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
               Three gentle steps, easy enough for anyone
@@ -153,7 +153,7 @@ export function HomePage() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{
                   duration: 0.4,
-                  ease: ravenxMotion.ease,
+                  ease: vitaloraMotion.ease,
                   delay: index * 0.07,
                 }}
                 className="tactile-card flex flex-col justify-between rounded-[2rem] p-7"
@@ -191,7 +191,7 @@ export function HomePage() {
       <Section id="safety-promise" tone="mint" topWave>
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-12">
-            <motion.div {...ravenxMotion.fadeUp} className="space-y-5 lg:col-span-6">
+            <motion.div {...vitaloraMotion.fadeUp} className="space-y-5 lg:col-span-6">
               <Badge tone="tomato" dotColor="#DE4436">
                 Design System & Safety First
               </Badge>
@@ -199,7 +199,7 @@ export function HomePage() {
                 Warm colors that speak clearly at a glance
               </h2>
               <p className="text-base leading-relaxed text-cocoa sm:text-lg">
-                Instead of cold dark dashboards, RAVENX uses soft cream surfaces
+                Instead of cold dark dashboards, VITALORA uses soft cream surfaces
                 and friendly colors so anyone can tell calm care apart from
                 urgent alerts right away.
               </p>
@@ -224,12 +224,12 @@ export function HomePage() {
             </motion.div>
 
             <motion.div
-              {...ravenxMotion.fadeUp}
+              {...vitaloraMotion.fadeUp}
               className="rounded-[2rem] border-2 border-border-warm bg-warm-white p-6 shadow-[0_6px_0_0_rgba(38,33,29,0.06)] lg:col-span-6"
             >
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="font-display text-xl font-bold text-ink">
-                  RAVENX Color Palette
+                  VITALORA Color Palette
                 </h3>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-taupe">
                   Foundation
@@ -237,7 +237,7 @@ export function HomePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {ravenxPaletteShowcase.map((swatch) => (
+                {vitaloraPaletteShowcase.map((swatch) => (
                   <div
                     key={swatch.name}
                     className="rounded-2xl border-2 border-border-warm bg-cream p-3"
@@ -268,25 +268,25 @@ export function HomePage() {
       <Section tone="pink" topWave>
         <Container size="narrow">
           <motion.div
-            {...ravenxMotion.fadeUp}
+            {...vitaloraMotion.fadeUp}
             className="rounded-[2.25rem] border-2 border-border-warm bg-warm-white px-6 py-10 text-center shadow-[0_8px_0_0_rgba(38,33,29,0.06)] sm:px-12 sm:py-14"
           >
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-coral-soft text-coral-deep">
               <HeartIcon className="h-7 w-7" />
             </div>
             <h2 className="mt-5 font-display text-3xl font-bold text-ink sm:text-4xl">
-              Stage 1 foundation is ready
+              VITALORA foundation is ready
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-base text-cocoa sm:text-lg">
-              Layout shells, warm typography, organic shapes, and large accessible
-              buttons are set up cleanly for the healthcare stages ahead.
+              Understand your symptoms. Know your next step. Layout shells, warm
+              typography, and accessible buttons are ready for the interactive stages ahead.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
               <Button href="#top" variant="coral" size="lg">
                 Back to Top
               </Button>
               <Button href="#how-it-works" variant="green" size="lg">
-                Review Step Skeleton
+                Review Step Preview
               </Button>
             </div>
           </motion.div>

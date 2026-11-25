@@ -1,11 +1,11 @@
 /**
- * RAVENX Design System Tokens
+ * VITALORA Design System Tokens
  *
  * Centralizes the warm, illustration-first palette, typography pairings,
  * spacing rhythm, and subtle motion curves shared across the app.
  */
 
-export const ravenxColors = {
+export const vitaloraColors = {
   cream: '#FFF9F2',
   linen: '#FFF2E2',
   warmWhite: '#FFFCF8',
@@ -25,7 +25,7 @@ export const ravenxColors = {
   pinkSoft: '#FDE9EE',
 } as const
 
-export const ravenxPaletteShowcase = [
+export const vitaloraPaletteShowcase = [
   {
     name: 'Cream',
     hex: '#FFF9F2',
@@ -64,7 +64,7 @@ export const ravenxPaletteShowcase = [
   },
 ] as const
 
-export const ravenxMotion = {
+export const vitaloraMotion = {
   ease: [0.22, 1, 0.36, 1] as const,
   fadeUp: {
     initial: { opacity: 0, y: 16 },
