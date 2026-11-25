@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Container } from '../../components/layout/Container'
 import { Section } from '../../components/layout/Section'
 import { Button } from '../../components/ui/Button'
@@ -24,10 +24,11 @@ const INITIAL_DATA: SymptomCheckInData = {
 }
 
 /**
- * Full Stage 3 guided symptom check-in workspace embedded inside VITALORA.
- * Keeps emergency safety evaluation live and rule-based on every step.
+ * Calm, clinical-grade guided symptom check-in workspace inside VITALORA.
+ * Keeps rule-based emergency safety evaluation active on every step.
  */
 export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
+  const prefersReduced = useReducedMotion()
   const [step, setStep] = useState<CheckInStep>(1)
   const [highestStepReached, setHighestStepReached] = useState<CheckInStep>(1)
   const [data, setData] = useState<SymptomCheckInData>(INITIAL_DATA)
@@ -38,11 +39,15 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
     [data],
   )
 
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  }
+
   const goToStep = (nextStep: CheckInStep) => {
     setAssessmentPreviewOpen(false)
     setStep(nextStep)
     setHighestStepReached((prev) => (nextStep > prev ? nextStep : prev))
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollTop()
   }
 
   const handleToggleSymptom = (id: string) => {
@@ -94,7 +99,7 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
     setAssessmentPreviewOpen(false)
     setStep(1)
     setHighestStepReached(1)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollTop()
   }
 
   const hasAnyInput =
@@ -103,10 +108,14 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
     Object.keys(data.contextualAnswers).length > 0
 
   return (
-    <Section id="symptom-check-in" tone="cream" className="min-h-[75vh] py-8 sm:py-12">
+    <Section
+      id="symptom-check-in"
+      tone="ivory"
+      bordered={false}
+      className="min-h-[75vh] py-8 sm:py-12"
+    >
       <Container size="narrow">
         <div className="space-y-6">
-          {/* Top utility row */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Button variant="outline" size="sm" onClick={onExitCheckIn}>
               ← Back to home guide
@@ -125,16 +134,15 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
             onSelectStep={goToStep}
           />
 
-          {/* Rule-based emergency alert is always evaluated immediately, never delayed */}
           <EmergencyAlertBanner assessment={emergencyAssessment} />
 
           <AnimatePresence mode="wait">
             <motion.div
               key={`${step}-${assessmentPreviewOpen ? 'stage4' : 'active'}`}
-              initial={{ opacity: 0, y: 10 }}
+              initial={prefersReduced ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
+              exit={prefersReduced ? undefined : { opacity: 0, y: -6 }}
+              transition={{ duration: prefersReduced ? 0 : 0.2 }}
             >
               {step === 1 ? (
                 <Step1SelectSymptoms
@@ -173,7 +181,7 @@ export function SymptomCheckFlow({ onExitCheckIn }: SymptomCheckFlowProps) {
                   onBack={() => goToStep(3)}
                   onContinueToAssessment={() => {
                     setAssessmentPreviewOpen(true)
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    scrollTop()
                   }}
                   onCloseAssessmentPreview={() => setAssessmentPreviewOpen(false)}
                   onStartOver={handleStartOver}

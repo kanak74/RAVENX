@@ -2,53 +2,62 @@
 
 @theme {
   --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
-  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  --color-cream: #fff9f2;
-  --color-linen: #fff2e2;
-  --color-warm-white: #fffcf8;
-  --color-ink: #26211d;
-  --color-cocoa: #594f47;
-  --color-taupe: #87796e;
-  --color-border-warm: #eadccf;
+  /* Refined warm ivory & botanical health-tech surfaces */
+  --color-ivory: #faf8f4;
+  --color-sand: #f3efe7;
+  --color-paper: #ffffff;
+  --color-sage-mist: #edf2ee;
+  --color-peach-mist: #fbf1eb;
 
-  --color-coral: #ff7b61;
-  --color-coral-hover: #f36a4f;
-  --color-coral-deep: #d94d34;
-  --color-coral-soft: #ffe5dd;
+  /* Charcoal & warm neutral inks */
+  --color-charcoal: #1e2421;
+  --color-slate: #4d5651;
+  --color-stone: #6f7872;
+  --color-hairline: #e4dfd5;
+  --color-hairline-strong: #cfc8ba;
 
-  --color-tomato: #de4436;
-  --color-tomato-hover: #c9372a;
-  --color-tomato-soft: #fce1de;
+  /* Strategic editorial accents */
+  --color-coral: #c4533b;
+  --color-coral-hover: #ae4630;
+  --color-coral-accent: #d96b52;
+  --color-coral-soft: #f9eae5;
 
-  --color-green: #2c875c;
-  --color-green-hover: #23704c;
-  --color-green-soft: #dff4e8;
+  --color-forest: #1e4d3b;
+  --color-forest-hover: #163b2d;
+  --color-sage: #6b8f7e;
 
-  --color-butter: #f9cc59;
-  --color-butter-hover: #f0be3e;
-  --color-butter-soft: #fff3cc;
+  --color-urgent: #b83a32;
+  --color-urgent-hover: #9e2f28;
+  --color-urgent-soft: #fceceb;
 
-  --color-pink: #f6b3c2;
-  --color-pink-hover: #ee9db0;
-  --color-pink-soft: #fde9ee;
+  --color-amber-soft: #f6efe0;
+  --color-amber-ink: #76521b;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     margin: 0;
     min-height: 100vh;
-    background-color: var(--color-cream);
-    color: var(--color-ink);
-    line-height: 1.6;
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    line-height: 1.65;
   }
 
   h1,
@@ -56,19 +65,21 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    color: var(--color-ink);
-    letter-spacing: -0.015em;
-    line-height: 1.18;
+    color: var(--color-charcoal);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
 
   ::selection {
-    background-color: var(--color-butter-soft);
-    color: var(--color-ink);
+    background-color: var(--color-coral-soft);
+    color: var(--color-charcoal);
   }
 }
 
-.tactile-card {
-  background-color: var(--color-warm-white);
-  border: 2px solid var(--color-border-warm);
-  box-shadow: 0 6px 0 0 rgba(38, 33, 29, 0.05);
+.editorial-surface {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-hairline);
+  box-shadow:
+    0 1px 2px rgba(30, 36, 33, 0.04),
+    0 10px 28px -10px rgba(30, 36, 33, 0.06);
 }

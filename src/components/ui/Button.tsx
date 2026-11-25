@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react'
-import { motion, type HTMLMotionProps } from 'framer-motion'
+import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion'
 
 export type ButtonVariant =
   | 'coral'
-  | 'green'
-  | 'butter'
-  | 'tomato'
+  | 'forest'
+  | 'urgent'
   | 'outline'
   | 'ghost'
 
@@ -33,27 +32,25 @@ export type ButtonLinkProps = SharedButtonProps &
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {
   coral:
-    'bg-coral text-ink border-2 border-[#E3593F] shadow-[0_4px_0_0_#E3593F] hover:bg-coral-hover active:translate-y-[2px] active:shadow-[0_2px_0_0_#E3593F]',
-  green:
-    'bg-green text-warm-white border-2 border-[#1F6644] shadow-[0_4px_0_0_#1F6644] hover:bg-green-hover active:translate-y-[2px] active:shadow-[0_2px_0_0_#1F6644]',
-  butter:
-    'bg-butter text-ink border-2 border-[#D4A22B] shadow-[0_4px_0_0_#D4A22B] hover:bg-butter-hover active:translate-y-[2px] active:shadow-[0_2px_0_0_#D4A22B]',
-  tomato:
-    'bg-tomato text-warm-white border-2 border-[#AC2C21] shadow-[0_4px_0_0_#AC2C21] hover:bg-tomato-hover active:translate-y-[2px] active:shadow-[0_2px_0_0_#AC2C21]',
+    'bg-coral text-paper border border-coral shadow-[0_2px_8px_rgba(196,83,59,0.22)] hover:bg-coral-hover hover:border-coral-hover hover:shadow-[0_6px_16px_rgba(196,83,59,0.25)]',
+  forest:
+    'bg-forest text-paper border border-forest shadow-[0_2px_8px_rgba(30,77,59,0.18)] hover:bg-forest-hover hover:border-forest-hover hover:shadow-[0_6px_16px_rgba(30,77,59,0.22)]',
+  urgent:
+    'bg-urgent text-paper border border-urgent shadow-[0_2px_8px_rgba(184,58,50,0.22)] hover:bg-urgent-hover hover:border-urgent-hover',
   outline:
-    'bg-warm-white text-ink border-2 border-border-warm shadow-[0_4px_0_0_#EADCCF] hover:bg-linen hover:border-[#D9C5B2] active:translate-y-[2px] active:shadow-[0_2px_0_0_#EADCCF]',
+    'bg-paper text-charcoal border border-hairline-strong shadow-[0_1px_2px_rgba(30,36,33,0.04)] hover:bg-sand/70 hover:border-stone/50',
   ghost:
-    'bg-transparent text-ink border-2 border-transparent hover:bg-linen/80 active:translate-y-[1px]',
+    'bg-transparent text-slate border border-transparent hover:bg-sand/80 hover:text-charcoal',
 }
 
 const SIZE_STYLES: Record<ButtonSize, string> = {
   sm: 'min-h-[40px] px-4 py-2 text-sm gap-2',
-  md: 'min-h-[48px] px-6 py-2.5 text-base gap-2.5',
-  lg: 'min-h-[56px] px-7 py-3.5 text-lg gap-3',
+  md: 'min-h-[46px] px-5 py-2.5 text-sm sm:text-base gap-2',
+  lg: 'min-h-[52px] px-7 py-3.5 text-base gap-2.5',
 }
 
 const BASE_CLASSES =
-  'inline-flex items-center justify-center rounded-full font-extrabold leading-none transition-colors duration-150 cursor-pointer select-none focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-coral-deep disabled:opacity-55 disabled:cursor-not-allowed disabled:shadow-none'
+  'inline-flex items-center justify-center rounded-full font-semibold leading-none transition-all duration-200 cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-coral disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none'
 
 function buildButtonClasses(
   variant: ButtonVariant,
@@ -73,10 +70,11 @@ function buildButtonClasses(
 }
 
 /**
- * Large, accessible, tactile pill button aligned with the VITALORA design system.
+ * Refined, accessible pill button aligned with the VITALORA health-tech design system.
  * Pass `href` to render an identically styled anchor link.
  */
 export function Button(props: ButtonProps | ButtonLinkProps) {
+  const prefersReduced = useReducedMotion()
   const {
     children,
     variant = 'coral',
@@ -96,6 +94,9 @@ export function Button(props: ButtonProps | ButtonLinkProps) {
     </>
   )
 
+  const motionHover = prefersReduced ? undefined : { y: -1 }
+  const motionTap = prefersReduced ? undefined : { scale: 0.99 }
+
   if (typeof props.href === 'string') {
     const {
       children: _c,
@@ -110,8 +111,9 @@ export function Button(props: ButtonProps | ButtonLinkProps) {
 
     return (
       <motion.a
-        whileHover={{ y: -1 }}
-        transition={{ duration: 0.15 }}
+        whileHover={motionHover}
+        whileTap={motionTap}
+        transition={{ duration: 0.16 }}
         className={classes}
         {...anchorProps}
       >
@@ -135,8 +137,9 @@ export function Button(props: ButtonProps | ButtonLinkProps) {
   return (
     <motion.button
       type={type}
-      whileHover={buttonProps.disabled ? undefined : { y: -1 }}
-      transition={{ duration: 0.15 }}
+      whileHover={buttonProps.disabled ? undefined : motionHover}
+      whileTap={buttonProps.disabled ? undefined : motionTap}
+      transition={{ duration: 0.16 }}
       className={classes}
       {...buttonProps}
     >

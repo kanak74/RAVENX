@@ -10,7 +10,7 @@ export interface PageLayoutProps {
   isCheckInActive?: boolean
 }
 
-/** Top-level layout shell supplying motion preferences, skip link, header, and footer. */
+/** Top-level layout shell enforcing user reduced-motion preferences, header, and footer. */
 export function PageLayout({
   children,
   onCheckSymptoms,
@@ -19,10 +19,10 @@ export function PageLayout({
 }: PageLayoutProps) {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="flex min-h-screen flex-col bg-cream text-ink">
+      <div className="flex min-h-screen flex-col bg-ivory text-charcoal">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-butter focus:px-5 focus:py-3 focus:text-sm focus:font-extrabold focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-forest focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-paper"
         >
           Skip to main content
         </a>

@@ -3,6 +3,7 @@ import {
   ArrowRightIcon,
   CheckCircleIcon,
   CloseIcon,
+  SearchIcon,
 } from '../../components/illustrations/Icons'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
@@ -11,6 +12,7 @@ import {
   filterSymptoms,
   getSymptomById,
 } from './symptomCatalog'
+import type { SymptomCategoryId } from './types'
 
 export interface Step1SelectSymptomsProps {
   selectedIds: string[]
@@ -18,7 +20,15 @@ export interface Step1SelectSymptomsProps {
   onContinue: () => void
 }
 
-/** Step 1: Searchable, categorized, touch-friendly symptom selector. */
+const CATEGORY_DOT: Record<SymptomCategoryId, string> = {
+  'head-breathing': 'bg-coral-accent',
+  stomach: 'bg-[#C48B3B]',
+  'body-skin': 'bg-forest',
+  'sleep-mood': 'bg-sage',
+  urgent: 'bg-urgent',
+}
+
+/** Step 1: Clean, calm, searchable symptom selector organized by body system. */
 export function Step1SelectSymptoms({
   selectedIds,
   onToggleSymptom,
@@ -40,17 +50,18 @@ export function Step1SelectSymptoms({
   )
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-3">
-        <Badge tone="coral" dotColor="#FF7B61">
-          Step 1 of 4 · Tell us how you feel
+    <div className="space-y-7">
+      <div className="space-y-2.5">
+        <Badge tone="forest" dotColor="#1E4D3B">
+          Step 1 of 4 · Symptoms
         </Badge>
-        <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+        <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
           What symptoms are bothering you today?
         </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-cocoa sm:text-lg">
-          Tap as many as apply — or tap again to remove one. If you are just
-          looking around, you can press <strong>Continue</strong> right away.
+        <p className="max-w-2xl text-base leading-relaxed text-slate">
+          Select everything that feels relevant, or tap again to remove an
+          item. If you are simply exploring, press <strong>Continue</strong> at
+          any time.
         </p>
       </div>
 
@@ -59,38 +70,37 @@ export function Step1SelectSymptoms({
         <label htmlFor="symptom-search" className="sr-only">
           Search symptoms
         </label>
+        <SearchIcon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-stone" />
         <input
           id="symptom-search"
           type="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search symptoms (e.g. fever, headache, tummy, cough)..."
-          className="min-h-[54px] w-full rounded-full border-2 border-border-warm bg-warm-white pl-6 pr-24 text-base font-bold text-ink placeholder:font-semibold placeholder:text-taupe focus:border-[#E3593F] focus:outline-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
+          placeholder="Search symptoms in plain words (e.g. fever, headache, tummy, cough)..."
+          className="min-h-[50px] w-full rounded-2xl border border-hairline-strong bg-paper pl-11 pr-24 text-sm font-medium text-charcoal placeholder:text-stone focus:border-coral focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral sm:text-base"
         />
         {searchQuery.trim() ? (
           <button
             type="button"
             onClick={() => setSearchQuery('')}
             aria-label="Clear search"
-            className="absolute right-3 top-1/2 inline-flex min-h-[38px] -translate-y-1/2 cursor-pointer items-center gap-1 rounded-full border border-border-warm bg-linen px-3.5 text-sm font-extrabold text-ink hover:bg-butter-soft"
+            className="absolute right-2.5 top-1/2 inline-flex min-h-[34px] -translate-y-1/2 cursor-pointer items-center gap-1 rounded-xl border border-hairline bg-sand px-3 text-xs font-semibold text-charcoal transition-colors hover:bg-hairline"
           >
-            <CloseIcon className="h-4 w-4" />
+            <CloseIcon className="h-3.5 w-3.5" />
             <span>Clear</span>
           </button>
         ) : null}
       </div>
 
-      {/* Selected symptoms quick-edit bar */}
+      {/* Selected symptoms bar */}
       {selectedItems.length > 0 ? (
         <div
           aria-label="Selected symptoms"
-          className="rounded-3xl border-2 border-green/30 bg-green-soft/65 p-4 sm:p-5"
+          className="rounded-2xl border border-forest/20 bg-sage-mist/70 p-4"
         >
-          <div className="mb-2.5 flex items-center justify-between gap-2">
-            <span className="text-sm font-extrabold text-[#194E35]">
-              Selected ({selectedItems.length}) — tap any tag to remove
-            </span>
-          </div>
+          <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-forest">
+            Selected ({selectedItems.length}) — tap to remove
+          </p>
           <div className="flex flex-wrap gap-2">
             {selectedItems.map((item) => (
               <button
@@ -98,25 +108,25 @@ export function Step1SelectSymptoms({
                 type="button"
                 onClick={() => onToggleSymptom(item.id)}
                 aria-label={`Remove ${item.label}`}
-                className="inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full border-2 border-green/40 bg-warm-white px-4 py-1.5 text-sm font-extrabold text-ink transition-colors hover:bg-tomato-soft hover:border-tomato/40 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
+                className="inline-flex min-h-[36px] cursor-pointer items-center gap-2 rounded-full border border-forest/25 bg-paper px-3.5 py-1 text-sm font-semibold text-charcoal transition-colors hover:border-urgent/40 hover:bg-urgent-soft hover:text-urgent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral"
               >
                 <span>{item.label}</span>
-                <CloseIcon className="h-3.5 w-3.5 text-cocoa" />
+                <CloseIcon className="h-3.5 w-3.5 text-stone" />
               </button>
             ))}
           </div>
         </div>
       ) : null}
 
-      {/* Categorized symptoms list */}
+      {/* Categorized symptoms */}
       {filteredSymptoms.length === 0 ? (
-        <div className="rounded-3xl border-2 border-border-warm bg-warm-white p-8 text-center">
-          <p className="font-display text-xl font-bold text-ink">
+        <div className="rounded-2xl border border-hairline bg-paper p-8 text-center">
+          <p className="font-display text-xl font-semibold text-charcoal">
             No symptoms matched &ldquo;{searchQuery.trim()}&rdquo;
           </p>
-          <p className="mt-2 text-base text-cocoa">
+          <p className="mt-2 text-sm text-slate sm:text-base">
             Try everyday words like &ldquo;headache&rdquo;, &ldquo;fever&rdquo;,
-            &ldquo;stomach&rdquo;, or clear the search box to browse all options.
+            &ldquo;stomach&rdquo;, or clear the search box to browse all choices.
           </p>
           <div className="mt-5">
             <Button
@@ -136,60 +146,74 @@ export function Step1SelectSymptoms({
             )
             if (categoryItems.length === 0) return null
 
+            const isUrgentCategory = category.id === 'urgent'
+
             return (
-              <section key={category.id} aria-labelledby={`cat-${category.id}`}>
-                <div className="mb-3 flex flex-wrap items-baseline gap-2.5">
+              <section
+                key={category.id}
+                aria-labelledby={`cat-${category.id}`}
+                className={
+                  isUrgentCategory
+                    ? 'rounded-2xl border border-urgent/25 bg-urgent-soft/45 p-4 sm:p-5'
+                    : undefined
+                }
+              >
+                <div className="mb-3 flex flex-wrap items-center gap-2.5">
                   <span
-                    className={`rounded-full px-3 py-1 text-xs font-extrabold ${category.badgeBg}`}
-                  >
-                    {category.title}
-                  </span>
+                    className={`h-2 w-2 rounded-full ${CATEGORY_DOT[category.id]}`}
+                    aria-hidden="true"
+                  />
                   <h2
                     id={`cat-${category.id}`}
-                    className="sr-only"
+                    className={`font-sans text-sm font-semibold tracking-wide ${isUrgentCategory ? 'text-urgent' : 'text-charcoal'
+                      }`}
                   >
                     {category.title}
                   </h2>
-                  <span className="text-sm font-semibold text-cocoa">
-                    {category.description}
+                  <span className="text-xs text-stone">
+                    — {category.description}
                   </span>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
                   {categoryItems.map((symptom) => {
                     const isSelected = selectedIds.includes(symptom.id)
+                    const activeClasses = isUrgentCategory
+                      ? 'border-urgent bg-urgent-soft text-charcoal shadow-[0_2px_8px_rgba(184,58,50,0.12)]'
+                      : 'border-coral bg-coral-soft/75 text-charcoal shadow-[0_2px_8px_rgba(196,83,59,0.1)]'
+
                     return (
                       <button
                         key={symptom.id}
                         type="button"
                         aria-pressed={isSelected}
                         onClick={() => onToggleSymptom(symptom.id)}
-                        className={`flex min-h-[56px] w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-all focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep ${
-                          isSelected
-                            ? `${category.selectedStyle} shadow-[0_4px_0_0_rgba(38,33,29,0.08)]`
-                            : 'border-border-warm bg-warm-white text-ink hover:border-[#D9C5B2] hover:bg-linen/70'
-                        }`}
+                        className={`flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral ${isSelected
+                          ? activeClasses
+                          : 'border-hairline bg-paper text-charcoal hover:border-hairline-strong hover:bg-sand/40'
+                          }`}
                       >
-                        <div>
-                          <span className="block text-base font-extrabold leading-snug text-ink">
+                        <div className="min-w-0">
+                          <span className="block text-sm font-semibold leading-snug text-charcoal sm:text-[15px]">
                             {symptom.label}
                           </span>
                           {symptom.helperText ? (
-                            <span className="mt-0.5 block text-xs font-semibold text-cocoa">
+                            <span className="mt-0.5 block text-xs text-stone">
                               {symptom.helperText}
                             </span>
                           ) : null}
                         </div>
 
                         <span
-                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 ${
-                            isSelected
-                              ? 'border-ink bg-warm-white text-green'
-                              : 'border-border-warm bg-cream text-transparent'
-                          }`}
+                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors ${isSelected
+                            ? isUrgentCategory
+                              ? 'border-urgent bg-urgent text-paper'
+                              : 'border-coral bg-coral text-paper'
+                            : 'border-hairline-strong bg-ivory text-transparent'
+                            }`}
                           aria-hidden="true"
                         >
-                          <CheckCircleIcon className="h-4 w-4" />
+                          <CheckCircleIcon className="h-3.5 w-3.5" />
                         </span>
                       </button>
                     )
@@ -202,8 +226,8 @@ export function Step1SelectSymptoms({
       )}
 
       {/* Bottom action bar */}
-      <div className="flex flex-col-reverse items-stretch justify-between gap-4 border-t-2 border-border-warm pt-6 sm:flex-row sm:items-center">
-        <p className="text-sm font-bold text-taupe">
+      <div className="flex flex-col-reverse items-stretch justify-between gap-4 border-t border-hairline pt-6 sm:flex-row sm:items-center">
+        <p className="text-sm font-medium text-stone">
           {selectedIds.length === 0
             ? 'No symptoms selected yet — you can still continue to explore.'
             : `${selectedIds.length} symptom${selectedIds.length === 1 ? '' : 's'} selected`}
@@ -212,7 +236,7 @@ export function Step1SelectSymptoms({
           variant="coral"
           size="lg"
           onClick={onContinue}
-          rightIcon={<ArrowRightIcon className="h-5 w-5" />}
+          rightIcon={<ArrowRightIcon className="h-4 w-4" />}
         >
           Continue
         </Button>
