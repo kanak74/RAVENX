@@ -6,10 +6,17 @@ import { Navbar } from './Navbar'
 export interface PageLayoutProps {
   children: ReactNode
   onCheckSymptoms?: () => void
+  onNavigateSection?: (sectionId: string) => void
+  isCheckInActive?: boolean
 }
 
 /** Top-level layout shell supplying motion preferences, skip link, header, and footer. */
-export function PageLayout({ children, onCheckSymptoms }: PageLayoutProps) {
+export function PageLayout({
+  children,
+  onCheckSymptoms,
+  onNavigateSection,
+  isCheckInActive = false,
+}: PageLayoutProps) {
   return (
     <MotionConfig reducedMotion="user">
       <div className="flex min-h-screen flex-col bg-cream text-ink">
@@ -19,11 +26,18 @@ export function PageLayout({ children, onCheckSymptoms }: PageLayoutProps) {
         >
           Skip to main content
         </a>
-        <Navbar onCheckSymptoms={onCheckSymptoms} />
+        <Navbar
+          onCheckSymptoms={onCheckSymptoms}
+          onNavigateSection={onNavigateSection}
+          isCheckInActive={isCheckInActive}
+        />
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <Footer onCheckSymptoms={onCheckSymptoms} />
+        <Footer
+          onCheckSymptoms={onCheckSymptoms}
+          onNavigateSection={onNavigateSection}
+        />
       </div>
     </MotionConfig>
   )

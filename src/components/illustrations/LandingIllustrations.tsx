@@ -226,35 +226,3 @@ export function BodyAwarenessIllustration() {
     </motion.svg>
   )
 }
-
-/** Cozy small illustration inside the "Check my symptoms" coming-soon preview dialog. */
-export function SymptomCheckPreviewIllustration() {
-  return (
-    <svg
-      viewBox="0 0 180 120"
-      fill="none"
-      aria-hidden="true"
-      className="mx-auto h-28 w-auto"
-    >
-      <ellipse cx="90" cy="64" rx="74" ry="48" fill="#FFF3CC" />
-      <circle cx="38" cy="40" r="12" fill="#FDE9EE" />
-      <circle cx="148" cy="84" r="10" fill="#DFF4E8" />
-      <rect
-        x="48"
-        y="22"
-        width="84"
-        height="76"
-        rx="22"
-        fill="#FFFCF8"
-        stroke="#26211D"
-        strokeWidth="2.8"
-      />
-      <circle cx="90" cy="52" r="16" fill="#FF7B61" stroke="#26211D" strokeWidth="2.4" />
-      <path
-        d="M90 60C89.3 60 82 55.4 82 50.4C82 47.8 84 46 86.3 46C87.8 46 89 46.8 90 48C91 46.8 92.2 46 93.7 46C96 46 98 47.8 98 50.4C98 55.4 90.7 60 90 60Z"
-        fill="#FFF9F2"
-      />
-      <path d="M70 80H110" stroke="#26211D" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  )
-}

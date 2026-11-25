@@ -7,22 +7,33 @@ import { Container } from './Container'
 
 interface NavLinkItem {
   label: string
+  sectionId: string
   href: string
 }
 
 const NAV_LINKS: NavLinkItem[] = [
-  { label: 'Home', href: '#top' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Health awareness', href: '#health-awareness' },
-  { label: 'Safety', href: '#safety' },
+  { label: 'Home', sectionId: 'top', href: '#top' },
+  { label: 'How it works', sectionId: 'how-it-works', href: '#how-it-works' },
+  {
+    label: 'Health awareness',
+    sectionId: 'health-awareness',
+    href: '#health-awareness',
+  },
+  { label: 'Safety', sectionId: 'safety', href: '#safety' },
 ]
 
 export interface NavbarProps {
   onCheckSymptoms?: () => void
+  onNavigateSection?: (sectionId: string) => void
+  isCheckInActive?: boolean
 }
 
 /** Responsive, kid-accessible top navigation header for VITALORA. */
-export function Navbar({ onCheckSymptoms }: NavbarProps) {
+export function Navbar({
+  onCheckSymptoms,
+  onNavigateSection,
+  isCheckInActive = false,
+}: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const closeMenu = () => setMobileOpen(false)
@@ -30,6 +41,17 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
   const handleCheckClick = () => {
     closeMenu()
     onCheckSymptoms?.()
+  }
+
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    closeMenu()
+    if (onNavigateSection) {
+      event.preventDefault()
+      onNavigateSection(sectionId)
+    }
   }
 
   return (
@@ -41,6 +63,7 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
         >
           <a
             href="#top"
+            onClick={(e) => handleLinkClick(e, 'top')}
             className="group inline-flex items-center gap-3 rounded-full pr-2 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-coral-deep"
           >
             <VitaloraLogoMark className="h-11 w-11 transition-transform duration-200 group-hover:rotate-[-4deg]" />
@@ -59,6 +82,7 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleLinkClick(e, item.sectionId)}
                 className="whitespace-nowrap rounded-full px-3.5 py-2 text-base font-bold text-cocoa transition-colors hover:bg-linen hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-coral-deep"
               >
                 {item.label}
@@ -69,12 +93,12 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
           <div className="hidden lg:block">
             {onCheckSymptoms ? (
               <Button
-                variant="coral"
+                variant={isCheckInActive ? 'green' : 'coral'}
                 size="sm"
                 onClick={handleCheckClick}
                 leftIcon={<SparkleIcon className="h-4 w-4" />}
               >
-                Check my symptoms
+                {isCheckInActive ? 'Symptom check-in' : 'Check my symptoms'}
               </Button>
             ) : (
               <Button
@@ -119,7 +143,7 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
                   <a
                     key={item.href}
                     href={item.href}
-                    onClick={closeMenu}
+                    onClick={(e) => handleLinkClick(e, item.sectionId)}
                     className="flex min-h-[46px] items-center rounded-2xl px-4 py-2.5 text-lg font-bold text-ink transition-colors hover:bg-linen"
                   >
                     {item.label}
@@ -128,13 +152,13 @@ export function Navbar({ onCheckSymptoms }: NavbarProps) {
                 <div className="pt-2">
                   {onCheckSymptoms ? (
                     <Button
-                      variant="coral"
+                      variant={isCheckInActive ? 'green' : 'coral'}
                       size="md"
                       fullWidth
                       onClick={handleCheckClick}
                       leftIcon={<SparkleIcon className="h-4 w-4" />}
                     >
-                      Check my symptoms
+                      {isCheckInActive ? 'Symptom check-in' : 'Check my symptoms'}
                     </Button>
                   ) : (
                     <Button

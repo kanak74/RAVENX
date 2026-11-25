@@ -5,10 +5,21 @@ import { Container } from './Container'
 
 export interface FooterProps {
   onCheckSymptoms?: () => void
+  onNavigateSection?: (sectionId: string) => void
 }
 
 /** Warm, clear footer with hackathon prototype disclaimer and consistent navigation. */
-export function Footer({ onCheckSymptoms }: FooterProps) {
+export function Footer({ onCheckSymptoms, onNavigateSection }: FooterProps) {
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    if (onNavigateSection) {
+      event.preventDefault()
+      onNavigateSection(sectionId)
+    }
+  }
+
   return (
     <footer className="border-t-2 border-border-warm bg-warm-white py-12 text-cocoa">
       <Container>
@@ -31,16 +42,32 @@ export function Footer({ onCheckSymptoms }: FooterProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-bold text-ink">
-            <a href="#top" className="hover:text-coral-deep">
+            <a
+              href="#top"
+              onClick={(e) => handleLinkClick(e, 'top')}
+              className="hover:text-coral-deep"
+            >
               Home
             </a>
-            <a href="#how-it-works" className="hover:text-coral-deep">
+            <a
+              href="#how-it-works"
+              onClick={(e) => handleLinkClick(e, 'how-it-works')}
+              className="hover:text-coral-deep"
+            >
               How it works
             </a>
-            <a href="#health-awareness" className="hover:text-coral-deep">
+            <a
+              href="#health-awareness"
+              onClick={(e) => handleLinkClick(e, 'health-awareness')}
+              className="hover:text-coral-deep"
+            >
               Health awareness
             </a>
-            <a href="#safety" className="hover:text-coral-deep">
+            <a
+              href="#safety"
+              onClick={(e) => handleLinkClick(e, 'safety')}
+              className="hover:text-coral-deep"
+            >
               Safety
             </a>
             {onCheckSymptoms ? (
@@ -64,7 +91,8 @@ export function Footer({ onCheckSymptoms }: FooterProps) {
             <HeartIcon className="mt-0.5 h-4 w-4 shrink-0 text-tomato" />
             <span>
               Informational health guidance prototype — not a medical diagnostic
-              tool. Always consult a doctor or seek emergency care when needed.
+              tool. Always consult a doctor or seek emergency care (112 in India)
+              when needed.
             </span>
           </p>
           <span className="shrink-0 text-xs font-bold text-taupe">
