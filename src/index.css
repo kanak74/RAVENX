@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-cream: #fff9f2;
+  --color-linen: #fff2e2;
+  --color-warm-white: #fffcf8;
+  --color-ink: #26211d;
+  --color-cocoa: #594f47;
+  --color-taupe: #87796e;
+  --color-border-warm: #eadccf;
+
+  --color-coral: #ff7b61;
+  --color-coral-hover: #f36a4f;
+  --color-coral-deep: #d94d34;
+  --color-coral-soft: #ffe5dd;
+
+  --color-tomato: #de4436;
+  --color-tomato-hover: #c9372a;
+  --color-tomato-soft: #fce1de;
+
+  --color-green: #2c875c;
+  --color-green-hover: #23704c;
+  --color-green-soft: #dff4e8;
+
+  --color-butter: #f9cc59;
+  --color-butter-hover: #f0be3e;
+  --color-butter-soft: #fff3cc;
+
+  --color-pink: #f6b3c2;
+  --color-pink-hover: #ee9db0;
+  --color-pink-soft: #fde9ee;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    letter-spacing: -0.015em;
+    line-height: 1.18;
+  }
+
+  ::selection {
+    background-color: var(--color-butter-soft);
+    color: var(--color-ink);
+  }
+}
+
+.tactile-card {
+  background-color: var(--color-warm-white);
+  border: 2px solid var(--color-border-warm);
+  box-shadow: 0 6px 0 0 rgba(38, 33, 29, 0.05);
+}
