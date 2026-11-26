@@ -131,32 +131,40 @@ STRICT RULES:
 
     try {
       const candidateModels = [
-        'gemini-2.5-flash',
+        'gemini-3-flash',
         'gemini-3-flash-preview',
+        'gemini-2.5-flash',
         'gemini-2.5-flash-lite',
         'gemini-flash-latest',
       ]
 
+      const contents = validMessages.slice(-12).map((m) => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }],
+      }))
+
+      const tryGenerate = async (modelName: string) =>
+        ai.models.generateContent({
+          model: modelName,
+          contents,
+          config: {
+            systemInstruction,
+            temperature: 0.3,
+            maxOutputTokens: 1024,
+            abortSignal: controller.signal,
+          },
+        })
+
       let response
       let usedModel = candidateModels[0]
       let lastErr: unknown = null
+      const tried = new Set<string>()
 
       for (const modelName of candidateModels) {
+        tried.add(modelName)
         try {
           usedModel = modelName
-          response = await ai.models.generateContent({
-            model: modelName,
-            contents: validMessages.slice(-12).map((m) => ({
-              role: m.role === 'assistant' ? 'model' : 'user',
-              parts: [{ text: m.content }],
-            })),
-            config: {
-              systemInstruction,
-              temperature: 0.3,
-              maxOutputTokens: 1024,
-              abortSignal: controller.signal,
-            },
-          })
+          response = await tryGenerate(modelName)
           lastErr = null
           break
         } catch (err) {
@@ -169,37 +177,42 @@ STRICT RULES:
       }
 
       if (!response && lastErr) {
-        // Dynamically discover an active flash model on this API key
+        // Dynamically discover all active Gemini text models on this API key
         const pager = await ai.models.list()
-        let discovered: string | undefined
+        const discovered: string[] = []
         for await (const m of pager) {
           const name = m.name?.replace(/^models\//, '') ?? ''
           if (
-            name.includes('gemini') &&
-            name.includes('flash') &&
-            !name.includes('image') &&
-            !name.includes('tts') &&
-            !name.includes('audio')
+            name.startsWith('gemini-') &&
+            !tried.has(name) &&
+            !/(image|tts|audio|embedding|robotics|computer-use|deep-research|live)/i.test(name)
           ) {
-            discovered = name
-            break
+            discovered.push(name)
           }
         }
-        if (!discovered) throw lastErr
-        usedModel = discovered
-        response = await ai.models.generateContent({
-          model: discovered,
-          contents: validMessages.slice(-12).map((m) => ({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }],
-          })),
-          config: {
-            systemInstruction,
-            temperature: 0.3,
-            maxOutputTokens: 1024,
-            abortSignal: controller.signal,
-          },
+        // Prefer flash models and newer versions first
+        discovered.sort((a, b) => {
+          const aFlash = a.includes('flash') ? 0 : 1
+          const bFlash = b.includes('flash') ? 0 : 1
+          if (aFlash !== bFlash) return aFlash - bFlash
+          return b.localeCompare(a)
         })
+
+        for (const modelName of discovered.slice(0, 8)) {
+          try {
+            usedModel = modelName
+            response = await tryGenerate(modelName)
+            lastErr = null
+            break
+          } catch (err) {
+            lastErr = err
+            const msg = err instanceof Error ? err.message : String(err)
+            if (!/404|not found|no longer available|unsupported/i.test(msg)) {
+              throw err
+            }
+          }
+        }
+        if (!response && lastErr) throw lastErr
       }
 
       const reply = response?.text?.trim()
