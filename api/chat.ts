@@ -131,6 +131,7 @@ STRICT RULES:
 
     try {
       const candidateModels = [
+        'gemini-3.6-flash',
         'gemini-3.7-flash',
         'gemini-3.8-flash',
         'gemini-flash-latest',
@@ -151,7 +152,7 @@ STRICT RULES:
             maxOutputTokens: 1024,
             abortSignal: AbortSignal.any([
               controller.signal,
-              AbortSignal.timeout(10000),
+              AbortSignal.timeout(8000),
             ]),
           },
         })
@@ -161,10 +162,13 @@ STRICT RULES:
       let lastErr: unknown = null
       const tried = new Set<string>()
 
-      const isRetryableModelError = (msg: string) =>
-        /404|not found|no longer available|unsupported|429|quota|resource_exhausted|limit:\s*0|503|high demand|overloaded|unavailable/i.test(
+      const shouldRetryModel = (err: unknown) => {
+        if (controller.signal.aborted) return false
+        const msg = err instanceof Error ? err.message : String(err)
+        return /404|not found|no longer available|unsupported|429|quota|resource_exhausted|limit:\s*0|503|high demand|overloaded|unavailable|abort|timeout/i.test(
           msg,
         )
+      }
 
       for (const modelName of candidateModels) {
         tried.add(modelName)
@@ -175,11 +179,7 @@ STRICT RULES:
           break
         } catch (err) {
           lastErr = err
-          const msg = err instanceof Error ? err.message : String(err)
-          if (
-            controller.signal.aborted ||
-            (!isRetryableModelError(msg) && !/abort|timeout/i.test(msg))
-          ) {
+          if (!shouldRetryModel(err)) {
             throw err
           }
         }
@@ -217,8 +217,7 @@ STRICT RULES:
             break
           } catch (err) {
             lastErr = err
-            const msg = err instanceof Error ? err.message : String(err)
-            if (!isRetryableModelError(msg)) {
+            if (!shouldRetryModel(err)) {
               throw err
             }
           }
