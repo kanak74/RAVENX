@@ -130,28 +130,22 @@ STRICT RULES:
     const timeout = setTimeout(() => controller.abort(), 15000)
 
     try {
+      const candidateModels = [
+        'gemini-2.5-flash',
+        'gemini-3-flash-preview',
+        'gemini-2.5-flash-lite',
+        'gemini-flash-latest',
+      ]
+
       let response
-      try {
-        response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: validMessages.slice(-12).map((m) => ({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }],
-          })),
-          config: {
-            systemInstruction,
-            temperature: 0.3,
-            maxOutputTokens: 1024,
-            thinkingConfig: { thinkingBudget: 0 },
-            abortSignal: controller.signal,
-          },
-        })
-      } catch (primaryErr) {
-        const primaryMsg =
-          primaryErr instanceof Error ? primaryErr.message : String(primaryErr)
-        if (/404|not found|unsupported/i.test(primaryMsg)) {
+      let usedModel = candidateModels[0]
+      let lastErr: unknown = null
+
+      for (const modelName of candidateModels) {
+        try {
+          usedModel = modelName
           response = await ai.models.generateContent({
-            model: 'gemini-2.0-flash',
+            model: modelName,
             contents: validMessages.slice(-12).map((m) => ({
               role: m.role === 'assistant' ? 'model' : 'user',
               parts: [{ text: m.content }],
@@ -163,12 +157,52 @@ STRICT RULES:
               abortSignal: controller.signal,
             },
           })
-        } else {
-          throw primaryErr
+          lastErr = null
+          break
+        } catch (err) {
+          lastErr = err
+          const msg = err instanceof Error ? err.message : String(err)
+          if (!/404|not found|no longer available|unsupported/i.test(msg)) {
+            throw err
+          }
         }
       }
 
-      const reply = response.text?.trim()
+      if (!response && lastErr) {
+        // Dynamically discover an active flash model on this API key
+        const pager = await ai.models.list()
+        let discovered: string | undefined
+        for await (const m of pager) {
+          const name = m.name?.replace(/^models\//, '') ?? ''
+          if (
+            name.includes('gemini') &&
+            name.includes('flash') &&
+            !name.includes('image') &&
+            !name.includes('tts') &&
+            !name.includes('audio')
+          ) {
+            discovered = name
+            break
+          }
+        }
+        if (!discovered) throw lastErr
+        usedModel = discovered
+        response = await ai.models.generateContent({
+          model: discovered,
+          contents: validMessages.slice(-12).map((m) => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: m.content }],
+          })),
+          config: {
+            systemInstruction,
+            temperature: 0.3,
+            maxOutputTokens: 1024,
+            abortSignal: controller.signal,
+          },
+        })
+      }
+
+      const reply = response?.text?.trim()
       if (!reply) {
         return jsonResponse(
           {
@@ -184,7 +218,7 @@ STRICT RULES:
         emergencyDetected: false,
         language,
         provider: 'google-gemini',
-        model: 'gemini-2.5-flash',
+        model: usedModel,
       })
     } catch (sdkErr) {
       const rawMsg = sdkErr instanceof Error ? sdkErr.message : String(sdkErr)
