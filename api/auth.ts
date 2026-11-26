@@ -1,16 +1,34 @@
 import crypto from 'node:crypto'
 import { neon } from '@neondatabase/serverless'
+import { get as getBlob, put as putBlob } from '@vercel/blob'
 
 const COOKIE_NAME = 'vitalora_session'
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7
 
+interface StoredUser {
+  id: string
+  name: string
+  email: string
+  passwordHash: string
+  ageGroup: 'under-18' | 'adult' | 'older-adult'
+  preferredLanguage: 'en' | 'hi'
+  medicalNotes: string
+  createdAt: string
+}
+
 let schemaInitialized = false
+
+function hasPostgres() {
+  return Boolean(process.env.DATABASE_URL || process.env.POSTGRES_URL)
+}
+
+function hasBlob() {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN)
+}
 
 function getSql() {
   const url = process.env.DATABASE_URL || process.env.POSTGRES_URL
-  if (!url) {
-    throw new Error('DATABASE_NOT_CONFIGURED')
-  }
+  if (!url) throw new Error('DATABASE_NOT_CONFIGURED')
   return neon(url)
 }
 
@@ -29,20 +47,31 @@ async function ensureSchema() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `
-  await sql`
-    CREATE TABLE IF NOT EXISTS health_assessments (
-      id TEXT PRIMARY KEY,
-      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      symptoms JSONB NOT NULL,
-      details JSONB NOT NULL,
-      measurements JSONB NOT NULL,
-      care_level TEXT NOT NULL,
-      ml_predictions JSONB NOT NULL,
-      summary_text TEXT NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    )
-  `
   schemaInitialized = true
+}
+
+function emailKey(email: string): string {
+  const digest = crypto.createHash('sha256').update(email.toLowerCase()).digest('hex')
+  return `users/${digest}.json`
+}
+
+async function blobReadUser(email: string): Promise<StoredUser | null> {
+  try {
+    const res = await getBlob(emailKey(email), { access: 'private' })
+    if (!res || res.statusCode !== 200 || !res.stream) return null
+    return (await new Response(res.stream).json()) as StoredUser
+  } catch {
+    return null
+  }
+}
+
+async function blobWriteUser(user: StoredUser): Promise<void> {
+  await putBlob(emailKey(user.email), JSON.stringify(user), {
+    access: 'private',
+    contentType: 'application/json',
+    allowOverwrite: true,
+    addRandomSuffix: false,
+  })
 }
 
 function getSecret(): string {
@@ -151,48 +180,62 @@ export async function GET(request: Request): Promise<Response> {
       return jsonResponse({ authenticated: false, user: null }, 200)
     }
 
-    await ensureSchema()
-    const sql = getSql()
-    const rows = await sql`
-      SELECT id, name, email, age_group, preferred_language, medical_notes, created_at
-      FROM users
-      WHERE id = ${session.userId}
-      LIMIT 1
-    `
-
-    if (!rows.length) {
-      return jsonResponse(
-        { authenticated: false, user: null },
-        200,
-        { 'Set-Cookie': clearSessionCookie() },
-      )
+    if (hasPostgres()) {
+      await ensureSchema()
+      const sql = getSql()
+      const rows = await sql`
+        SELECT id, name, email, age_group, preferred_language, medical_notes, created_at
+        FROM users WHERE id = ${session.userId} LIMIT 1
+      `
+      if (!rows.length) {
+        return jsonResponse(
+          { authenticated: false, user: null },
+          200,
+          { 'Set-Cookie': clearSessionCookie() },
+        )
+      }
+      const u = rows[0]
+      return jsonResponse({
+        authenticated: true,
+        user: {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          ageGroup: u.age_group,
+          preferredLanguage: u.preferred_language,
+          medicalNotes: u.medical_notes,
+        },
+      })
     }
 
-    const u = rows[0]
-    return jsonResponse({
-      authenticated: true,
-      user: {
-        id: u.id,
-        name: u.name,
-        email: u.email,
-        ageGroup: u.age_group,
-        preferredLanguage: u.preferred_language,
-        medicalNotes: u.medical_notes,
-        createdAt: u.created_at,
-      },
-    })
+    if (hasBlob()) {
+      const user = await blobReadUser(session.email)
+      if (!user) {
+        return jsonResponse(
+          { authenticated: false, user: null },
+          200,
+          { 'Set-Cookie': clearSessionCookie() },
+        )
+      }
+      return jsonResponse({
+        authenticated: true,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          ageGroup: user.ageGroup,
+          preferredLanguage: user.preferredLanguage,
+          medicalNotes: user.medicalNotes,
+        },
+      })
+    }
+
+    return jsonResponse(
+      { error: 'DATABASE_NOT_CONFIGURED', message: 'Storage is not configured.' },
+      503,
+    )
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Unknown error'
-    if (msg === 'DATABASE_NOT_CONFIGURED') {
-      return jsonResponse(
-        {
-          error: 'DATABASE_NOT_CONFIGURED',
-          message:
-            'Neon Postgres DATABASE_URL is not configured in Vercel Project Settings yet.',
-        },
-        503,
-      )
-    }
     return jsonResponse({ error: msg }, 500)
   }
 }
@@ -210,15 +253,27 @@ export async function POST(request: Request): Promise<Response> {
       )
     }
 
-    await ensureSchema()
-    const sql = getSql()
+    if (!hasPostgres() && !hasBlob()) {
+      return jsonResponse(
+        {
+          error: 'DATABASE_NOT_CONFIGURED',
+          message: 'Storage is not configured in Vercel Project Settings yet.',
+        },
+        503,
+      )
+    }
 
     if (action === 'register') {
       const name = String(body.name ?? '').trim()
       const email = String(body.email ?? '').trim().toLowerCase()
       const password = String(body.password ?? '')
-      const ageGroup = String(body.ageGroup ?? 'adult')
-      const preferredLanguage = body.preferredLanguage === 'hi' ? 'hi' : 'en'
+      const ageGroup = (
+        body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
+          ? body.ageGroup
+          : 'adult'
+      ) as StoredUser['ageGroup']
+      const preferredLanguage: 'en' | 'hi' =
+        body.preferredLanguage === 'hi' ? 'hi' : 'en'
 
       if (name.length < 2) {
         return jsonResponse({ error: 'Please enter your full name.' }, 400)
@@ -233,21 +288,42 @@ export async function POST(request: Request): Promise<Response> {
         )
       }
 
-      const existing = await sql`SELECT id FROM users WHERE email = ${email} LIMIT 1`
-      if (existing.length > 0) {
-        return jsonResponse(
-          { error: 'An account with this email already exists.' },
-          409,
-        )
-      }
-
       const id = crypto.randomUUID()
       const passwordHash = hashPassword(password)
 
-      await sql`
-        INSERT INTO users (id, name, email, password_hash, age_group, preferred_language)
-        VALUES (${id}, ${name}, ${email}, ${passwordHash}, ${ageGroup}, ${preferredLanguage})
-      `
+      if (hasPostgres()) {
+        await ensureSchema()
+        const sql = getSql()
+        const existing = await sql`SELECT id FROM users WHERE email = ${email} LIMIT 1`
+        if (existing.length > 0) {
+          return jsonResponse(
+            { error: 'An account with this email already exists.' },
+            409,
+          )
+        }
+        await sql`
+          INSERT INTO users (id, name, email, password_hash, age_group, preferred_language)
+          VALUES (${id}, ${name}, ${email}, ${passwordHash}, ${ageGroup}, ${preferredLanguage})
+        `
+      } else {
+        const existing = await blobReadUser(email)
+        if (existing) {
+          return jsonResponse(
+            { error: 'An account with this email already exists.' },
+            409,
+          )
+        }
+        await blobWriteUser({
+          id,
+          name,
+          email,
+          passwordHash,
+          ageGroup,
+          preferredLanguage,
+          medicalNotes: '',
+          createdAt: new Date().toISOString(),
+        })
+      }
 
       const token = signSessionToken({ userId: id, email })
       return jsonResponse(
@@ -278,39 +354,61 @@ export async function POST(request: Request): Promise<Response> {
         )
       }
 
-      const rows = await sql`
-        SELECT id, name, email, password_hash, age_group, preferred_language, medical_notes
-        FROM users
-        WHERE email = ${email}
-        LIMIT 1
-      `
-      if (
-        !rows.length ||
-        !verifyPassword(password, String(rows[0].password_hash))
-      ) {
-        return jsonResponse({ error: 'Invalid email or password.' }, 401)
-      }
-
-      const u = rows[0]
-      const token = signSessionToken({
-        userId: String(u.id),
-        email: String(u.email),
-      })
-      return jsonResponse(
-        {
-          authenticated: true,
-          user: {
-            id: u.id,
-            name: u.name,
-            email: u.email,
-            ageGroup: u.age_group,
-            preferredLanguage: u.preferred_language,
-            medicalNotes: u.medical_notes,
+      if (hasPostgres()) {
+        await ensureSchema()
+        const sql = getSql()
+        const rows = await sql`
+          SELECT id, name, email, password_hash, age_group, preferred_language, medical_notes
+          FROM users WHERE email = ${email} LIMIT 1
+        `
+        if (
+          !rows.length ||
+          !verifyPassword(password, String(rows[0].password_hash))
+        ) {
+          return jsonResponse({ error: 'Invalid email or password.' }, 401)
+        }
+        const u = rows[0]
+        const token = signSessionToken({
+          userId: String(u.id),
+          email: String(u.email),
+        })
+        return jsonResponse(
+          {
+            authenticated: true,
+            user: {
+              id: u.id,
+              name: u.name,
+              email: u.email,
+              ageGroup: u.age_group,
+              preferredLanguage: u.preferred_language,
+              medicalNotes: u.medical_notes,
+            },
           },
-        },
-        200,
-        { 'Set-Cookie': buildSessionCookie(token) },
-      )
+          200,
+          { 'Set-Cookie': buildSessionCookie(token) },
+        )
+      } else {
+        const user = await blobReadUser(email)
+        if (!user || !verifyPassword(password, user.passwordHash)) {
+          return jsonResponse({ error: 'Invalid email or password.' }, 401)
+        }
+        const token = signSessionToken({ userId: user.id, email: user.email })
+        return jsonResponse(
+          {
+            authenticated: true,
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              ageGroup: user.ageGroup,
+              preferredLanguage: user.preferredLanguage,
+              medicalNotes: user.medicalNotes,
+            },
+          },
+          200,
+          { 'Set-Cookie': buildSessionCookie(token) },
+        )
+      }
     }
 
     if (action === 'update-profile') {
@@ -320,22 +418,43 @@ export async function POST(request: Request): Promise<Response> {
       }
 
       const name = String(body.name ?? '').trim()
-      const ageGroup = String(body.ageGroup ?? 'adult')
-      const preferredLanguage = body.preferredLanguage === 'hi' ? 'hi' : 'en'
+      const ageGroup = (
+        body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
+          ? body.ageGroup
+          : 'adult'
+      ) as StoredUser['ageGroup']
+      const preferredLanguage: 'en' | 'hi' =
+        body.preferredLanguage === 'hi' ? 'hi' : 'en'
       const medicalNotes = String(body.medicalNotes ?? '').slice(0, 1000)
 
       if (name.length < 2) {
         return jsonResponse({ error: 'Name must be at least 2 characters.' }, 400)
       }
 
-      await sql`
-        UPDATE users
-        SET name = ${name},
-            age_group = ${ageGroup},
-            preferred_language = ${preferredLanguage},
-            medical_notes = ${medicalNotes}
-        WHERE id = ${session.userId}
-      `
+      if (hasPostgres()) {
+        await ensureSchema()
+        const sql = getSql()
+        await sql`
+          UPDATE users
+          SET name = ${name},
+              age_group = ${ageGroup},
+              preferred_language = ${preferredLanguage},
+              medical_notes = ${medicalNotes}
+          WHERE id = ${session.userId}
+        `
+      } else {
+        const existing = await blobReadUser(session.email)
+        if (!existing) {
+          return jsonResponse({ error: 'User not found.' }, 404)
+        }
+        await blobWriteUser({
+          ...existing,
+          name,
+          ageGroup,
+          preferredLanguage,
+          medicalNotes,
+        })
+      }
 
       return jsonResponse({
         ok: true,
@@ -353,16 +472,6 @@ export async function POST(request: Request): Promise<Response> {
     return jsonResponse({ error: 'Unsupported action.' }, 400)
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Unknown error'
-    if (msg === 'DATABASE_NOT_CONFIGURED') {
-      return jsonResponse(
-        {
-          error: 'DATABASE_NOT_CONFIGURED',
-          message:
-            'Neon Postgres DATABASE_URL is not configured in Vercel Project Settings yet.',
-        },
-        503,
-      )
-    }
     return jsonResponse({ error: msg }, 500)
   }
 }
