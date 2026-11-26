@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
-import {
-  CheckCircleIcon,
-  HeartIcon,
-  ShieldAlertIcon,
-} from '../../components/illustrations/Icons'
+import { useEffect, useMemo, useState } from 'react'
+import { ShieldAlertIcon } from '../../components/illustrations/Icons'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
 import { useAuth } from '../auth/AuthContext'
 import { MedicalChatbot } from '../chatbot/MedicalChatbot'
 import { NearbyFacilities } from '../facilities/NearbyFacilities'
 import { downloadAssessmentPdf, type MlPredictionItem } from '../../utils/pdfReport'
-import type { AssessmentReport, SymptomCheckInData } from './types'
 import { getConfirmedSymptomIds } from './emergencyRules'
+import {
+  buildFallbackAnalysis,
+  URGENCY_CONFIG,
+  type SimpleSymptomAnalysisResult,
+} from './specialistMapper'
+import type { AssessmentReport, SymptomCheckInData } from './types'
 
 export interface Step5AssessmentResultProps {
   report: AssessmentReport
@@ -22,31 +23,11 @@ export interface Step5AssessmentResultProps {
   onOpenAuth?: () => void
 }
 
-function getQualitativeOverlap(pct: number): string {
-  if (pct >= 65) return 'Strong symptom overlap'
-  if (pct >= 30) return 'Moderate symptom overlap'
-  return 'Possible symptom overlap'
-}
-
 interface PredictApiResponse {
   status: 'ok' | 'emergency' | 'insufficient_data'
-  insufficientData?: boolean
   predictions: MlPredictionItem[]
-  modelInfo?: {
-    modelType: string
-    cvAccuracy: number
-    datasetRows: number
-  }
-  disclaimer?: string
 }
 
-/**
- * Connected Stage 4–6 Assessment Result Dashboard.
- * - Priority 1: Non-bypassable emergency interruption when safety rules trigger.
- * - Integrates real Python ML disease pattern predictions (/api/predict),
- *   downloadable PDF export, Neon Postgres history saving, Hindi/English AI Medical
- *   Assistant (/api/chat), and verified nearby healthcare facilities (/api/facilities).
- */
 export function Step5AssessmentResult({
   report,
   rawData,
@@ -56,9 +37,12 @@ export function Step5AssessmentResult({
   onOpenAuth,
 }: Step5AssessmentResultProps) {
   const { user } = useAuth()
-  const [mlResult, setMlResult] = useState<PredictApiResponse | null>(null)
-  const [mlLoading, setMlLoading] = useState(false)
-  const [mlError, setMlError] = useState('')
+  const [mlPredictions, setMlPredictions] = useState<MlPredictionItem[]>([])
+  const [aiAnalysis, setAiAnalysis] = useState<SimpleSymptomAnalysisResult | null>(null)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiNotice, setAiNotice] = useState('')
+  const [locateTrigger, setLocateTrigger] = useState(0)
+  const [showChat, setShowChat] = useState(false)
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
 
   useEffect(() => {
@@ -67,9 +51,9 @@ export function Step5AssessmentResult({
     }
 
     let cancelled = false
-    const runMl = async () => {
-      setMlLoading(true)
-      setMlError('')
+    const controller = new AbortController()
+
+    const fetchMl = async () => {
       try {
         const confirmedIds = getConfirmedSymptomIds(rawData)
         const res = await fetch('/api/predict', {
@@ -81,28 +65,88 @@ export function Step5AssessmentResult({
             severity: rawData.details.severity,
             progression: rawData.details.progression,
           }),
+          signal: controller.signal,
         })
-        if (!res.ok) {
-          throw new Error(`ML service returned ${res.status}`)
-        }
+        if (!res.ok) return
         const data = (await res.json()) as PredictApiResponse
-        if (!cancelled) {
-          setMlResult(data)
+        if (!cancelled && Array.isArray(data.predictions)) {
+          setMlPredictions(data.predictions)
         }
       } catch {
-        if (!cancelled) {
-          setMlError('ML pattern service is unavailable in this environment.')
-        }
-      } finally {
-        if (!cancelled) setMlLoading(false)
+        // Optional ML enrichment; ignore if unavailable
       }
     }
 
-    void runMl()
+    const fetchAiAnalysis = async () => {
+      setAiLoading(true)
+      setAiNotice('')
+      try {
+        const measurements: Record<string, string> = {}
+        for (const item of report.healthMeasurements.items) {
+          if (item.label === 'Body temperature') measurements.temperature = item.readingText
+          if (item.label === 'Blood pressure') measurements.bloodPressure = item.readingText
+          if (item.label === 'Heart rate') measurements.heartRate = item.readingText
+          if (item.label === 'Blood oxygen (SpO2)') measurements.spo2 = item.readingText
+        }
+
+        const res = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            symptoms: report.reportedSymptoms.confirmedSymptomLabels,
+            notes: report.reportedSymptoms.userDescribedNotes,
+            duration: report.reportedSymptoms.durationLabel,
+            severity: report.reportedSymptoms.severityLabel,
+            progression: report.reportedSymptoms.progressionLabel,
+            measurements,
+            isEmergency: report.isEmergencyInterrupted,
+            emergencyTriggers: report.safety.triggers,
+          }),
+          signal: controller.signal,
+        })
+
+        if (!res.ok) {
+          if (!cancelled) {
+            setAiNotice('Showing standard clinical guidance (AI summary unavailable).')
+          }
+          return
+        }
+
+        const data = (await res.json()) as Omit<SimpleSymptomAnalysisResult, 'source'>
+        if (!cancelled && data.symptomSummary && data.recommendedSpecialist?.name) {
+          setAiAnalysis({ ...data, source: 'ai' })
+        }
+      } catch {
+        if (!cancelled) {
+          setAiNotice('Showing standard clinical guidance (AI summary unavailable).')
+        }
+      } finally {
+        if (!cancelled) setAiLoading(false)
+      }
+    }
+
+    void fetchMl()
+    void fetchAiAnalysis()
+
     return () => {
       cancelled = true
+      controller.abort()
     }
-  }, [report.isEmergencyInterrupted, report.insufficientInformation, rawData])
+  }, [report, rawData])
+
+  const fallbackAnalysis = useMemo(
+    () => buildFallbackAnalysis(report, rawData, mlPredictions),
+    [report, rawData, mlPredictions],
+  )
+
+  const analysis = aiAnalysis ?? fallbackAnalysis
+  const urgencyMeta = URGENCY_CONFIG[analysis.urgencyLevel]
+
+  const handleFindNearbyDoctors = () => {
+    setLocateTrigger((prev) => prev + 1)
+    const el = document.getElementById('nearby-healthcare-providers')
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const handleSaveToHistory = async () => {
     if (!user) {
@@ -120,8 +164,8 @@ export function Step5AssessmentResult({
           details: rawData?.details ?? {},
           measurements: rawData?.measurements ?? {},
           careLevel: report.careGuidance.level,
-          mlPredictions: mlResult?.predictions ?? [],
-          summaryText: report.careGuidance.summary,
+          mlPredictions,
+          summaryText: analysis.symptomSummary,
         }),
       })
       setSaveState(res.ok ? 'saved' : 'error')
@@ -130,36 +174,45 @@ export function Step5AssessmentResult({
     }
   }
 
-  if (report.isEmergencyInterrupted) {
+  // Emergency priority view: prioritize immediate emergency help over ordinary doctor recommendations
+  if (report.isEmergencyInterrupted || analysis.urgencyLevel === 'emergency') {
+    const triggers =
+      report.safety.triggers.length > 0
+        ? report.safety.triggers
+        : [analysis.urgencyReason || 'Urgent warning signs detected.']
+
     return (
       <div className="space-y-6">
         <div
           role="alert"
           aria-live="assertive"
-          className="space-y-6 rounded-3xl border-2 border-urgent bg-urgent-soft p-6 sm:p-10 shadow-[0_18px_42px_-16px_rgba(184,58,50,0.25)]"
+          className="space-y-5 rounded-3xl border-2 border-urgent bg-urgent-soft p-6 sm:p-8 shadow-sm"
         >
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-urgent text-paper">
+          <div className="flex items-start gap-3.5">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-urgent text-paper">
               <ShieldAlertIcon className="h-6 w-6" />
             </div>
             <div>
-              <Badge tone="urgent">Emergency — Get emergency help now</Badge>
+              <Badge tone="urgent">Emergency</Badge>
               <h1 className="mt-1 font-display text-2xl font-semibold text-charcoal sm:text-3xl">
-                {report.safety.headline}
+                Seek emergency medical assistance immediately
               </h1>
             </div>
           </div>
 
-          <p className="text-base leading-relaxed text-charcoal">
-            {report.safety.message}
+          <p className="text-sm sm:text-base leading-relaxed text-charcoal">
+            {report.isEmergencyInterrupted
+              ? report.safety.message
+              : analysis.urgencyReason ||
+                'Your symptoms include warning signs that need immediate emergency medical care.'}
           </p>
 
-          <div className="rounded-2xl border border-urgent/30 bg-paper p-5">
+          <div className="rounded-2xl border border-urgent/25 bg-paper p-4">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-urgent">
-              Why this emergency warning appeared
+              Reason for emergency alert
             </h2>
-            <ul className="mt-2.5 space-y-2 text-sm font-semibold text-charcoal">
-              {report.safety.triggers.map((trigger) => (
+            <ul className="mt-2 space-y-1.5 text-sm font-medium text-charcoal">
+              {triggers.map((trigger) => (
                 <li key={trigger} className="flex items-start gap-2">
                   <span aria-hidden="true" className="text-urgent">
                     •
@@ -177,57 +230,40 @@ export function Step5AssessmentResult({
             >
               Call Emergency ({report.safety.emergencyNumber})
             </a>
-            <Button variant="outline" size="lg" onClick={onEditAnswers}>
-              Change my answers
+            <Button variant="outline" size="md" onClick={onEditAnswers}>
+              Edit answers
             </Button>
-            <Button variant="ghost" size="lg" onClick={onStartOver}>
+            <Button variant="ghost" size="md" onClick={onStartOver}>
               Start over
             </Button>
           </div>
 
-          <div className="space-y-1.5 border-t border-urgent/20 pt-4 text-xs text-charcoal/85">
-            <p className="font-semibold">{report.disclaimer}</p>
-            <p>
-              Emergency rules cannot be skipped and always take priority over
-              ML predictions and general information.
-            </p>
-          </div>
+          <p className="text-xs text-charcoal/80">{report.disclaimer}</p>
         </div>
-
-        <NearbyFacilities />
       </div>
     )
   }
 
-  const isPromptAttention = report.careGuidance.level === 'medical-attention'
-  const mlPredictions = mlResult?.predictions ?? []
-
   return (
-    <div className="space-y-7">
-      {/* Header + Actions */}
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div className="space-y-2">
+    <div className="space-y-5">
+      {/* Compact Header + Actions */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
           <Badge tone="forest" dotColor="#174B42">
-            Your Health Guide
+            Symptom Check Result
           </Badge>
-          <h1 className="font-display text-3xl font-semibold text-charcoal sm:text-4xl">
-            Here is what your answers suggest
+          <h1 className="mt-1.5 font-display text-2xl font-semibold text-charcoal sm:text-3xl">
+            Your Health Summary
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-slate">
-            Plain-language guidance combined with statistical symptom pattern
-            analysis. Never a medical diagnosis.
-          </p>
         </div>
 
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() =>
-              downloadAssessmentPdf(report, mlPredictions, user?.name)
-            }
+            onClick={() => downloadAssessmentPdf(report, mlPredictions, user?.name)}
           >
-            Download PDF report
+            Download PDF
           </Button>
           <Button
             variant="forest"
@@ -236,422 +272,236 @@ export function Step5AssessmentResult({
             disabled={saveState === 'saving' || saveState === 'saved'}
           >
             {saveState === 'saved'
-              ? 'Saved to history'
+              ? 'Saved'
               : saveState === 'saving'
                 ? 'Saving...'
                 : user
-                  ? 'Save to history'
+                  ? 'Save'
                   : 'Sign in to save'}
           </Button>
         </div>
       </div>
 
-      {/* B. HOW URGENT IS IT? */}
+      {/* 1. SYMPTOM ANALYSIS */}
       <section
-        aria-labelledby="care-guidance-heading"
-        className={`rounded-2xl border-2 p-5 sm:p-6 ${
-          isPromptAttention
-            ? 'border-coral bg-coral-soft/65'
-            : 'border-forest/30 bg-sage-mist/75'
-        }`}
+        aria-labelledby="symptom-analysis-heading"
+        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4 shadow-sm"
       >
-        <p className="text-xs font-semibold uppercase tracking-wider text-stone">
-          How urgent is it?
-        </p>
-        <h2
-          id="care-guidance-heading"
-          className="mt-1 font-display text-xl font-semibold text-charcoal sm:text-2xl"
-        >
-          {report.careGuidance.label}
-        </h2>
-        <p className="mt-2 text-sm leading-relaxed text-charcoal/90 sm:text-base">
-          {report.careGuidance.summary}
-        </p>
-        {report.careGuidance.reasons.length > 0 ? (
-          <ul className="mt-3 space-y-1.5 text-sm text-slate">
-            {report.careGuidance.reasons.map((reason) => (
-              <li key={reason} className="flex items-start gap-2">
-                <span
-                  aria-hidden="true"
-                  className={isPromptAttention ? 'text-coral' : 'text-forest'}
-                >
-                  •
-                </span>
-                <span>{reason}</span>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </section>
-
-      {/* STAGE 3 & 4: REAL PYTHON ML DISEASE PATTERN ANALYSIS */}
-      {!report.insufficientInformation ? (
-        <section
-          aria-labelledby="ml-prediction-heading"
-          className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <Badge tone="sand">Prototype ML Pattern Classifier (Demo Dataset)</Badge>
-              <h2
-                id="ml-prediction-heading"
-                className="mt-1.5 font-display text-xl font-semibold text-charcoal sm:text-2xl"
-              >
-                Symptom-pattern associations
-              </h2>
-            </div>
-          </div>
-
-          <p className="text-xs leading-relaxed text-stone">
-            These associations come from a prototype machine-learning classifier
-            trained on a <strong>synthetic demonstration dataset</strong> (not
-            clinically validated hospital data). They are{' '}
-            <strong>not diagnoses or medical probabilities</strong>.
-          </p>
-
-          {mlLoading ? (
-            <p className="text-sm text-stone">
-              Checking symptom patterns...
-            </p>
-          ) : mlError ? (
-            <p className="text-xs text-stone">{mlError}</p>
-          ) : mlPredictions.length > 0 ? (
-            <div className="space-y-3">
-              {mlPredictions.map((pred) => (
-                <div
-                  key={pred.condition}
-                  className="rounded-xl border border-hairline bg-ivory p-4 space-y-2.5"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-base font-semibold text-charcoal">
-                      {pred.condition}
-                    </h3>
-                    <span className="rounded-full border border-forest/25 bg-sage-mist px-3 py-0.5 text-xs font-semibold text-forest">
-                      {getQualitativeOverlap(pred.confidencePercent)}
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-slate">{pred.summary}</p>
-
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="font-semibold text-stone">
-                        Influenced by:
-                      </span>
-                      {pred.influencingSymptoms.map((s) => (
-                        <span
-                          key={s.id}
-                          className="rounded-full border border-hairline bg-paper px-2.5 py-0.5 font-medium text-charcoal"
-                        >
-                          {s.label}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="font-semibold text-coral">
-                      Suggested doctor: {pred.recommendedSpecialist}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-slate">
-              Not enough recognized symptoms for statistical pattern matching.
-            </p>
-          )}
-        </section>
-      ) : null}
-
-      {/* A. WHAT MIGHT BE HAPPENING? */}
-      <section
-        aria-labelledby="what-happening-heading"
-        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4"
-      >
-        <div>
+        <div className="flex items-center justify-between gap-2">
           <h2
-            id="what-happening-heading"
-            className="font-display text-xl font-semibold text-charcoal sm:text-2xl"
+            id="symptom-analysis-heading"
+            className="text-xs font-semibold uppercase tracking-wider text-forest"
           >
-            What might be happening?
+            Symptom Analysis
           </h2>
-          <p className="mt-1 text-xs text-stone">
-            Only a doctor can tell you for sure. These are common, general
-            possibilities based on your answers.
+          {aiLoading ? (
+            <span className="text-xs text-stone">Analyzing symptoms...</span>
+          ) : null}
+        </div>
+
+        <div className="space-y-1">
+          <p className="text-xs font-semibold text-stone">Your Symptoms</p>
+          <p className="text-sm sm:text-base text-charcoal leading-relaxed">
+            {analysis.symptomSummary}
           </p>
         </div>
 
-        {report.insufficientInformation && report.insufficientInfoMessage ? (
-          <p className="rounded-xl border border-hairline bg-ivory p-4 text-sm leading-relaxed text-charcoal">
-            {report.insufficientInfoMessage}
-          </p>
-        ) : (
-          <div className="space-y-3">
-            {report.whatInfoMaySuggest.map((block) => (
-              <div
-                key={block.id}
-                className="rounded-xl border border-hairline bg-ivory p-4"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-base font-semibold text-charcoal">
-                    {block.title}
-                  </h3>
-                  <span className="text-xs text-stone">
-                    Source: {block.sourceLabel}
-                  </span>
-                </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate">
-                  {block.summary}
-                </p>
-                <p className="mt-1.5 text-xs leading-relaxed text-stone">
-                  {block.relevance}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {report.whyThisIsRelevant.length > 0 && !report.insufficientInformation ? (
-          <div className="border-t border-hairline pt-3.5">
-            <h3 className="text-sm font-semibold text-charcoal">
-              How your details fit together
-            </h3>
-            <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-slate">
-              {report.whyThisIsRelevant.map((line) => (
-                <li key={line} className="flex items-start gap-2">
-                  <span aria-hidden="true" className="text-forest">
-                    •
-                  </span>
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {aiNotice ? (
+          <p className="text-xs text-stone">{aiNotice}</p>
         ) : null}
 
-        {report.feverAssessment.mode !== 'none' ? (
-          <div className="rounded-xl border border-forest/20 bg-sage-mist/45 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest">
-              {report.feverAssessment.mode === 'measured-temperature'
-                ? 'About your thermometer reading'
-                : 'About feeling feverish'}
-            </p>
-            <p className="mt-1 text-sm font-semibold text-charcoal">
-              {report.feverAssessment.headline}
-            </p>
-            <p className="mt-1 text-sm leading-relaxed text-slate">
-              {report.feverAssessment.explanation}
-            </p>
-            {report.feverAssessment.thermometerGuidance ? (
-              <p className="mt-1.5 text-xs font-medium text-forest">
-                {report.feverAssessment.thermometerGuidance}
+        {report.insufficientInformation ? (
+          <div className="rounded-xl border border-hairline bg-ivory p-4 text-sm text-charcoal space-y-2">
+            <p>{report.insufficientInfoMessage}</p>
+            {analysis.followUpQuestion ? (
+              <p className="font-medium text-forest">{analysis.followUpQuestion}</p>
+            ) : null}
+          </div>
+        ) : (
+          <div className="space-y-2.5 pt-1">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <p className="text-xs font-semibold text-stone">
+                Possible Conditions
+              </p>
+              <span className="text-[11px] text-stone">
+                Possibilities only — not a medical diagnosis
+              </span>
+            </div>
+
+            {aiLoading && !aiAnalysis ? (
+              <div className="space-y-2.5">
+                <div className="h-16 animate-pulse rounded-xl bg-ivory border border-hairline" />
+                <div className="h-16 animate-pulse rounded-xl bg-ivory border border-hairline" />
+              </div>
+            ) : analysis.possibleConditions.length > 0 ? (
+              <ol className="space-y-2.5">
+                {analysis.possibleConditions.slice(0, 3).map((cond, idx) => (
+                  <li
+                    key={cond.name}
+                    className="rounded-xl border border-hairline bg-ivory p-3.5 sm:p-4"
+                  >
+                    <p className="text-sm font-semibold text-charcoal">
+                      {idx + 1}. {cond.name}
+                    </p>
+                    <p className="mt-1 text-sm text-slate leading-relaxed">
+                      {cond.explanation}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="rounded-xl border border-hairline bg-ivory p-3.5 text-sm text-slate">
+                Your symptoms are quite general. A doctor can help narrow down the cause.
+              </p>
+            )}
+
+            {analysis.followUpQuestion ? (
+              <p className="rounded-xl border border-forest/20 bg-sage-mist/40 px-3.5 py-2.5 text-xs sm:text-sm text-charcoal">
+                <strong className="text-forest">Helpful detail to share with a doctor:</strong>{' '}
+                {analysis.followUpQuestion}
               </p>
             ) : null}
           </div>
-        ) : null}
+        )}
       </section>
 
-      {/* C. WHAT SHOULD I DO NOW? */}
+      {/* 2. URGENCY LEVEL */}
       <section
-        aria-labelledby="what-to-do-heading"
-        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6"
-      >
-        <h2
-          id="what-to-do-heading"
-          className="font-display text-xl font-semibold text-charcoal sm:text-2xl"
-        >
-          What should I do now?
-        </h2>
-        <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-slate sm:text-base">
-          {report.whatYouCanDoNext.map((step) => (
-            <li key={step} className="flex items-start gap-2.5">
-              <CheckCircleIcon className="mt-1 h-4 w-4 shrink-0 text-forest" />
-              <span>{step}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* D. WHEN SHOULD I SEEK MEDICAL HELP? */}
-      <section
-        aria-labelledby="when-seek-help-heading"
-        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-5"
-      >
-        <h2
-          id="when-seek-help-heading"
-          className="font-display text-xl font-semibold text-charcoal sm:text-2xl"
-        >
-          When should I seek medical help?
-        </h2>
-
-        <div>
-          <h3 className="text-sm font-semibold text-charcoal">
-            Contact a doctor, clinic, or pharmacist if:
-          </h3>
-          <ul className="mt-2 space-y-2 text-sm leading-relaxed text-slate">
-            {report.whenToSeekMedicalCare.map((line) => (
-              <li key={line} className="flex items-start gap-2.5">
-                <HeartIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="rounded-xl border border-urgent/25 bg-urgent-soft/40 p-4">
-          <h3 className="text-sm font-semibold text-urgent">
-            Get emergency help right away (call 112) if you notice:
-          </h3>
-          <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-charcoal">
-            {report.warningSigns.map((sign) => (
-              <li key={sign} className="flex items-start gap-2">
-                <ShieldAlertIcon className="mt-0.5 h-4 w-4 shrink-0 text-urgent" />
-                <span>{sign}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* STAGE 5: AI MEDICAL CHATBOT (ENGLISH & HINDI) */}
-      <MedicalChatbot
-        initialLanguage={user?.preferredLanguage ?? 'en'}
-        context={{
-          symptoms: report.reportedSymptoms.confirmedSymptomLabels,
-          careLevel: report.careGuidance.label,
-          predictions: mlPredictions.map((p) => ({
-            condition: p.condition,
-            confidencePercent: p.confidencePercent,
-          })),
-        }}
-      />
-
-      {/* STAGE 6: DOCTOR CONSULTATION & VERIFIED NEARBY HEALTHCARE FACILITIES */}
-      <NearbyFacilities
-        recommendedSpecialists={mlPredictions
-          .map((p) => p.recommendedSpecialist)
-          .filter(Boolean)}
-      />
-
-      {/* E. WHAT INFORMATION DID I PROVIDE? */}
-      <section
-        aria-labelledby="provided-info-heading"
-        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-4"
+        aria-labelledby="urgency-level-heading"
+        className={`rounded-2xl border-2 p-5 sm:p-6 space-y-2 ${urgencyMeta.containerClass}`}
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2
-            id="provided-info-heading"
-            className="font-display text-xl font-semibold text-charcoal"
+            id="urgency-level-heading"
+            className="text-xs font-semibold uppercase tracking-wider text-charcoal/75"
           >
-            What information did I provide?
+            Urgency Level
           </h2>
-          <Button variant="outline" size="sm" onClick={onEditAnswers}>
-            Change answers
-          </Button>
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${urgencyMeta.badgeClass}`}
+          >
+            {urgencyMeta.label}
+          </span>
         </div>
 
-        {report.reportedSymptoms.confirmedSymptomLabels.length > 0 ? (
-          <div className="flex flex-wrap gap-2">
-            {report.reportedSymptoms.confirmedSymptomLabels.map((label) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-1.5 rounded-full border border-forest/20 bg-sage-mist px-3 py-1 text-xs font-semibold text-forest sm:text-sm"
-              >
-                <span>{label}</span>
-              </span>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-slate">No specific symptoms selected.</p>
-        )}
+        <p className="font-display text-lg sm:text-xl font-semibold text-charcoal">
+          {urgencyMeta.description}
+        </p>
 
-        <dl className="grid gap-2.5 sm:grid-cols-3">
-          <div className="rounded-xl border border-hairline bg-ivory p-3">
-            <dt className="text-xs font-medium text-stone">When it started</dt>
-            <dd className="mt-0.5 text-sm font-semibold text-charcoal">
-              {report.reportedSymptoms.durationLabel}
-            </dd>
-          </div>
-          <div className="rounded-xl border border-hairline bg-ivory p-3">
-            <dt className="text-xs font-medium text-stone">How strong</dt>
-            <dd className="mt-0.5 text-sm font-semibold text-charcoal">
-              {report.reportedSymptoms.severityLabel}
-            </dd>
-          </div>
-          <div className="rounded-xl border border-hairline bg-ivory p-3">
-            <dt className="text-xs font-medium text-stone">How it is changing</dt>
-            <dd className="mt-0.5 text-sm font-semibold text-charcoal">
-              {report.reportedSymptoms.progressionLabel}
-            </dd>
-          </div>
-        </dl>
-
-        {report.healthMeasurements.hasAnyValidMeasurement ? (
-          <div className="space-y-2.5 border-t border-hairline pt-3.5">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-sm font-semibold text-charcoal">
-                Measurements you entered
-              </h3>
-              <span className="text-xs text-stone">
-                Unverified — entered by you
-              </span>
-            </div>
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {report.healthMeasurements.items.map((item) => (
-                <div
-                  key={item.label}
-                  className={`rounded-xl border p-3 ${
-                    item.isConcerning
-                      ? 'border-coral/40 bg-coral-soft/30'
-                      : 'border-hairline bg-ivory'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-stone">
-                      {item.label}
-                    </span>
-                    <span className="text-[11px] font-medium text-stone">
-                      Unverified
-                    </span>
-                  </div>
-                  <p className="mt-0.5 text-sm font-semibold text-charcoal sm:text-base">
-                    {item.readingText}
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-slate">
-                    {item.interpretationNote}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+        {analysis.urgencyReason ? (
+          <p className="text-sm text-charcoal/85 leading-relaxed">
+            {analysis.urgencyReason}
+          </p>
         ) : null}
       </section>
 
-      {/* Transparency */}
+      {/* 3. RECOMMENDED SPECIALIST */}
       <section
-        aria-labelledby="transparency-heading"
-        className="rounded-2xl border border-forest/20 bg-sage-mist/60 p-5 text-xs leading-relaxed text-forest sm:text-sm"
+        aria-labelledby="recommended-specialist-heading"
+        className="rounded-2xl border border-forest/25 bg-paper p-5 sm:p-6 space-y-4 shadow-sm"
       >
-        <h2 id="transparency-heading" className="font-semibold">
-          Important to keep in mind
-        </h2>
-        <ul className="mt-2 space-y-1">
-          {report.transparencyPoints.map((point) => (
-            <li key={point}>• {point}</li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1.5">
+            <h2
+              id="recommended-specialist-heading"
+              className="text-xs font-semibold uppercase tracking-wider text-forest"
+            >
+              Recommended Specialist
+            </h2>
+            <p className="font-display text-xl sm:text-2xl font-semibold text-charcoal">
+              {analysis.recommendedSpecialist.name}
+            </p>
+            <p className="text-sm text-slate leading-relaxed max-w-xl">
+              {analysis.recommendedSpecialist.reason}
+            </p>
+          </div>
+
+          <Button
+            type="button"
+            variant="forest"
+            size="md"
+            onClick={handleFindNearbyDoctors}
+            className="shrink-0 w-full sm:w-auto"
+          >
+            Find Nearby Doctors
+          </Button>
+        </div>
       </section>
 
+      {/* 4. NEARBY HEALTHCARE PROVIDERS */}
+      <NearbyFacilities
+        recommendedSpecialist={analysis.recommendedSpecialist.name}
+        locateTrigger={locateTrigger}
+      />
+
+      {/* 5. NEXT STEP */}
+      <section
+        aria-labelledby="next-step-heading"
+        className="rounded-2xl border border-hairline bg-paper p-5 sm:p-6 space-y-2 shadow-sm"
+      >
+        <h2
+          id="next-step-heading"
+          className="text-xs font-semibold uppercase tracking-wider text-forest"
+        >
+          Next Step
+        </h2>
+        <p className="text-sm sm:text-base text-charcoal leading-relaxed">
+          {analysis.nextStep}
+        </p>
+        <p className="pt-1 text-xs text-stone">
+          {report.disclaimer}
+        </p>
+      </section>
+
+      {/* Secondary: Optional AI Follow-up Chat */}
+      <div className="rounded-2xl border border-hairline bg-paper p-4 sm:p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="text-sm font-semibold text-charcoal">
+              Have a question about these symptoms?
+            </p>
+            <p className="text-xs text-stone">
+              Chat with the VITALORA Health Guide in English or Hindi.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setShowChat((prev) => !prev)}
+          >
+            {showChat ? 'Hide chat' : 'Ask AI Assistant'}
+          </Button>
+        </div>
+
+        {showChat ? (
+          <div className="mt-4">
+            <MedicalChatbot
+              initialLanguage={user?.preferredLanguage ?? 'en'}
+              context={{
+                symptoms: report.reportedSymptoms.confirmedSymptomLabels,
+                careLevel: urgencyMeta.label,
+                predictions: mlPredictions.map((p) => ({
+                  condition: p.condition,
+                  confidencePercent: p.confidencePercent,
+                })),
+              }}
+            />
+          </div>
+        ) : null}
+      </div>
+
       {/* Footer Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6">
-        <div className="flex flex-wrap gap-3">
-          <Button variant="outline" size="lg" onClick={onEditAnswers}>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-5">
+        <div className="flex flex-wrap gap-2.5">
+          <Button variant="outline" size="md" onClick={onEditAnswers}>
             Edit answers
           </Button>
-          <Button variant="ghost" size="lg" onClick={onStartOver}>
+          <Button variant="ghost" size="md" onClick={onStartOver}>
             Start new check-in
           </Button>
         </div>
-        <Button variant="forest" size="lg" onClick={onBackToHome}>
+        <Button variant="forest" size="md" onClick={onBackToHome}>
           Back to VITALORA home
         </Button>
       </div>
