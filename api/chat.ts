@@ -130,19 +130,43 @@ STRICT RULES:
     const timeout = setTimeout(() => controller.abort(), 15000)
 
     try {
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: validMessages.slice(-12).map((m) => ({
-          role: m.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: m.content }],
-        })),
-        config: {
-          systemInstruction,
-          temperature: 0.3,
-          maxOutputTokens: 600,
-          abortSignal: controller.signal,
-        },
-      })
+      let response
+      try {
+        response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash',
+          contents: validMessages.slice(-12).map((m) => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: m.content }],
+          })),
+          config: {
+            systemInstruction,
+            temperature: 0.3,
+            maxOutputTokens: 1024,
+            thinkingConfig: { thinkingBudget: 0 },
+            abortSignal: controller.signal,
+          },
+        })
+      } catch (primaryErr) {
+        const primaryMsg =
+          primaryErr instanceof Error ? primaryErr.message : String(primaryErr)
+        if (/404|not found|unsupported/i.test(primaryMsg)) {
+          response = await ai.models.generateContent({
+            model: 'gemini-2.0-flash',
+            contents: validMessages.slice(-12).map((m) => ({
+              role: m.role === 'assistant' ? 'model' : 'user',
+              parts: [{ text: m.content }],
+            })),
+            config: {
+              systemInstruction,
+              temperature: 0.3,
+              maxOutputTokens: 1024,
+              abortSignal: controller.signal,
+            },
+          })
+        } else {
+          throw primaryErr
+        }
+      }
 
       const reply = response.text?.trim()
       if (!reply) {
@@ -164,7 +188,10 @@ STRICT RULES:
       })
     } catch (sdkErr) {
       const rawMsg = sdkErr instanceof Error ? sdkErr.message : String(sdkErr)
-      if (controller.signal.aborted || /abort|timeout/i.test(rawMsg)) {
+      const safeMsg = rawMsg.replace(/AIza[0-9A-Za-z_-]+/g, '[REDACTED]')
+      console.error('[vitalora-chat] Gemini error:', safeMsg)
+
+      if (controller.signal.aborted || /abort|timeout/i.test(safeMsg)) {
         return jsonResponse(
           {
             error: 'GEMINI_TIMEOUT',
@@ -173,7 +200,7 @@ STRICT RULES:
           504,
         )
       }
-      if (/429|quota|rate/i.test(rawMsg)) {
+      if (/429|quota|rate|resource_exhausted/i.test(safeMsg)) {
         return jsonResponse(
           {
             error: 'GEMINI_RATE_LIMIT',
@@ -182,11 +209,11 @@ STRICT RULES:
           429,
         )
       }
-      if (/401|403|api key|permission|unauthorized/i.test(rawMsg)) {
+      if (/401|403|api[_ ]?key|permission|unauthorized/i.test(safeMsg)) {
         return jsonResponse(
           {
             error: 'GEMINI_AUTH_ERROR',
-            message: 'Gemini API authentication failed. Please verify GEMINI_API_KEY in Vercel settings.',
+            message: 'Gemini API key was rejected. Please verify GEMINI_API_KEY in Vercel settings.',
           },
           502,
         )
@@ -194,7 +221,7 @@ STRICT RULES:
       return jsonResponse(
         {
           error: 'GEMINI_REQUEST_FAILED',
-          message: 'Unable to get a response from Gemini right now. Please try again.',
+          message: `Unable to get a response from Gemini (${safeMsg.slice(0, 120)}).`,
         },
         502,
       )
