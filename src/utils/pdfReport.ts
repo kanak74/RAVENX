@@ -46,8 +46,7 @@ export function downloadAssessmentPdf(
 
   addLine('2. Reported Symptoms & Context', 12, true, [23, 75, 66])
   addLine(
-    `Symptoms: ${
-      report.reportedSymptoms.confirmedSymptomLabels.join(', ') || 'None selected'
+    `Symptoms: ${report.reportedSymptoms.confirmedSymptomLabels.join(', ') || 'None selected'
     }`,
     10,
   )

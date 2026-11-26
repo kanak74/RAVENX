@@ -83,8 +83,8 @@ export function MedicalChatbot({
         setFailedMessage(trimmed)
         setError(
           data.message ??
-            data.error ??
-            'AI assistant is currently unavailable.',
+          data.error ??
+          'AI assistant is currently unavailable.',
         )
         return
       }
@@ -169,22 +169,20 @@ export function MedicalChatbot({
             <button
               type="button"
               onClick={() => setLanguage('en')}
-              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-                language === 'en'
-                  ? 'bg-forest text-paper'
-                  : 'text-slate hover:text-charcoal'
-              }`}
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${language === 'en'
+                ? 'bg-forest text-paper'
+                : 'text-slate hover:text-charcoal'
+                }`}
             >
               English
             </button>
             <button
               type="button"
               onClick={() => setLanguage('hi')}
-              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-                language === 'hi'
-                  ? 'bg-forest text-paper'
-                  : 'text-slate hover:text-charcoal'
-              }`}
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${language === 'hi'
+                ? 'bg-forest text-paper'
+                : 'text-slate hover:text-charcoal'
+                }`}
             >
               हिन्दी
             </button>
@@ -214,13 +212,12 @@ export function MedicalChatbot({
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`rounded-2xl p-4 text-sm leading-relaxed ${
-                msg.role === 'user'
-                  ? 'ml-8 border border-hairline bg-ivory text-charcoal'
-                  : msg.emergencyDetected
-                    ? 'mr-4 border-2 border-urgent bg-urgent-soft text-charcoal'
-                    : 'mr-4 border border-forest/15 bg-sage-mist/45 text-charcoal'
-              }`}
+              className={`rounded-2xl p-4 text-sm leading-relaxed ${msg.role === 'user'
+                ? 'ml-8 border border-hairline bg-ivory text-charcoal'
+                : msg.emergencyDetected
+                  ? 'mr-4 border-2 border-urgent bg-urgent-soft text-charcoal'
+                  : 'mr-4 border border-forest/15 bg-sage-mist/45 text-charcoal'
+                }`}
             >
               <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-stone">
                 {msg.emergencyDetected ? (

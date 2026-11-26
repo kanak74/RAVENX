@@ -1,10 +1,11 @@
+import { GoogleGenAI } from '@google/genai'
+
 /**
  * VITALORA AI Medical Assistant Endpoint (/api/chat)
  *
- * - Runs deterministic bilingual (English + Hindi) emergency warning detection BEFORE calling any LLM.
- * - Supports Vercel AI Gateway (AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN),
- *   OpenAI (OPENAI_API_KEY), or Google Gemini (GEMINI_API_KEY) server-side.
- * - Never returns hardcoded/fake AI responses; returns explicit setup errors if unavailable.
+ * - Runs deterministic bilingual (English + Hindi) emergency warning detection BEFORE calling Gemini.
+ * - Uses the official @google/genai SDK server-side with GEMINI_API_KEY.
+ * - Never exposes API keys, never falls back to Vercel AI Gateway, and never fabricates AI responses.
  */
 
 interface ChatMessage {
@@ -37,7 +38,13 @@ function jsonResponse(data: unknown, status = 200) {
 
 export async function POST(request: Request): Promise<Response> {
   try {
-    const body = (await request.json()) as ChatRequestBody
+    let body: ChatRequestBody
+    try {
+      body = (await request.json()) as ChatRequestBody
+    } catch {
+      return jsonResponse({ error: 'Invalid JSON request body.' }, 400)
+    }
+
     const messages = Array.isArray(body.messages) ? body.messages : []
     const language = body.language === 'hi' ? 'hi' : 'en'
 
@@ -60,7 +67,7 @@ export async function POST(request: Request): Promise<Response> {
       return jsonResponse({ error: 'Please enter a question.' }, 400)
     }
 
-    // 1. Deterministic emergency pre-check (never delegated to AI)
+    // 1. Deterministic emergency pre-check (always runs first, independent of AI)
     if (
       EMERGENCY_PATTERNS_EN.test(latestUserMsg) ||
       EMERGENCY_PATTERNS_HI.test(latestUserMsg)
@@ -78,13 +85,26 @@ export async function POST(request: Request): Promise<Response> {
       })
     }
 
+    // 2. Read GEMINI_API_KEY strictly from server-side environment
+    const apiKey = process.env.GEMINI_API_KEY?.trim()
+    if (!apiKey) {
+      return jsonResponse(
+        {
+          error: 'GEMINI_NOT_CONFIGURED',
+          message:
+            'GEMINI_API_KEY is not configured on the server. Add GEMINI_API_KEY in Vercel Environment Variables.',
+        },
+        503,
+      )
+    }
+
     const ctxSummary = body.context?.symptoms?.length
       ? `User's current VITALORA check-in symptoms: ${body.context.symptoms.join(', ')}. Care guidance level: ${
           body.context.careLevel ?? 'not yet assessed'
         }.`
       : 'No symptom check-in submitted yet in this session.'
 
-    const systemPrompt = `You are VITALORA's calm, trustworthy AI Medical Information Assistant.
+    const systemInstruction = `You are VITALORA's calm, trustworthy AI Medical Information Assistant.
 Tagline: "Understand your symptoms. Know your next step."
 
 STRICT RULES:
@@ -94,164 +114,95 @@ STRICT RULES:
         : 'simple, everyday English'
     }.
 2. Medical Safety:
-   - You provide general health information and precautions only.
-   - NEVER diagnose a disease or claim certainty or say the user is definitely healthy.
+   - Provide general health information and precautions only.
+   - NEVER diagnose a disease, claim certainty, or say the user is definitely healthy.
    - NEVER prescribe medications or give medication dosages.
-   - Always encourage seeing a qualified doctor for personal care.
-   - If the user describes any red-flag emergency (chest pain, trouble breathing, fainting, sudden weakness, stiff neck + fever), immediately tell them to call 112.
+   - Do not invent test results, statistics, or medical sources.
+   - Always encourage consulting a qualified healthcare professional for personal medical care.
+   - If the user mentions any urgent warning sign (chest pain, trouble breathing, fainting, sudden weakness, stiff neck with fever), immediately instruct them to call 112.
 3. Style:
-   - Keep answers concise, warm, structured with short bullet points, and easy for someone feeling unwell to read.
-   - Ask 1–2 relevant, context-aware follow-up questions to help clarify timing, severity, or hydration.
+   - Keep answers concise, calm, structured with short bullet points, and easy for someone feeling unwell to read.
+   - Ask 1–2 relevant, context-aware follow-up questions to clarify timing, severity, or hydration.
 4. Current User Context: ${ctxSummary}`
 
-    // 2A. Try Google Gemini direct key if configured
-    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY
-    if (geminiKey) {
-      const gemRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(
-          geminiKey,
-        )}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            systemInstruction: { parts: [{ text: systemPrompt }] },
-            contents: validMessages.slice(-12).map((m) => ({
-              role: m.role === 'assistant' ? 'model' : 'user',
-              parts: [{ text: m.content }],
-            })),
-            generationConfig: { temperature: 0.3, maxOutputTokens: 550 },
-          }),
-        },
-      )
-      if (gemRes.ok) {
-        const gemData = (await gemRes.json()) as {
-          candidates?: { content?: { parts?: { text?: string }[] } }[]
-        }
-        const reply = gemData.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
-        if (reply) {
-          return jsonResponse({
-            reply,
-            emergencyDetected: false,
-            language,
-            provider: 'gemini',
-          })
-        }
-      }
-    }
+    const ai = new GoogleGenAI({ apiKey })
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 15000)
 
-    // 2B. Try OpenAI direct key if configured
-    const openaiKey = process.env.OPENAI_API_KEY
-    if (openaiKey) {
-      const oaRes = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${openaiKey}`,
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o-mini',
+    try {
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: validMessages.slice(-12).map((m) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }],
+        })),
+        config: {
+          systemInstruction,
           temperature: 0.3,
-          max_tokens: 550,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            ...validMessages.slice(-12),
-          ],
-        }),
+          maxOutputTokens: 600,
+          abortSignal: controller.signal,
+        },
       })
-      if (oaRes.ok) {
-        const oaData = (await oaRes.json()) as {
-          choices?: { message?: { content?: string } }[]
-        }
-        const reply = oaData.choices?.[0]?.message?.content?.trim()
-        if (reply) {
-          return jsonResponse({
-            reply,
-            emergencyDetected: false,
-            language,
-            provider: 'openai',
-          })
-        }
-      }
-    }
 
-    // 2C. Try Vercel AI Gateway (AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN)
-    const gatewayToken =
-      process.env.AI_GATEWAY_API_KEY ||
-      process.env.VERCEL_OIDC_TOKEN ||
-      request.headers.get('x-vercel-oidc-token')
-
-    if (!gatewayToken) {
-      return jsonResponse(
-        {
-          error: 'AI_NOT_CONFIGURED',
-          message:
-            'No AI provider key is configured. Add AI_GATEWAY_API_KEY, GEMINI_API_KEY, or OPENAI_API_KEY in Vercel Environment Variables.',
-        },
-        503,
-      )
-    }
-
-    const gatewayRes = await fetch(
-      'https://ai-gateway.vercel.sh/v1/chat/completions',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${gatewayToken}`,
-        },
-        body: JSON.stringify({
-          model: 'openai/gpt-4o-mini',
-          temperature: 0.3,
-          max_tokens: 550,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            ...validMessages.slice(-12),
-          ],
-        }),
-      },
-    )
-
-    if (!gatewayRes.ok) {
-      const errText = await gatewayRes.text()
-      if (gatewayRes.status === 403 && errText.includes('credit card')) {
+      const reply = response.text?.trim()
+      if (!reply) {
         return jsonResponse(
           {
-            error: 'AI_GATEWAY_BILLING_REQUIRED',
-            message:
-              'Vercel AI Gateway requires a payment method on your Vercel team, or you can add a GEMINI_API_KEY / OPENAI_API_KEY environment variable in Vercel Project Settings.',
+            error: 'GEMINI_EMPTY_RESPONSE',
+            message: 'Gemini returned an empty response. Please try again.',
           },
-          503,
+          502,
+        )
+      }
+
+      return jsonResponse({
+        reply,
+        emergencyDetected: false,
+        language,
+        provider: 'google-gemini',
+        model: 'gemini-2.5-flash',
+      })
+    } catch (sdkErr) {
+      const rawMsg = sdkErr instanceof Error ? sdkErr.message : String(sdkErr)
+      if (controller.signal.aborted || /abort|timeout/i.test(rawMsg)) {
+        return jsonResponse(
+          {
+            error: 'GEMINI_TIMEOUT',
+            message: 'The AI assistant took too long to respond. Please try again.',
+          },
+          504,
+        )
+      }
+      if (/429|quota|rate/i.test(rawMsg)) {
+        return jsonResponse(
+          {
+            error: 'GEMINI_RATE_LIMIT',
+            message: 'AI assistant is temporarily busy (rate limit). Please wait a moment and retry.',
+          },
+          429,
+        )
+      }
+      if (/401|403|api key|permission|unauthorized/i.test(rawMsg)) {
+        return jsonResponse(
+          {
+            error: 'GEMINI_AUTH_ERROR',
+            message: 'Gemini API authentication failed. Please verify GEMINI_API_KEY in Vercel settings.',
+          },
+          502,
         )
       }
       return jsonResponse(
         {
-          error: 'AI_GATEWAY_ERROR',
-          message: `AI service returned ${gatewayRes.status}. Please try again.`,
+          error: 'GEMINI_REQUEST_FAILED',
+          message: 'Unable to get a response from Gemini right now. Please try again.',
         },
         502,
       )
+    } finally {
+      clearTimeout(timeout)
     }
-
-    const data = (await gatewayRes.json()) as {
-      choices?: { message?: { content?: string } }[]
-      model?: string
-    }
-    const reply = data.choices?.[0]?.message?.content?.trim()
-
-    if (!reply) {
-      return jsonResponse({ error: 'Empty response from AI model.' }, 502)
-    }
-
-    return jsonResponse({
-      reply,
-      emergencyDetected: false,
-      language,
-      provider: 'vercel-ai-gateway',
-      model: data.model ?? 'openai/gpt-4o-mini',
-    })
   } catch (err) {
-    const msg = err instanceof Error ? err.message : 'Unknown error'
-    return jsonResponse({ error: msg }, 500)
+    const msg = err instanceof Error ? err.message : 'Unknown server error'
+    return jsonResponse({ error: 'SERVER_ERROR', message: msg }, 500)
   }
 }
