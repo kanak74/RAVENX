@@ -6,7 +6,7 @@ export interface PageLayoutProps {
   children: ReactNode
   onCheckSymptoms?: () => void
   onNavigateSection?: (sectionId: string) => void
-  onOpenView?: (view: 'assistant' | 'facilities' | 'history' | 'auth') => void
+  onOpenView?: (view: 'assistant' | 'facilities' | 'history' | 'auth' | 'voice') => void
   isCheckInActive?: boolean
 }
 

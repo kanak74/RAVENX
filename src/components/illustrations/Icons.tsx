@@ -106,3 +106,52 @@ export function ClockNoticeIcon({ className = 'h-5 w-5' }: IconProps) {
     </svg>
   )
 }
+
+/** Active microphone icon. */
+export function MicIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="9" y="2" width="6" height="12" rx="3" />
+      <path d="M5 10a7 7 0 0 0 14 0" />
+      <path d="M12 19v3" />
+      <path d="M9 22h6" />
+    </svg>
+  )
+}
+
+/** Mic-off (muted) icon. */
+export function MicOffIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <line x1="2" y1="2" x2="22" y2="22" />
+      <path d="M18.89 13.23A7.12 7.12 0 0 0 19 12" />
+      <path d="M5 10a7 7 0 0 0 11.08 5.84" />
+      <path d="M15 9.34V5a3 3 0 0 0-5.68-1.33" />
+      <path d="M9 9v3a3 3 0 0 0 5.12 2.12" />
+      <path d="M12 19v3" />
+      <path d="M9 22h6" />
+    </svg>
+  )
+}
+
+/** Speaker / volume on icon. */
+export function SpeakerIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  )
+}
+
+/** Speaker off / muted icon. */
+export function SpeakerOffIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <line x1="23" y1="9" x2="17" y2="15" />
+      <line x1="17" y1="9" x2="23" y2="15" />
+    </svg>
+  )
+}

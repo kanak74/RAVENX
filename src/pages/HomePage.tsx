@@ -19,6 +19,7 @@ import { MedicalChatbot } from '../features/chatbot/MedicalChatbot'
 import { NearbyFacilities } from '../features/facilities/NearbyFacilities'
 import { HealthHistoryView } from '../features/history/HealthHistoryView'
 import { SymptomCheckFlow } from '../features/symptom-check/SymptomCheckFlow'
+import { VoiceHealthAssistant } from '../features/voice/VoiceHealthAssistant'
 
 const SIX_STAGE_WORKFLOW = [
   {
@@ -60,6 +61,7 @@ type ActiveView =
   | 'facilities'
   | 'auth'
   | 'history'
+  | 'voice'
 
 /** VITALORA modern medical-tech SaaS platform shell & 6-stage clinical workflow. */
 export function HomePage() {
@@ -124,7 +126,7 @@ export function HomePage() {
   }
 
   const openStandaloneView = (
-    view: 'assistant' | 'facilities' | 'auth' | 'history',
+    view: 'assistant' | 'facilities' | 'auth' | 'history' | 'voice',
   ) => {
     setActiveView(view)
     window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
@@ -209,6 +211,25 @@ export function HomePage() {
             </div>
           </Container>
         </Section>
+      ) : activeView === 'voice' ? (
+        <Section tone="ivory" bordered={false} className="min-h-[75vh] py-10">
+          <Container size="narrow">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button variant="outline" size="sm" onClick={exitToLanding}>
+                  ← Back to VITALORA
+                </Button>
+                <Button variant="forest" size="sm" onClick={() => startSymptomCheck()}>
+                  Start Your Check-In
+                </Button>
+              </div>
+              <VoiceHealthAssistant
+                initialLanguage={user?.preferredLanguage ?? 'en'}
+                onStartSymptomCheck={() => startSymptomCheck()}
+              />
+            </div>
+          </Container>
+        </Section>
       ) : (
         <>
           {/* ── HERO ──────────────────────────────────────────────────────── */}
@@ -269,6 +290,13 @@ export function HomePage() {
                       leftIcon={<SparkleIcon className="h-4 w-4" />}
                     >
                       AI Assistant
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => openStandaloneView('voice')}
+                    >
+                      🎙️ Voice AI
                     </Button>
                   </div>
 
