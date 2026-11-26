@@ -1,6 +1,78 @@
 import crypto from 'node:crypto'
-import { ensureSchema, getSql } from './_lib/db'
-import { parseSessionFromCookie } from './_lib/auth'
+import { neon } from '@neondatabase/serverless'
+
+const COOKIE_NAME = 'vitalora_session'
+let schemaInitialized = false
+
+function getSql() {
+  const url = process.env.DATABASE_URL || process.env.POSTGRES_URL
+  if (!url) {
+    throw new Error('DATABASE_NOT_CONFIGURED')
+  }
+  return neon(url)
+}
+
+async function ensureSchema() {
+  if (schemaInitialized) return
+  const sql = getSql()
+  await sql`
+    CREATE TABLE IF NOT EXISTS health_assessments (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      symptoms JSONB NOT NULL,
+      details JSONB NOT NULL,
+      measurements JSONB NOT NULL,
+      care_level TEXT NOT NULL,
+      ml_predictions JSONB NOT NULL,
+      summary_text TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `
+  schemaInitialized = true
+}
+
+function getSecret(): string {
+  return (
+    process.env.AUTH_SECRET ||
+    process.env.VERCEL_PROJECT_ID ||
+    'vitalora-session-secret'
+  )
+}
+
+interface SessionPayload {
+  userId: string
+  email: string
+  exp: number
+}
+
+function parseSessionFromCookie(cookieHeader: string | null): SessionPayload | null {
+  if (!cookieHeader) return null
+  const pairs = cookieHeader.split(';').map((p) => p.trim())
+  const match = pairs.find((p) => p.startsWith(`${COOKIE_NAME}=`))
+  if (!match) return null
+  const token = decodeURIComponent(match.slice(COOKIE_NAME.length + 1))
+  const [encoded, sig] = token.split('.')
+  if (!encoded || !sig) return null
+  const expected = crypto
+    .createHmac('sha256', getSecret())
+    .update(encoded)
+    .digest('base64url')
+  if (sig.length !== expected.length) return null
+  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) {
+    return null
+  }
+  try {
+    const parsed = JSON.parse(
+      Buffer.from(encoded, 'base64url').toString('utf-8'),
+    ) as SessionPayload
+    if (!parsed.userId || parsed.exp < Math.floor(Date.now() / 1000)) {
+      return null
+    }
+    return parsed
+  } catch {
+    return null
+  }
+}
 
 function jsonResponse(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {

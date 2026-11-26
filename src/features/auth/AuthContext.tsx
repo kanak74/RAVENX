@@ -68,26 +68,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (email: string, password: string) => {
-    const res = await fetch('/api/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ action: 'login', email, password }),
-    })
-    const data = (await res.json()) as {
-      user?: UserProfile
-      error?: string
-      message?: string
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ action: 'login', email, password }),
+      })
+      const text = await res.text()
+      const data = text
+        ? (JSON.parse(text) as { user?: UserProfile; error?: string; message?: string })
+        : {}
+      if (res.status === 503) {
+        setDbConfigured(false)
+        return { ok: false, error: data.message ?? 'Database not configured yet.' }
+      }
+      if (!res.ok || !data.user) {
+        return { ok: false, error: data.message ?? data.error ?? `Sign in failed (${res.status}).` }
+      }
+      setUser(data.user)
+      return { ok: true }
+    } catch {
+      return { ok: false, error: 'Unable to reach authentication server. Please try again.' }
     }
-    if (res.status === 503) {
-      setDbConfigured(false)
-      return { ok: false, error: data.message ?? 'Database not configured.' }
-    }
-    if (!res.ok || !data.user) {
-      return { ok: false, error: data.error ?? 'Sign in failed.' }
-    }
-    setUser(data.user)
-    return { ok: true }
   }
 
   const register = async (payload: {
@@ -97,26 +100,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     ageGroup: UserProfile['ageGroup']
     preferredLanguage: UserProfile['preferredLanguage']
   }) => {
-    const res = await fetch('/api/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ action: 'register', ...payload }),
-    })
-    const data = (await res.json()) as {
-      user?: UserProfile
-      error?: string
-      message?: string
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ action: 'register', ...payload }),
+      })
+      const text = await res.text()
+      const data = text
+        ? (JSON.parse(text) as { user?: UserProfile; error?: string; message?: string })
+        : {}
+      if (res.status === 503) {
+        setDbConfigured(false)
+        return { ok: false, error: data.message ?? 'Database not configured yet.' }
+      }
+      if (!res.ok || !data.user) {
+        return { ok: false, error: data.message ?? data.error ?? `Registration failed (${res.status}).` }
+      }
+      setUser(data.user)
+      return { ok: true }
+    } catch {
+      return { ok: false, error: 'Unable to reach authentication server. Please try again.' }
     }
-    if (res.status === 503) {
-      setDbConfigured(false)
-      return { ok: false, error: data.message ?? 'Database not configured.' }
-    }
-    if (!res.ok || !data.user) {
-      return { ok: false, error: data.error ?? 'Registration failed.' }
-    }
-    setUser(data.user)
-    return { ok: true }
   }
 
   const updateProfile = async (payload: {

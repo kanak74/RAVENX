@@ -1,15 +1,143 @@
 import crypto from 'node:crypto'
-import { ensureSchema, getSql } from './_lib/db'
-import {
-  buildSessionCookie,
-  clearSessionCookie,
-  hashPassword,
-  parseSessionFromCookie,
-  signSessionToken,
-  verifyPassword,
-} from './_lib/auth'
+import { neon } from '@neondatabase/serverless'
 
-function jsonResponse(data: unknown, status = 200, headers: Record<string, string> = {}) {
+const COOKIE_NAME = 'vitalora_session'
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7
+
+let schemaInitialized = false
+
+function getSql() {
+  const url = process.env.DATABASE_URL || process.env.POSTGRES_URL
+  if (!url) {
+    throw new Error('DATABASE_NOT_CONFIGURED')
+  }
+  return neon(url)
+}
+
+async function ensureSchema() {
+  if (schemaInitialized) return
+  const sql = getSql()
+  await sql`
+    CREATE TABLE IF NOT EXISTS users (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT UNIQUE NOT NULL,
+      password_hash TEXT NOT NULL,
+      age_group TEXT DEFAULT 'adult',
+      preferred_language TEXT DEFAULT 'en',
+      medical_notes TEXT DEFAULT '',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `
+  await sql`
+    CREATE TABLE IF NOT EXISTS health_assessments (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      symptoms JSONB NOT NULL,
+      details JSONB NOT NULL,
+      measurements JSONB NOT NULL,
+      care_level TEXT NOT NULL,
+      ml_predictions JSONB NOT NULL,
+      summary_text TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `
+  schemaInitialized = true
+}
+
+function getSecret(): string {
+  return (
+    process.env.AUTH_SECRET ||
+    process.env.VERCEL_PROJECT_ID ||
+    'vitalora-session-secret'
+  )
+}
+
+function hashPassword(password: string): string {
+  const salt = crypto.randomBytes(16).toString('hex')
+  const derived = crypto.scryptSync(password, salt, 64).toString('hex')
+  return `${salt}:${derived}`
+}
+
+function verifyPassword(password: string, stored: string): boolean {
+  const [salt, keyHex] = stored.split(':')
+  if (!salt || !keyHex) return false
+  const derived = crypto.scryptSync(password, salt, 64)
+  const storedBuf = Buffer.from(keyHex, 'hex')
+  if (derived.length !== storedBuf.length) return false
+  return crypto.timingSafeEqual(derived, storedBuf)
+}
+
+interface SessionPayload {
+  userId: string
+  email: string
+  exp: number
+}
+
+function signSessionToken(payload: Omit<SessionPayload, 'exp'>): string {
+  const fullPayload: SessionPayload = {
+    ...payload,
+    exp: Math.floor(Date.now() / 1000) + SESSION_MAX_AGE_SECONDS,
+  }
+  const encoded = Buffer.from(JSON.stringify(fullPayload)).toString('base64url')
+  const sig = crypto
+    .createHmac('sha256', getSecret())
+    .update(encoded)
+    .digest('base64url')
+  return `${encoded}.${sig}`
+}
+
+function verifySessionToken(token: string): SessionPayload | null {
+  const [encoded, sig] = token.split('.')
+  if (!encoded || !sig) return null
+  const expected = crypto
+    .createHmac('sha256', getSecret())
+    .update(encoded)
+    .digest('base64url')
+  if (sig.length !== expected.length) return null
+  if (!crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) {
+    return null
+  }
+  try {
+    const parsed = JSON.parse(
+      Buffer.from(encoded, 'base64url').toString('utf-8'),
+    ) as SessionPayload
+    if (!parsed.userId || parsed.exp < Math.floor(Date.now() / 1000)) {
+      return null
+    }
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+function parseSessionFromCookie(cookieHeader: string | null): SessionPayload | null {
+  if (!cookieHeader) return null
+  const pairs = cookieHeader.split(';').map((p) => p.trim())
+  const match = pairs.find((p) => p.startsWith(`${COOKIE_NAME}=`))
+  if (!match) return null
+  const token = decodeURIComponent(match.slice(COOKIE_NAME.length + 1))
+  return verifySessionToken(token)
+}
+
+function buildSessionCookie(token: string): string {
+  const isProd =
+    process.env.VERCEL_ENV === 'production' ||
+    process.env.NODE_ENV === 'production'
+  return `${COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_MAX_AGE_SECONDS}${
+    isProd ? '; Secure' : ''
+  }`
+}
+
+function clearSessionCookie(): string {
+  return `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`
+}
+
+function jsonResponse(
+  data: unknown,
+  status = 200,
+  headers: Record<string, string> = {},
+) {
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers },
@@ -59,7 +187,8 @@ export async function GET(request: Request): Promise<Response> {
       return jsonResponse(
         {
           error: 'DATABASE_NOT_CONFIGURED',
-          message: 'Neon Postgres DATABASE_URL is not configured yet.',
+          message:
+            'Neon Postgres DATABASE_URL is not configured in Vercel Project Settings yet.',
         },
         503,
       )
@@ -124,7 +253,14 @@ export async function POST(request: Request): Promise<Response> {
       return jsonResponse(
         {
           authenticated: true,
-          user: { id, name, email, ageGroup, preferredLanguage, medicalNotes: '' },
+          user: {
+            id,
+            name,
+            email,
+            ageGroup,
+            preferredLanguage,
+            medicalNotes: '',
+          },
         },
         201,
         { 'Set-Cookie': buildSessionCookie(token) },
@@ -148,15 +284,18 @@ export async function POST(request: Request): Promise<Response> {
         WHERE email = ${email}
         LIMIT 1
       `
-      if (!rows.length || !verifyPassword(password, String(rows[0].password_hash))) {
-        return jsonResponse(
-          { error: 'Invalid email or password.' },
-          401,
-        )
+      if (
+        !rows.length ||
+        !verifyPassword(password, String(rows[0].password_hash))
+      ) {
+        return jsonResponse({ error: 'Invalid email or password.' }, 401)
       }
 
       const u = rows[0]
-      const token = signSessionToken({ userId: String(u.id), email: String(u.email) })
+      const token = signSessionToken({
+        userId: String(u.id),
+        email: String(u.email),
+      })
       return jsonResponse(
         {
           authenticated: true,
@@ -218,7 +357,8 @@ export async function POST(request: Request): Promise<Response> {
       return jsonResponse(
         {
           error: 'DATABASE_NOT_CONFIGURED',
-          message: 'Neon Postgres DATABASE_URL is not configured yet.',
+          message:
+            'Neon Postgres DATABASE_URL is not configured in Vercel Project Settings yet.',
         },
         503,
       )
