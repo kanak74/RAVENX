@@ -96,8 +96,8 @@ export function SymptomCheckFlow({
 
       const suggestions = exists
         ? prev.naturalDescription.suggestions.map((s) =>
-            s.symptomId === id ? { ...s, confirmed: false } : s,
-          )
+          s.symptomId === id ? { ...s, confirmed: false } : s,
+        )
         : prev.naturalDescription.suggestions
 
       return {

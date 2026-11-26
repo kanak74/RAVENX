@@ -124,6 +124,7 @@ export function AuthPanel({
         setError(res.error ?? 'Could not save profile.')
       } else {
         setSavedNotice('Health profile updated securely.')
+        onOpenHistory()
       }
     } finally {
       setSubmitting(false)
@@ -327,10 +328,10 @@ export function AuthPanel({
 
                 <div className="flex flex-wrap gap-3 pt-2">
                   <Button type="submit" variant="forest" size="md" disabled={submitting}>
-                    {submitting ? 'Saving...' : 'Save health profile'}
+                    {submitting ? 'Saving...' : 'Save & Continue to Dashboard →'}
                   </Button>
                   <Button type="button" variant="outline" size="md" onClick={onOpenHistory}>
-                    Open Health Dashboard
+                    Skip to Dashboard
                   </Button>
                 </div>
               </form>

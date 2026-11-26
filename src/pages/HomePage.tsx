@@ -15,6 +15,7 @@ import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { useAuth } from '../features/auth/AuthContext'
 import { AuthPanel } from '../features/auth/AuthPanel'
+import { AuthWelcomePage } from '../features/auth/AuthWelcomePage'
 import { MedicalChatbot } from '../features/chatbot/MedicalChatbot'
 import { NearbyFacilities } from '../features/facilities/NearbyFacilities'
 import { HealthHistoryView } from '../features/history/HealthHistoryView'
@@ -84,10 +85,10 @@ type ActiveView =
 
 /** VITALORA modern medical-tech SaaS platform shell & 6-stage clinical workflow. */
 export function HomePage() {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const prefersReduced = useReducedMotion()
   const [activeView, setActiveView] = useState<ActiveView>(() =>
-    window.location.hash === '#check-in' ? 'check-in' : 'landing',
+    window.location.hash === '#check-in' ? 'check-in' : 'history',
   )
   const [preselectedSymptoms, setPreselectedSymptoms] = useState<string[]>([])
 
@@ -95,7 +96,7 @@ export function HomePage() {
     const syncFromHash = () => {
       if (window.location.hash === '#check-in') {
         setActiveView('check-in')
-      } else {
+      } else if (window.location.hash === '#home') {
         setActiveView('landing')
       }
     }
@@ -103,6 +104,30 @@ export function HomePage() {
     window.addEventListener('hashchange', syncFromHash)
     return () => window.removeEventListener('hashchange', syncFromHash)
   }, [])
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-ivory text-slate">
+        <p className="text-sm font-medium">Loading VITALORA...</p>
+      </div>
+    )
+  }
+
+  // Protected Auth Gate: unauthenticated visitors always land on Welcome -> Sign In / Sign Up
+  if (!user) {
+    return (
+      <AuthWelcomePage
+        onLoginSuccess={() => {
+          setActiveView('history')
+          window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+        }}
+        onRegisterSuccess={() => {
+          setActiveView('auth')
+          window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+        }}
+      />
+    )
+  }
 
   const startSymptomCheck = (symptomId?: string) => {
     setPreselectedSymptoms(symptomId ? [symptomId] : [])
