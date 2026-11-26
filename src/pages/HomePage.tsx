@@ -4,7 +4,6 @@ import {
   ArrowRightIcon,
   CheckCircleIcon,
   PhoneUrgentIcon,
-  ShieldAlertIcon,
   SparkleIcon,
 } from '../components/illustrations/Icons'
 import { BodyRegionExplorer } from '../components/landing/BodyRegionExplorer'
@@ -54,27 +53,6 @@ const SIX_STAGE_WORKFLOW = [
   },
 ]
 
-const SAFETY_BOUNDARIES = [
-  {
-    code: '01',
-    title: 'Informational guidance, not a diagnosis',
-    detail:
-      'VITALORA highlights symptom patterns and general precautions. It never diagnoses diseases or prescribes medication.',
-  },
-  {
-    code: '02',
-    title: 'Deterministic emergency detection',
-    detail:
-      'Urgent symptoms like severe chest pain, breathing trouble, or stroke signs immediately interrupt the flow with 112 guidance.',
-  },
-  {
-    code: '03',
-    title: 'Transparent confidence & real data',
-    detail:
-      'ML confidence bars show statistical pattern similarity only, and nearby facilities come live from OpenStreetMap.',
-  },
-]
-
 type ActiveView =
   | 'landing'
   | 'check-in'
@@ -100,7 +78,6 @@ export function HomePage() {
         setActiveView('landing')
       }
     }
-
     window.addEventListener('hashchange', syncFromHash)
     return () => window.removeEventListener('hashchange', syncFromHash)
   }, [])
@@ -113,7 +90,6 @@ export function HomePage() {
     )
   }
 
-  // Protected Auth Gate: unauthenticated visitors always land on Welcome -> Sign In / Sign Up
   if (!user) {
     return (
       <AuthWelcomePage
@@ -160,12 +136,9 @@ export function HomePage() {
       if (sectionId === 'top') {
         window.scrollTo({ top: 0, behavior: scrollBehavior })
       } else {
-        document
-          .getElementById(sectionId)
-          ?.scrollIntoView({ behavior: scrollBehavior })
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: scrollBehavior })
       }
     }
-
     if (activeView !== 'landing') {
       setActiveView('landing')
       window.history.pushState(null, '', `#${sectionId}`)
@@ -212,12 +185,8 @@ export function HomePage() {
                 <Button variant="outline" size="sm" onClick={exitToLanding}>
                   ← Back to VITALORA
                 </Button>
-                <Button
-                  variant="forest"
-                  size="sm"
-                  onClick={() => startSymptomCheck()}
-                >
-                  Start full symptom check
+                <Button variant="forest" size="sm" onClick={() => startSymptomCheck()}>
+                  Start Your Check-In
                 </Button>
               </div>
               <MedicalChatbot initialLanguage={user?.preferredLanguage ?? 'en'} />
@@ -232,12 +201,8 @@ export function HomePage() {
                 <Button variant="outline" size="sm" onClick={exitToLanding}>
                   ← Back to VITALORA
                 </Button>
-                <Button
-                  variant="forest"
-                  size="sm"
-                  onClick={() => startSymptomCheck()}
-                >
-                  Start full symptom check
+                <Button variant="forest" size="sm" onClick={() => startSymptomCheck()}>
+                  Start Your Check-In
                 </Button>
               </div>
               <NearbyFacilities />
@@ -246,42 +211,56 @@ export function HomePage() {
         </Section>
       ) : (
         <>
-          {/* 1. CLEAN MEDICAL SAAS HERO */}
-          <Section id="top" tone="paper" className="py-12 sm:py-16">
+          {/* ── HERO ──────────────────────────────────────────────────────── */}
+          <Section id="top" tone="paper" className="relative overflow-hidden py-20 sm:py-28">
+            {/* Ambient gradient */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-40 right-0 h-[560px] w-[560px] rounded-full"
+              style={{
+                background:
+                  'radial-gradient(circle at 65% 35%, rgba(15,82,186,0.08) 0%, rgba(13,148,136,0.06) 55%, transparent 80%)',
+                filter: 'blur(80px)',
+              }}
+            />
+
             <Container>
-              <div className="grid items-center gap-10 lg:grid-cols-12">
-                <div className="space-y-5 lg:col-span-7">
-                  <Badge tone="forest" dotColor="#0F52BA">
+              <div className="grid items-center gap-14 lg:grid-cols-12">
+                {/* Left: Headline + CTAs */}
+                <div className="space-y-8 lg:col-span-7">
+                  <Badge tone="forest" dotColor="#0d9488">
                     AI-Powered Personal Health Assistant
                   </Badge>
 
-                  <h1 className="font-display text-3xl font-bold tracking-tight text-charcoal sm:text-5xl">
-                    Understand your symptoms.{' '}
-                    <span className="text-forest">Know your next step.</span>
-                  </h1>
+                  <div className="space-y-5">
+                    <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-charcoal sm:text-5xl lg:text-6xl">
+                      Your Health.{' '}
+                      <span className="text-forest">Your Signs.</span>
+                      <br className="hidden sm:block" />
+                      {' '}Your Next Step.
+                    </h1>
+                    <p className="max-w-lg text-base leading-relaxed text-slate sm:text-lg">
+                      Understand what your body is telling you. Track how you feel,
+                      find clarity in your symptoms, and take the next step with
+                      confidence.
+                    </p>
+                  </div>
 
-                  <p className="max-w-xl text-base leading-relaxed text-slate sm:text-lg">
-                    A structured 6-step health platform combining deterministic
-                    emergency screening, Python ML symptom-pattern analysis,
-                    bilingual AI guidance (English &amp; हिन्दी), and verified
-                    nearby care.
-                  </p>
-
-                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <div className="flex flex-wrap items-center gap-3">
                     <Button
                       variant="forest"
                       size="lg"
                       onClick={() => startSymptomCheck()}
                       rightIcon={<ArrowRightIcon className="h-4 w-4" />}
                     >
-                      Check my symptoms
+                      Start Your Check-In
                     </Button>
                     <Button
                       variant="outline"
                       size="lg"
-                      onClick={() => openStandaloneView(user ? 'history' : 'auth')}
+                      onClick={() => navigateToSection('body-atlas')}
                     >
-                      {user ? 'Open Health Dashboard' : 'Create Health Profile'}
+                      Explore Symptom Guide
                     </Button>
                     <Button
                       variant="ghost"
@@ -292,72 +271,101 @@ export function HomePage() {
                       AI Assistant
                     </Button>
                   </div>
+
+                  {/* Trust signals row */}
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {[
+                      'Real ML model — 85% accuracy',
+                      'EN / हिन्दी bilingual',
+                      'Emergency 112 detection',
+                    ].map((item) => (
+                      <span
+                        key={item}
+                        className="flex items-center gap-1.5 text-xs font-medium text-stone"
+                      >
+                        <CheckCircleIcon className="h-3.5 w-3.5 text-coral" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Right: Clinical Platform Quick-Access Card */}
-                <div className="rounded-2xl border border-hairline bg-ivory p-6 shadow-xs lg:col-span-5 space-y-4">
-                  <div className="flex items-center justify-between border-b border-hairline pb-3">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-forest">
-                      Clinical Safety First
-                    </span>
-                    <span className="rounded-full bg-sage-mist px-2.5 py-0.5 text-xs font-semibold text-coral">
-                      EN / हिन्दी
-                    </span>
-                  </div>
+                {/* Right: Platform quick-access card */}
+                <div className="lg:col-span-5">
+                  <div className="rounded-3xl border border-hairline bg-ivory p-7 shadow-[0_24px_64px_-16px_rgba(15,82,186,0.12)] space-y-5">
+                    <div className="flex items-center justify-between border-b border-hairline pb-4">
+                      <span className="text-xs font-bold uppercase tracking-widest text-forest">
+                        Clinical Safety First
+                      </span>
+                      <span className="rounded-full bg-sage-mist px-3 py-1 text-xs font-semibold text-coral">
+                        EN / हिन्दी
+                      </span>
+                    </div>
 
-                  <ul className="space-y-3 text-sm text-slate">
-                    <li className="flex items-start gap-2.5">
-                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
-                      <span>
-                        <strong>Real Python ML model</strong> trained on 20
-                        primary-care conditions with symptom influence weights.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
-                      <span>
-                        <strong>Instant red-flag checks</strong> interrupt
-                        normal results when 112 emergency signs appear.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
-                      <span>
-                        <strong>PDF health reports</strong> &amp; live
-                        OpenStreetMap nearby hospitals and clinics.
-                      </span>
-                    </li>
-                  </ul>
+                    <ul className="space-y-4 text-sm text-slate">
+                      <li className="flex items-start gap-3">
+                        <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                        <span>
+                          <strong className="font-semibold text-charcoal">Real Python ML model</strong>{' '}
+                          trained on 20 primary-care conditions with symptom influence weights.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                        <span>
+                          <strong className="font-semibold text-charcoal">Instant red-flag checks</strong>{' '}
+                          interrupt normal results when 112 emergency signs appear.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                        <span>
+                          <strong className="font-semibold text-charcoal">PDF health reports</strong>{' '}
+                          &amp; live OpenStreetMap nearby hospitals and clinics.
+                        </span>
+                      </li>
+                    </ul>
 
-                  <div className="flex items-center justify-between rounded-xl border border-urgent/25 bg-urgent-soft px-4 py-3 text-xs text-charcoal">
-                    <span className="flex items-center gap-2 font-semibold text-urgent">
-                      <PhoneUrgentIcon className="h-4 w-4" />
-                      Emergency in India: Call 112
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => openStandaloneView('facilities')}
-                      className="cursor-pointer font-semibold text-forest hover:underline"
+                    <div className="flex items-center justify-between rounded-2xl border border-urgent/20 bg-urgent-soft px-4 py-3 text-xs">
+                      <span className="flex items-center gap-2 font-semibold text-urgent">
+                        <PhoneUrgentIcon className="h-4 w-4" />
+                        Emergency in India: Call 112
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => openStandaloneView('facilities')}
+                        className="cursor-pointer font-semibold text-forest hover:underline"
+                      >
+                        Nearby Care →
+                      </button>
+                    </div>
+
+                    <Button
+                      variant="forest"
+                      size="md"
+                      fullWidth
+                      onClick={() => startSymptomCheck()}
+                      rightIcon={<ArrowRightIcon className="h-4 w-4" />}
                     >
-                      Nearby Care →
-                    </button>
+                      Start Your Check-In
+                    </Button>
                   </div>
                 </div>
               </div>
             </Container>
           </Section>
 
-          {/* 2. SIX-STEP CONTINUOUS WORKFLOW */}
-          <Section id="how-it-works" tone="ivory" className="py-12 sm:py-16">
+          {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
+          <Section id="how-it-works" tone="ivory" className="py-16 sm:py-20">
             <Container>
-              <div className="max-w-2xl space-y-2 mb-8">
+              <div className="max-w-2xl space-y-3 mb-10">
                 <Badge tone="coral" dotColor="#0D9488">
                   How VITALORA Works
                 </Badge>
                 <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
                   One connected 6-step health journey
                 </h2>
-                <p className="text-sm text-slate sm:text-base">
+                <p className="text-sm leading-relaxed text-slate sm:text-base">
                   Move between onboarding, symptom check-in, ML analysis, AI
                   precautions, and nearby care without losing your information.
                 </p>
@@ -367,9 +375,9 @@ export function HomePage() {
                 {SIX_STAGE_WORKFLOW.map((item) => (
                   <div
                     key={item.step}
-                    className="rounded-2xl border border-hairline bg-paper p-5 shadow-xs space-y-2"
+                    className="group rounded-2xl border border-hairline bg-paper p-6 shadow-xs transition-shadow hover:shadow-md space-y-3"
                   >
-                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-sand text-xs font-bold text-forest">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-sand text-xs font-bold text-forest">
                       {item.step}
                     </span>
                     <h3 className="font-display text-base font-semibold text-charcoal">
@@ -384,42 +392,10 @@ export function HomePage() {
             </Container>
           </Section>
 
-          {/* 3. INTERACTIVE BODY MAP QUICK-START */}
-          <Section id="body-atlas" tone="paper" className="py-12 sm:py-16">
+          {/* ── BODY MAP ──────────────────────────────────────────────────── */}
+          <Section id="body-atlas" tone="paper" className="py-16 sm:py-20">
             <Container>
               <BodyRegionExplorer onStartCheckWithSymptom={startSymptomCheck} />
-            </Container>
-          </Section>
-
-          {/* 4. MEDICAL SAFETY & TRANSPARENCY BOUNDARIES */}
-          <Section id="safety" tone="ivory" className="py-12 sm:py-16">
-            <Container>
-              <div className="max-w-2xl space-y-2 mb-8">
-                <Badge tone="urgent">Medical Safety</Badge>
-                <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
-                  Built with strict clinical boundaries
-                </h2>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-3">
-                {SAFETY_BOUNDARIES.map((b) => (
-                  <div
-                    key={b.code}
-                    className="rounded-2xl border border-hairline bg-paper p-5 space-y-2"
-                  >
-                    <div className="flex items-center gap-2 text-xs font-bold text-forest">
-                      <ShieldAlertIcon className="h-4 w-4 text-coral" />
-                      <span>{b.code}</span>
-                    </div>
-                    <h3 className="font-display text-base font-semibold text-charcoal">
-                      {b.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-slate">
-                      {b.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </Container>
           </Section>
         </>
