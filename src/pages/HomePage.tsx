@@ -368,15 +368,51 @@ export function HomePage() {
                       </button>
                     </div>
 
-                    <Button
-                      variant="forest"
-                      size="md"
-                      fullWidth
-                      onClick={() => startSymptomCheck()}
-                      rightIcon={<ArrowRightIcon className="h-4 w-4" />}
-                    >
-                      Start Your Check-In
-                    </Button>
+                    {/* Feature highlight — replaces redundant CTA */}
+                    <div className="rounded-2xl border border-hairline bg-paper p-4 space-y-3">
+                      <div className="space-y-0.5">
+                        <p className="text-xs font-bold tracking-wide text-charcoal">
+                          Your Health, One Step Ahead
+                        </p>
+                        <p className="text-[11px] leading-relaxed text-stone">
+                          Talk naturally. Get clarity. Know what to do next.
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {/* Voice AI highlight */}
+                        <div className="flex flex-col gap-2 rounded-xl border border-coral/20 bg-sage-mist/40 px-3 py-2.5">
+                          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-sage-mist">
+                            {/* Mic icon inline SVG */}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 text-coral" aria-hidden="true">
+                              <rect x="9" y="2" width="6" height="12" rx="3" />
+                              <path d="M5 10a7 7 0 0 0 14 0" />
+                              <path d="M12 19v3M9 22h6" />
+                            </svg>
+                          </span>
+                          <div>
+                            <p className="text-[11px] font-bold text-charcoal">Voice AI</p>
+                            <p className="mt-0.5 text-[10px] leading-relaxed text-stone">
+                              Describe symptoms naturally in Hindi or English.
+                            </p>
+                          </div>
+                        </div>
+                        {/* Personalized Insights highlight */}
+                        <div className="flex flex-col gap-2 rounded-xl border border-forest/15 bg-sand/60 px-3 py-2.5">
+                          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-sage-mist">
+                            {/* Heart-pulse icon inline SVG */}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 text-forest" aria-hidden="true">
+                              <path d="M3 12h4l2.5-6 4 12 2.5-6H21" />
+                            </svg>
+                          </span>
+                          <div>
+                            <p className="text-[11px] font-bold text-charcoal">Personalized Insights</p>
+                            <p className="mt-0.5 text-[10px] leading-relaxed text-stone">
+                              Understand symptoms and discover your next steps.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
