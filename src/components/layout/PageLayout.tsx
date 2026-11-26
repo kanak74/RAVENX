@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { MotionConfig } from 'framer-motion'
-import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
 export interface PageLayoutProps {
@@ -11,7 +10,7 @@ export interface PageLayoutProps {
   isCheckInActive?: boolean
 }
 
-/** Clean healthcare SaaS application shell with sticky header and safety footer. */
+/** Clean healthcare SaaS application shell with sticky header. */
 export function PageLayout({
   children,
   onCheckSymptoms,
@@ -39,10 +38,6 @@ export function PageLayout({
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer
-            onCheckSymptoms={onCheckSymptoms}
-            onNavigateSection={onNavigateSection}
-          />
         </div>
       </div>
     </MotionConfig>

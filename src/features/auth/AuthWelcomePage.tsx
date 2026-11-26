@@ -567,10 +567,6 @@ export function AuthWelcomePage({
           </div>
         </div>
       </main>
-
-      <footer className="border-t border-hairline bg-paper py-4 text-center text-xs text-stone">
-        VITALORA — Understand your symptoms. Know your next step. · Informational health guidance only.
-      </footer>
     </div>
   )
 }
