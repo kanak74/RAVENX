@@ -127,15 +127,13 @@ STRICT RULES:
 
     const ai = new GoogleGenAI({ apiKey })
     const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 15000)
+    const timeout = setTimeout(() => controller.abort(), 25000)
 
     try {
       const candidateModels = [
-        'gemini-3-flash',
         'gemini-3-flash-preview',
-        'gemini-2.5-flash',
-        'gemini-2.5-flash-lite',
         'gemini-flash-latest',
+        'gemini-2.5-flash-lite',
       ]
 
       const contents = validMessages.slice(-12).map((m) => ({
@@ -161,7 +159,7 @@ STRICT RULES:
       const tried = new Set<string>()
 
       const isRetryableModelError = (msg: string) =>
-        /404|not found|no longer available|unsupported|429|quota|resource_exhausted|limit:\s*0/i.test(
+        /404|not found|no longer available|unsupported|429|quota|resource_exhausted|limit:\s*0|503|high demand|overloaded|unavailable/i.test(
           msg,
         )
 
