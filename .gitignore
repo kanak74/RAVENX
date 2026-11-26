@@ -21,3 +21,10 @@ pnpm-debug.log*
 !.vscode/extensions.json
 .DS_Store
 Thumbs.db
+
+# Python bytecode caches (can be very large — excluded from git)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
