@@ -21,7 +21,6 @@ interface NavLinkItem {
 const NAV_LINKS: NavLinkItem[] = [
   { label: 'How it works', sectionId: 'how-it-works', href: '#how-it-works' },
   { label: 'Body map', sectionId: 'body-atlas', href: '#body-atlas' },
-  { label: 'Safety', sectionId: 'safety', href: '#safety' },
 ]
 
 export interface NavbarProps {
@@ -31,7 +30,7 @@ export interface NavbarProps {
   isCheckInActive?: boolean
 }
 
-/** Sticky editorial header with active scroll-spy pill indicator and scroll progress hairline. */
+/** Sticky header — Safety link removed; CTA updated to "Start Your Check-In". */
 export function Navbar({
   onCheckSymptoms,
   onNavigateSection,
@@ -65,9 +64,7 @@ export function Navbar({
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
         }
       },
       { rootMargin: '-35% 0px -50% 0px' },
@@ -99,15 +96,16 @@ export function Navbar({
     <header
       className={`sticky top-0 z-40 border-b transition-all duration-200 ${
         scrolled
-          ? 'border-hairline-strong bg-ivory/95 shadow-[0_8px_24px_-12px_rgba(23,35,32,0.1)]'
-          : 'border-hairline bg-ivory/95'
+          ? 'border-hairline-strong bg-paper/95 shadow-[0_8px_32px_-12px_rgba(15,82,186,0.10)] backdrop-blur-sm'
+          : 'border-hairline bg-paper/95 backdrop-blur-sm'
       }`}
     >
       <Container>
         <nav
           aria-label="Primary navigation"
-          className="flex min-h-[72px] items-center justify-between gap-6 py-2.5"
+          className="flex min-h-[68px] items-center justify-between gap-6 py-2.5"
         >
+          {/* Logo */}
           <a
             href="#top"
             onClick={(e) => handleLinkClick(e, 'top')}
@@ -115,15 +113,16 @@ export function Navbar({
           >
             <VitaloraLogoMark className="h-9 w-9 transition-transform duration-200 group-hover:scale-[1.03]" />
             <div className="flex items-baseline gap-2.5">
-              <span className="font-display text-xl font-semibold tracking-tight text-charcoal sm:text-2xl">
+              <span className="font-display text-xl font-bold tracking-tight text-charcoal sm:text-2xl">
                 VITALORA
               </span>
               <span className="hidden border-l border-hairline-strong pl-2.5 text-xs font-medium text-stone sm:inline-block">
-                Symptom Guidance
+                Health Guide
               </span>
             </div>
           </a>
 
+          {/* Desktop nav links */}
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((item) => {
               const isActive = activeSection === item.sectionId
@@ -151,6 +150,7 @@ export function Navbar({
             })}
           </div>
 
+          {/* Desktop actions */}
           <div className="hidden items-center gap-2 lg:flex">
             {onOpenView ? (
               <>
@@ -193,7 +193,7 @@ export function Navbar({
                 onClick={handleCheckClick}
                 leftIcon={<SparkleIcon className="h-4 w-4" />}
               >
-                {isCheckInActive ? 'Symptom check-in' : 'Check my symptoms'}
+                {isCheckInActive ? 'Symptom check-in' : 'Start Your Check-In'}
               </Button>
             ) : (
               <Button
@@ -202,11 +202,12 @@ export function Navbar({
                 size="sm"
                 leftIcon={<SparkleIcon className="h-4 w-4" />}
               >
-                Check my symptoms
+                Start Your Check-In
               </Button>
             )}
           </div>
 
+          {/* Mobile hamburger */}
           <button
             type="button"
             aria-expanded={mobileOpen}
@@ -248,40 +249,28 @@ export function Navbar({
                   <>
                     <button
                       type="button"
-                      onClick={() => {
-                        closeMenu()
-                        onOpenView('assistant')
-                      }}
+                      onClick={() => { closeMenu(); onOpenView('assistant') }}
                       className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
                     >
                       AI Assistant (EN / हिन्दी)
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        closeMenu()
-                        onOpenView('facilities')
-                      }}
+                      onClick={() => { closeMenu(); onOpenView('facilities') }}
                       className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
                     >
                       Nearby Hospitals &amp; Clinics
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        closeMenu()
-                        onOpenView('history')
-                      }}
+                      onClick={() => { closeMenu(); onOpenView('history') }}
                       className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-charcoal transition-colors hover:bg-sand"
                     >
                       Health History
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        closeMenu()
-                        onOpenView('auth')
-                      }}
+                      onClick={() => { closeMenu(); onOpenView('auth') }}
                       className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-forest transition-colors hover:bg-sand"
                     >
                       {user ? `Profile (${user.name})` : 'Sign in / Register'}
@@ -289,10 +278,7 @@ export function Navbar({
                     {user ? (
                       <button
                         type="button"
-                        onClick={() => {
-                          closeMenu()
-                          void logout()
-                        }}
+                        onClick={() => { closeMenu(); void logout() }}
                         className="flex min-h-[44px] w-full cursor-pointer items-center rounded-xl px-3.5 py-2 text-left text-base font-semibold text-urgent transition-colors hover:bg-urgent-soft"
                       >
                         Sign out
@@ -309,7 +295,7 @@ export function Navbar({
                       onClick={handleCheckClick}
                       leftIcon={<SparkleIcon className="h-4 w-4" />}
                     >
-                      {isCheckInActive ? 'Symptom check-in' : 'Check my symptoms'}
+                      {isCheckInActive ? 'Symptom check-in' : 'Start Your Check-In'}
                     </Button>
                   ) : (
                     <Button
@@ -320,7 +306,7 @@ export function Navbar({
                       onClick={closeMenu}
                       leftIcon={<SparkleIcon className="h-4 w-4" />}
                     >
-                      Check my symptoms
+                      Start Your Check-In
                     </Button>
                   )}
                 </div>
