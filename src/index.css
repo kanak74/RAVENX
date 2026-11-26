@@ -1,54 +1,66 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
-  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  --color-cream: #fff9f2;
-  --color-linen: #fff2e2;
-  --color-warm-white: #fffcf8;
-  --color-ink: #26211d;
-  --color-cocoa: #594f47;
-  --color-taupe: #87796e;
-  --color-border-warm: #eadccf;
+  /* Crisp White, Soft Medical Blue & Subtle Teal Healthcare SaaS Palette */
+  --color-ivory: #f4f8fc;
+  --color-sand: #e8f0f8;
+  --color-paper: #ffffff;
+  --color-sage-mist: #e6f4f1;
+  --color-peach-mist: #ebf3fa;
 
-  --color-coral: #ff7b61;
-  --color-coral-hover: #f36a4f;
-  --color-coral-deep: #d94d34;
-  --color-coral-soft: #ffe5dd;
+  /* Clinical Slate & Navy Typography */
+  --color-charcoal: #0f172a;
+  --color-slate: #475569;
+  --color-stone: #64748b;
+  --color-hairline: #e2e8f0;
+  --color-hairline-strong: #cbd5e1;
 
-  --color-tomato: #de4436;
-  --color-tomato-hover: #c9372a;
-  --color-tomato-soft: #fce1de;
+  /* Primary: Medical Blue */
+  --color-forest: #0f52ba;
+  --color-forest-hover: #0b3f91;
+  --color-sage: #0d9488;
 
-  --color-green: #2c875c;
-  --color-green-hover: #23704c;
-  --color-green-soft: #dff4e8;
+  /* Secondary Accent: Subtle Medical Teal */
+  --color-coral: #0d9488;
+  --color-coral-hover: #0f766e;
+  --color-coral-accent: #14b8a6;
+  --color-coral-soft: #e6f4f1;
 
-  --color-butter: #f9cc59;
-  --color-butter-hover: #f0be3e;
-  --color-butter-soft: #fff3cc;
+  /* Emergency Clinical Red */
+  --color-urgent: #dc2626;
+  --color-urgent-hover: #b91c1c;
+  --color-urgent-soft: #fef2f2;
 
-  --color-pink: #f6b3c2;
-  --color-pink-hover: #ee9db0;
-  --color-pink-soft: #fde9ee;
+  --color-amber-soft: #fef3c7;
+  --color-amber-ink: #92400e;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     margin: 0;
     min-height: 100vh;
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
     line-height: 1.6;
+    overflow-x: clip;
   }
 
   h1,
@@ -56,19 +68,13 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    color: var(--color-ink);
-    letter-spacing: -0.015em;
-    line-height: 1.18;
+    color: var(--color-charcoal);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   ::selection {
-    background-color: var(--color-butter-soft);
-    color: var(--color-ink);
+    background-color: var(--color-sage-mist);
+    color: var(--color-forest);
   }
-}
-
-.tactile-card {
-  background-color: var(--color-warm-white);
-  border: 2px solid var(--color-border-warm);
-  box-shadow: 0 6px 0 0 rgba(38, 33, 29, 0.05);
 }

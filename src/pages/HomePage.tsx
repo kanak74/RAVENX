@@ -1,471 +1,429 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 import {
   ArrowRightIcon,
   CheckCircleIcon,
-  ClockNoticeIcon,
-  HeartIcon,
   PhoneUrgentIcon,
+  ShieldAlertIcon,
   SparkleIcon,
-  SunIcon,
 } from '../components/illustrations/Icons'
-import {
-  BodyAwarenessIllustration,
-  StoryStepIllustration,
-} from '../components/illustrations/LandingIllustrations'
-import { HeroCompanionIllustration } from '../components/illustrations/WarmSpotShapes'
+import { BodyRegionExplorer } from '../components/landing/BodyRegionExplorer'
 import { Container } from '../components/layout/Container'
 import { PageLayout } from '../components/layout/PageLayout'
 import { Section } from '../components/layout/Section'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
-import { OrganicBlob } from '../components/ui/OrganicBlob'
-import { SymptomCheckComingSoonModal } from '../components/ui/SymptomCheckComingSoonModal'
-import { vitaloraMotion } from '../styles/theme'
+import { useAuth } from '../features/auth/AuthContext'
+import { AuthPanel } from '../features/auth/AuthPanel'
+import { AuthWelcomePage } from '../features/auth/AuthWelcomePage'
+import { MedicalChatbot } from '../features/chatbot/MedicalChatbot'
+import { NearbyFacilities } from '../features/facilities/NearbyFacilities'
+import { HealthHistoryView } from '../features/history/HealthHistoryView'
+import { SymptomCheckFlow } from '../features/symptom-check/SymptomCheckFlow'
 
-interface StoryStep {
-  step: 1 | 2 | 3
-  title: string
-  description: string
-  badgeBg: string
-  badgeText: string
-  examples?: string[]
-}
-
-const STORY_STEPS: StoryStep[] = [
+const SIX_STAGE_WORKFLOW = [
   {
-    step: 1,
-    title: "Tell us how you're feeling.",
-    description:
-      'Pick what feels off using friendly choices or type it in your own everyday words — no tricky medical terms needed.',
-    badgeBg: 'bg-coral text-ink border-[#E3593F]',
-    badgeText: 'Step 1',
-    examples: ['Headache', 'Fever', 'Sore throat', 'Tummy ache'],
+    step: '01',
+    title: 'Health Profile',
+    description: 'Create your profile with age, allergies, and medical history.',
   },
   {
-    step: 2,
-    title: 'Answer a few simple questions.',
-    description:
-      'VITALORA asks one short, gentle question at a time — like when it started or what helps it feel calmer — so nothing feels rushed.',
-    badgeBg: 'bg-butter text-ink border-[#D4A22B]',
-    badgeText: 'Step 2',
+    step: '02',
+    title: 'Symptom Check',
+    description: 'Search, select, or describe symptoms with timing and severity.',
   },
   {
-    step: 3,
-    title: 'Understand your next steps.',
-    description:
-      'Get clear everyday precautions, signs to watch out for, and plain advice on whether home rest makes sense or when to see a doctor.',
-    badgeBg: 'bg-green text-warm-white border-[#1F6644]',
-    badgeText: 'Step 3',
-  },
-]
-
-const AWARENESS_POINTS = [
-  {
-    icon: ClockNoticeIcon,
-    iconBg: 'bg-butter-soft text-ink',
-    title: 'Notice small changes early',
-    description:
-      'Feeling unusually tired, warm, thirsty, or achy are gentle clues your body sends before things build up.',
+    step: '03',
+    title: 'AI / ML Analysis',
+    description: 'Python ML model validates inputs and checks emergency safety first.',
   },
   {
-    icon: SunIcon,
-    iconBg: 'bg-coral-soft text-coral-deep',
-    title: 'Pay attention to simple details',
-    description:
-      'Noting when a symptom started and whether water, rest, or sleep helps makes it easier to spot patterns.',
+    step: '04',
+    title: 'Pattern Results',
+    description: 'View possible conditions, confidence scores, and key symptom factors.',
   },
   {
-    icon: CheckCircleIcon,
-    iconBg: 'bg-green-soft text-green',
-    title: 'Share clearly with someone you trust',
-    description:
-      'Turning worried thoughts into plain words helps parents, caregivers, and doctors support you faster.',
+    step: '05',
+    title: 'AI Guidance',
+    description: 'Ask follow-up questions in English or Hindi and get safe precautions.',
+  },
+  {
+    step: '06',
+    title: 'Doctor & Care',
+    description: 'Download PDF reports and locate verified nearby hospitals & clinics.',
   },
 ]
 
 const SAFETY_BOUNDARIES = [
   {
-    title: 'VITALORA provides informational guidance.',
+    code: '01',
+    title: 'Informational guidance, not a diagnosis',
     detail:
-      'Explanations and comfort tips are here to help you learn and prepare — in calm, everyday words.',
+      'VITALORA highlights symptom patterns and general precautions. It never diagnoses diseases or prescribes medication.',
   },
   {
-    title: 'It is not a diagnostic tool.',
+    code: '02',
+    title: 'Deterministic emergency detection',
     detail:
-      'VITALORA cannot diagnose an illness, rule out serious conditions, or prescribe medicine.',
+      'Urgent symptoms like severe chest pain, breathing trouble, or stroke signs immediately interrupt the flow with 112 guidance.',
   },
   {
-    title: 'It does not replace professional medical advice.',
+    code: '03',
+    title: 'Transparent confidence & real data',
     detail:
-      'Always talk with a qualified doctor, nurse, or trusted adult when deciding on medical care.',
+      'ML confidence bars show statistical pattern similarity only, and nearby facilities come live from OpenStreetMap.',
   },
 ]
 
-const EMERGENCY_SIGNS = [
-  'Trouble breathing or catching your breath',
-  'Chest pain, tightness, or heavy pressure',
-  'Sudden confusion, fainting, or trouble waking up',
-  'Severe bleeding, sudden weakness, or fast swelling',
-]
+type ActiveView =
+  | 'landing'
+  | 'check-in'
+  | 'assistant'
+  | 'facilities'
+  | 'auth'
+  | 'history'
 
-/** Complete Stage 2 human-centered landing page for VITALORA. */
+/** VITALORA modern medical-tech SaaS platform shell & 6-stage clinical workflow. */
 export function HomePage() {
-  const [checkModalOpen, setCheckModalOpen] = useState(false)
+  const { user, loading } = useAuth()
+  const prefersReduced = useReducedMotion()
+  const [activeView, setActiveView] = useState<ActiveView>(() =>
+    window.location.hash === '#check-in' ? 'check-in' : 'history',
+  )
+  const [preselectedSymptoms, setPreselectedSymptoms] = useState<string[]>([])
 
-  const openCheckPreview = () => setCheckModalOpen(true)
-  const closeCheckPreview = () => setCheckModalOpen(false)
+  useEffect(() => {
+    const syncFromHash = () => {
+      if (window.location.hash === '#check-in') {
+        setActiveView('check-in')
+      } else if (window.location.hash === '#home') {
+        setActiveView('landing')
+      }
+    }
+
+    window.addEventListener('hashchange', syncFromHash)
+    return () => window.removeEventListener('hashchange', syncFromHash)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-ivory text-slate">
+        <p className="text-sm font-medium">Loading VITALORA...</p>
+      </div>
+    )
+  }
+
+  // Protected Auth Gate: unauthenticated visitors always land on Welcome -> Sign In / Sign Up
+  if (!user) {
+    return (
+      <AuthWelcomePage
+        onLoginSuccess={() => {
+          setActiveView('history')
+          window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+        }}
+        onRegisterSuccess={() => {
+          setActiveView('auth')
+          window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+        }}
+      />
+    )
+  }
+
+  const startSymptomCheck = (symptomId?: string) => {
+    setPreselectedSymptoms(symptomId ? [symptomId] : [])
+    setActiveView('check-in')
+    if (window.location.hash !== '#check-in') {
+      window.history.pushState(null, '', '#check-in')
+    }
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  }
+
+  const exitToLanding = () => {
+    setPreselectedSymptoms([])
+    setActiveView('landing')
+    if (window.location.hash === '#check-in') {
+      window.history.pushState(null, '', '#top')
+    }
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  }
+
+  const openStandaloneView = (
+    view: 'assistant' | 'facilities' | 'auth' | 'history',
+  ) => {
+    setActiveView(view)
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  }
+
+  const navigateToSection = (sectionId: string) => {
+    const scrollBehavior = prefersReduced ? 'auto' : 'smooth'
+    const scrollTarget = () => {
+      if (sectionId === 'top') {
+        window.scrollTo({ top: 0, behavior: scrollBehavior })
+      } else {
+        document
+          .getElementById(sectionId)
+          ?.scrollIntoView({ behavior: scrollBehavior })
+      }
+    }
+
+    if (activeView !== 'landing') {
+      setActiveView('landing')
+      window.history.pushState(null, '', `#${sectionId}`)
+      window.setTimeout(scrollTarget, 60)
+    } else {
+      window.history.replaceState(null, '', `#${sectionId}`)
+      scrollTarget()
+    }
+  }
 
   return (
-    <PageLayout onCheckSymptoms={openCheckPreview}>
-      {/* 1. HERO SECTION */}
-      <Section
-        id="top"
-        tone="cream"
-        className="relative overflow-hidden pb-16 pt-10 sm:pb-24 sm:pt-16"
-      >
-        <OrganicBlob
-          variant="butter"
-          className="pointer-events-none absolute -left-28 -top-16 h-72 w-72 opacity-70"
+    <PageLayout
+      onCheckSymptoms={() => startSymptomCheck()}
+      onNavigateSection={navigateToSection}
+      onOpenView={openStandaloneView}
+      isCheckInActive={activeView !== 'landing'}
+    >
+      {activeView === 'check-in' ? (
+        <SymptomCheckFlow
+          key={preselectedSymptoms.join(',') || 'blank'}
+          initialSymptomIds={preselectedSymptoms}
+          onExitCheckIn={exitToLanding}
+          onOpenAuth={() => openStandaloneView('auth')}
         />
-        <OrganicBlob
-          variant="pink"
-          className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 opacity-60"
+      ) : activeView === 'auth' ? (
+        <AuthPanel
+          onBack={exitToLanding}
+          onOpenHistory={() => openStandaloneView('history')}
+          onStartSymptomCheck={() => startSymptomCheck()}
         />
-
-        <Container className="relative z-10">
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: vitaloraMotion.ease }}
-              className="space-y-5 lg:col-span-6"
-            >
-              <Badge tone="pink" dotColor="#FF7B61">
-                VITALORA · Friendly Health Companion
-              </Badge>
-
-              <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-[3.35rem]">
-                Care that feels calm when you don&apos;t feel your best.
-              </h1>
-
-              <p className="font-display text-xl font-bold text-coral-deep sm:text-2xl">
-                Understand your symptoms. Know your next step.
-              </p>
-
-              <p className="max-w-xl text-lg leading-relaxed text-cocoa">
-                VITALORA helps kids, families, and adults make sense of everyday
-                symptoms in plain, reassuring words — with gentle precautions and
-                clear guidance on when to see a doctor.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Button
-                  variant="coral"
-                  size="lg"
-                  onClick={openCheckPreview}
-                  rightIcon={<ArrowRightIcon className="h-5 w-5" />}
-                >
-                  Check my symptoms
+      ) : activeView === 'history' ? (
+        <HealthHistoryView
+          onBack={exitToLanding}
+          onStartCheck={() => startSymptomCheck()}
+          onOpenAuth={() => openStandaloneView('auth')}
+          onOpenAssistant={() => openStandaloneView('assistant')}
+          onOpenFacilities={() => openStandaloneView('facilities')}
+        />
+      ) : activeView === 'assistant' ? (
+        <Section tone="ivory" bordered={false} className="min-h-[75vh] py-10">
+          <Container size="narrow">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button variant="outline" size="sm" onClick={exitToLanding}>
+                  ← Back to VITALORA
                 </Button>
-                <Button href="#how-it-works" variant="outline" size="lg">
-                  How it works
+                <Button
+                  variant="forest"
+                  size="sm"
+                  onClick={() => startSymptomCheck()}
+                >
+                  Start full symptom check
                 </Button>
               </div>
-
-              <p className="inline-flex items-center gap-2 pt-1 text-sm font-bold text-taupe">
-                <SunIcon className="h-4 w-4 text-coral-deep" />
-                <span>
-                  Simple everyday words · No scary charts · Informational guidance only
-                </span>
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.5,
-                ease: vitaloraMotion.ease,
-                delay: 0.08,
-              }}
-              className="lg:col-span-6"
-            >
-              <HeroCompanionIllustration />
-            </motion.div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 2. HOW IT WORKS — Visual storytelling rather than generic cards */}
-      <Section id="how-it-works" tone="linen" topWave>
-        <Container>
-          <motion.div
-            {...vitaloraMotion.fadeUp}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <Badge tone="butter" dotColor="#D4A22B">
-              How it works
-            </Badge>
-            <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-              Three gentle steps — no medical guesswork
-            </h2>
-            <p className="mt-3 text-base text-cocoa sm:text-lg">
-              Follow an easy, unhurried path built to help you feel heard and
-              know what to do next.
-            </p>
-          </motion.div>
-
-          <div className="mt-14 space-y-14 sm:space-y-20">
-            {STORY_STEPS.map((item, idx) => {
-              const isReversed = idx % 2 === 1
-              return (
-                <motion.div
-                  key={item.step}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.45, ease: vitaloraMotion.ease }}
-                  className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12"
+              <MedicalChatbot initialLanguage={user?.preferredLanguage ?? 'en'} />
+            </div>
+          </Container>
+        </Section>
+      ) : activeView === 'facilities' ? (
+        <Section tone="ivory" bordered={false} className="min-h-[75vh] py-10">
+          <Container size="narrow">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button variant="outline" size="sm" onClick={exitToLanding}>
+                  ← Back to VITALORA
+                </Button>
+                <Button
+                  variant="forest"
+                  size="sm"
+                  onClick={() => startSymptomCheck()}
                 >
-                  <div
-                    className={`lg:col-span-6 ${
-                      isReversed ? 'lg:order-2' : 'lg:order-1'
-                    }`}
-                  >
-                    <StoryStepIllustration step={item.step} />
+                  Start full symptom check
+                </Button>
+              </div>
+              <NearbyFacilities />
+            </div>
+          </Container>
+        </Section>
+      ) : (
+        <>
+          {/* 1. CLEAN MEDICAL SAAS HERO */}
+          <Section id="top" tone="paper" className="py-12 sm:py-16">
+            <Container>
+              <div className="grid items-center gap-10 lg:grid-cols-12">
+                <div className="space-y-5 lg:col-span-7">
+                  <Badge tone="forest" dotColor="#0F52BA">
+                    AI-Powered Personal Health Assistant
+                  </Badge>
+
+                  <h1 className="font-display text-3xl font-bold tracking-tight text-charcoal sm:text-5xl">
+                    Understand your symptoms.{' '}
+                    <span className="text-forest">Know your next step.</span>
+                  </h1>
+
+                  <p className="max-w-xl text-base leading-relaxed text-slate sm:text-lg">
+                    A structured 6-step health platform combining deterministic
+                    emergency screening, Python ML symptom-pattern analysis,
+                    bilingual AI guidance (English &amp; हिन्दी), and verified
+                    nearby care.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <Button
+                      variant="forest"
+                      size="lg"
+                      onClick={() => startSymptomCheck()}
+                      rightIcon={<ArrowRightIcon className="h-4 w-4" />}
+                    >
+                      Check my symptoms
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => openStandaloneView(user ? 'history' : 'auth')}
+                    >
+                      {user ? 'Open Health Dashboard' : 'Create Health Profile'}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="lg"
+                      onClick={() => openStandaloneView('assistant')}
+                      leftIcon={<SparkleIcon className="h-4 w-4" />}
+                    >
+                      AI Assistant
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Right: Clinical Platform Quick-Access Card */}
+                <div className="rounded-2xl border border-hairline bg-ivory p-6 shadow-xs lg:col-span-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-hairline pb-3">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-forest">
+                      Clinical Safety First
+                    </span>
+                    <span className="rounded-full bg-sage-mist px-2.5 py-0.5 text-xs font-semibold text-coral">
+                      EN / हिन्दी
+                    </span>
                   </div>
 
-                  <div
-                    className={`space-y-4 lg:col-span-6 ${
-                      isReversed ? 'lg:order-1' : 'lg:order-2'
-                    }`}
-                  >
-                    <div className="inline-flex items-center gap-3">
-                      <span
-                        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border-2 text-lg font-extrabold ${item.badgeBg}`}
-                      >
-                        {item.step}
+                  <ul className="space-y-3 text-sm text-slate">
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                      <span>
+                        <strong>Real Python ML model</strong> trained on 20
+                        primary-care conditions with symptom influence weights.
                       </span>
-                      <span className="text-sm font-extrabold uppercase tracking-wider text-taupe">
-                        {item.badgeText}
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                      <span>
+                        <strong>Instant red-flag checks</strong> interrupt
+                        normal results when 112 emergency signs appear.
                       </span>
-                    </div>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
+                      <span>
+                        <strong>PDF health reports</strong> &amp; live
+                        OpenStreetMap nearby hospitals and clinics.
+                      </span>
+                    </li>
+                  </ul>
 
-                    <h3 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+                  <div className="flex items-center justify-between rounded-xl border border-urgent/25 bg-urgent-soft px-4 py-3 text-xs text-charcoal">
+                    <span className="flex items-center gap-2 font-semibold text-urgent">
+                      <PhoneUrgentIcon className="h-4 w-4" />
+                      Emergency in India: Call 112
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => openStandaloneView('facilities')}
+                      className="cursor-pointer font-semibold text-forest hover:underline"
+                    >
+                      Nearby Care →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </Section>
+
+          {/* 2. SIX-STEP CONTINUOUS WORKFLOW */}
+          <Section id="how-it-works" tone="ivory" className="py-12 sm:py-16">
+            <Container>
+              <div className="max-w-2xl space-y-2 mb-8">
+                <Badge tone="coral" dotColor="#0D9488">
+                  How VITALORA Works
+                </Badge>
+                <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+                  One connected 6-step health journey
+                </h2>
+                <p className="text-sm text-slate sm:text-base">
+                  Move between onboarding, symptom check-in, ML analysis, AI
+                  precautions, and nearby care without losing your information.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {SIX_STAGE_WORKFLOW.map((item) => (
+                  <div
+                    key={item.step}
+                    className="rounded-2xl border border-hairline bg-paper p-5 shadow-xs space-y-2"
+                  >
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-sand text-xs font-bold text-forest">
+                      {item.step}
+                    </span>
+                    <h3 className="font-display text-base font-semibold text-charcoal">
                       {item.title}
                     </h3>
-
-                    <p className="max-w-lg text-lg leading-relaxed text-cocoa">
+                    <p className="text-sm leading-relaxed text-slate">
                       {item.description}
                     </p>
-
-                    {item.examples ? (
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {item.examples.map((example) => (
-                          <span
-                            key={example}
-                            className="rounded-full border-2 border-border-warm bg-warm-white px-3.5 py-1.5 text-sm font-bold text-cocoa"
-                          >
-                            {example}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
                   </div>
-                </motion.div>
-              )
-            })}
-          </div>
-        </Container>
-      </Section>
+                ))}
+              </div>
+            </Container>
+          </Section>
 
-      {/* 3. HEALTH AWARENESS */}
-      <Section id="health-awareness" tone="cream" topWave>
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-5">
-              <BodyAwarenessIllustration />
-            </div>
+          {/* 3. INTERACTIVE BODY MAP QUICK-START */}
+          <Section id="body-atlas" tone="paper" className="py-12 sm:py-16">
+            <Container>
+              <BodyRegionExplorer onStartCheckWithSymptom={startSymptomCheck} />
+            </Container>
+          </Section>
 
-            <motion.div
-              {...vitaloraMotion.fadeUp}
-              className="space-y-6 lg:col-span-7"
-            >
-              <Badge tone="green" dotColor="#2C875C">
-                Health awareness
-              </Badge>
+          {/* 4. MEDICAL SAFETY & TRANSPARENCY BOUNDARIES */}
+          <Section id="safety" tone="ivory" className="py-12 sm:py-16">
+            <Container>
+              <div className="max-w-2xl space-y-2 mb-8">
+                <Badge tone="urgent">Medical Safety</Badge>
+                <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+                  Built with strict clinical boundaries
+                </h2>
+              </div>
 
-              <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
-                Listening to your body doesn&apos;t have to feel scary
-              </h2>
-
-              <p className="text-base leading-relaxed text-cocoa sm:text-lg">
-                Your body gives quiet signals every day. Paying calm attention
-                to how you feel helps you take simple steps early and talk more
-                clearly with someone who can help.
-              </p>
-
-              <ul className="space-y-5 pt-1">
-                {AWARENESS_POINTS.map((point) => {
-                  const Icon = point.icon
-                  return (
-                    <li key={point.title} className="flex items-start gap-4">
-                      <span
-                        className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-border-warm ${point.iconBg}`}
-                      >
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <h3 className="font-display text-xl font-bold text-ink">
-                          {point.title}
-                        </h3>
-                        <p className="mt-1 text-base leading-relaxed text-cocoa">
-                          {point.description}
-                        </p>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            </motion.div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 4. SAFETY */}
-      <Section id="safety" tone="mint" topWave>
-        <Container>
-          <motion.div {...vitaloraMotion.fadeUp} className="max-w-2xl">
-            <Badge tone="tomato" dotColor="#DE4436">
-              Safety first
-            </Badge>
-            <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-              Helpful guidance with clear, honest boundaries
-            </h2>
-          </motion.div>
-
-          <div className="mt-10 grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
-            {/* Calm non-diagnostic boundaries */}
-            <motion.div
-              {...vitaloraMotion.fadeUp}
-              className="space-y-5 lg:col-span-6"
-            >
-              {SAFETY_BOUNDARIES.map((item) => (
-                <div
-                  key={item.title}
-                  className="flex items-start gap-3.5 rounded-3xl border-2 border-green/25 bg-warm-white p-5"
-                >
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-soft text-green">
-                    <CheckCircleIcon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-lg font-bold text-ink">
-                      {item.title}
+              <div className="grid gap-4 md:grid-cols-3">
+                {SAFETY_BOUNDARIES.map((b) => (
+                  <div
+                    key={b.code}
+                    className="rounded-2xl border border-hairline bg-paper p-5 space-y-2"
+                  >
+                    <div className="flex items-center gap-2 text-xs font-bold text-forest">
+                      <ShieldAlertIcon className="h-4 w-4 text-coral" />
+                      <span>{b.code}</span>
+                    </div>
+                    <h3 className="font-display text-base font-semibold text-charcoal">
+                      {b.title}
                     </h3>
-                    <p className="mt-1 text-base leading-relaxed text-cocoa">
-                      {item.detail}
+                    <p className="text-sm leading-relaxed text-slate">
+                      {b.detail}
                     </p>
                   </div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Clear tomato-red emergency guidance */}
-            <motion.div
-              {...vitaloraMotion.fadeUp}
-              className="rounded-[2rem] border-2 border-tomato/55 bg-warm-white p-6 shadow-[0_8px_0_0_rgba(222,68,54,0.12)] sm:p-8 lg:col-span-6"
-            >
-              <div className="flex items-center gap-3.5">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-tomato text-warm-white">
-                  <PhoneUrgentIcon className="h-6 w-6" />
-                </span>
-                <div>
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-tomato">
-                    Urgent care warning
-                  </span>
-                  <h3 className="font-display text-2xl font-bold text-ink">
-                    Emergency symptoms require immediate medical attention
-                  </h3>
-                </div>
-              </div>
-
-              <p className="mt-4 text-base leading-relaxed text-cocoa">
-                Do not wait for an online check-in if you or someone near you
-                notices sudden or severe signs like:
-              </p>
-
-              <ul className="mt-4 space-y-2.5">
-                {EMERGENCY_SIGNS.map((sign) => (
-                  <li
-                    key={sign}
-                    className="flex items-start gap-2.5 text-base font-bold text-ink"
-                  >
-                    <span
-                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-tomato"
-                      aria-hidden="true"
-                    />
-                    <span>{sign}</span>
-                  </li>
                 ))}
-              </ul>
-
-              <div className="mt-6 rounded-2xl bg-tomato-soft px-4 py-3.5 text-sm font-extrabold text-[#8F2118]">
-                Call your local emergency number or go to the nearest emergency
-                room right away.
               </div>
-            </motion.div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 5. FINAL CTA */}
-      <Section id="get-started" tone="pink" topWave>
-        <Container size="narrow">
-          <motion.div
-            {...vitaloraMotion.fadeUp}
-            className="rounded-[2.5rem] border-2 border-border-warm bg-warm-white px-6 py-12 text-center shadow-[0_10px_0_0_rgba(38,33,29,0.06)] sm:px-14 sm:py-16"
-          >
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-coral-soft text-coral-deep">
-              <HeartIcon className="h-7 w-7" />
-            </div>
-
-            <div className="mt-4">
-              <Badge tone="butter" dotColor="#D4A22B">
-                Understand your symptoms. Know your next step.
-              </Badge>
-            </div>
-
-            <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-4xl">
-              Ready to feel a little clearer about what&apos;s going on?
-            </h2>
-
-            <p className="mx-auto mt-3 max-w-lg text-base leading-relaxed text-cocoa sm:text-lg">
-              Begin with a calm check-in preview, or review how our simple
-              step-by-step guidance works for you and your family.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Button
-                variant="coral"
-                size="lg"
-                onClick={openCheckPreview}
-                leftIcon={<SparkleIcon className="h-5 w-5" />}
-              >
-                Check my symptoms
-              </Button>
-              <Button href="#how-it-works" variant="green" size="lg">
-                How it works
-              </Button>
-            </div>
-          </motion.div>
-        </Container>
-      </Section>
-
-      <SymptomCheckComingSoonModal
-        open={checkModalOpen}
-        onClose={closeCheckPreview}
-      />
+            </Container>
+          </Section>
+        </>
+      )}
     </PageLayout>
   )
 }
