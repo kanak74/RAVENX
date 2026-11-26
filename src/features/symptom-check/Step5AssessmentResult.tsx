@@ -531,8 +531,12 @@ export function Step5AssessmentResult({
         }}
       />
 
-      {/* STAGE 6: VERIFIED NEARBY HEALTHCARE FACILITIES */}
-      <NearbyFacilities />
+      {/* STAGE 6: DOCTOR CONSULTATION & VERIFIED NEARBY HEALTHCARE FACILITIES */}
+      <NearbyFacilities
+        recommendedSpecialists={mlPredictions
+          .map((p) => p.recommendedSpecialist)
+          .filter(Boolean)}
+      />
 
       {/* E. WHAT INFORMATION DID I PROVIDE? */}
       <section

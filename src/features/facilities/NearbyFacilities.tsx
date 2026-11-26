@@ -16,7 +16,13 @@ interface FacilityItem {
   osmUrl?: string
 }
 
-export function NearbyFacilities() {
+export interface NearbyFacilitiesProps {
+  recommendedSpecialists?: string[]
+}
+
+export function NearbyFacilities({
+  recommendedSpecialists = [],
+}: NearbyFacilitiesProps = {}) {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -159,17 +165,18 @@ export function NearbyFacilities() {
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <Badge tone="coral" dotColor="#C25941">
-            Nearby Care
+          <Badge tone="coral" dotColor="#0D9488">
+            Step 6 · Doctor Consultation &amp; Nearby Care
           </Badge>
           <h2
             id="nearby-facilities-heading"
             className="mt-1.5 font-display text-xl font-semibold text-charcoal"
           >
-            Find verified nearby hospitals &amp; clinics
+            Find a doctor &amp; verified nearby medical facilities
           </h2>
           <p className="text-xs text-stone">
-            Live public healthcare listings from OpenStreetMap within 5 km.
+            Live public healthcare listings from OpenStreetMap within 5 km. We
+            never display fake doctor profiles or simulated booking slots.
           </p>
         </div>
         <Button
@@ -181,6 +188,28 @@ export function NearbyFacilities() {
         >
           Use my location
         </Button>
+      </div>
+
+      {/* Doctor Specialization & Consultation Guidance */}
+      <div className="rounded-xl border border-forest/20 bg-peach-mist/70 p-4 space-y-1.5 text-xs text-charcoal">
+        <p className="font-semibold text-forest">
+          Consultation Preparation &amp; Specialization
+        </p>
+        {recommendedSpecialists.length > 0 ? (
+          <p>
+            <strong>Suggested specialist(s) to look for:</strong>{' '}
+            {Array.from(new Set(recommendedSpecialists)).join(', ')}
+          </p>
+        ) : (
+          <p>
+            <strong>Suggested starting point:</strong> General Physician / Primary
+            Care Clinic for initial examination and evaluation.
+          </p>
+        )}
+        <p className="text-slate">
+          Bring your symptom timeline, downloaded VITALORA PDF summary, and any
+          medications or allergies when calling or visiting a clinic.
+        </p>
       </div>
 
       <form onSubmit={handleSearch} className="flex flex-col gap-2 sm:flex-row">

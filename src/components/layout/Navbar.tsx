@@ -174,7 +174,7 @@ export function Navbar({
                   onClick={() => onOpenView(user ? 'history' : 'auth')}
                   className="cursor-pointer rounded-full border border-hairline bg-paper px-3 py-1.5 text-xs font-semibold text-charcoal transition-colors hover:bg-sand"
                 >
-                  {user ? user.name.split(' ')[0] : 'Sign in'}
+                  {user ? 'Dashboard' : 'Sign in'}
                 </button>
               </>
             ) : null}

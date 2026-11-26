@@ -1,40 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Warm Ivory, Muted Coral, Soft Terracotta, Sage Green & Charcoal palette */
-  --color-ivory: #f9f7f2;
-  --color-sand: #f0ece3;
+  /* Crisp White, Soft Medical Blue & Subtle Teal Healthcare SaaS Palette */
+  --color-ivory: #f4f8fc;
+  --color-sand: #e8f0f8;
   --color-paper: #ffffff;
-  --color-sage-mist: #e4ede8;
-  --color-peach-mist: #f6ebe4;
+  --color-sage-mist: #e6f4f1;
+  --color-peach-mist: #ebf3fa;
 
-  /* Editorial Charcoal & Warm Grey */
-  --color-charcoal: #18201e;
-  --color-slate: #444e4a;
-  --color-stone: #6e756f;
-  --color-hairline: #e2ded3;
-  --color-hairline-strong: #cac4b6;
+  /* Clinical Slate & Navy Typography */
+  --color-charcoal: #0f172a;
+  --color-slate: #475569;
+  --color-stone: #64748b;
+  --color-hairline: #e2e8f0;
+  --color-hairline-strong: #cbd5e1;
 
-  /* Primary: Deep Botanical Pine & Muted Sage Green */
-  --color-forest: #174b42;
-  --color-forest-hover: #103b34;
-  --color-sage: #5b8577;
+  /* Primary: Medical Blue */
+  --color-forest: #0f52ba;
+  --color-forest-hover: #0b3f91;
+  --color-sage: #0d9488;
 
-  /* Secondary Warmth: Soft Terracotta & Muted Coral */
-  --color-coral: #c25941;
-  --color-coral-hover: #ab4b35;
-  --color-coral-accent: #d6735c;
-  --color-coral-soft: #f7eae4;
+  /* Secondary Accent: Subtle Medical Teal */
+  --color-coral: #0d9488;
+  --color-coral-hover: #0f766e;
+  --color-coral-accent: #14b8a6;
+  --color-coral-soft: #e6f4f1;
 
-  --color-urgent: #b4372e;
-  --color-urgent-hover: #992d25;
-  --color-urgent-soft: #fceceb;
+  /* Emergency Clinical Red */
+  --color-urgent: #dc2626;
+  --color-urgent-hover: #b91c1c;
+  --color-urgent-soft: #fef2f2;
 
-  --color-amber-soft: #f5ead7;
-  --color-amber-ink: #7d5418;
+  --color-amber-soft: #fef3c7;
+  --color-amber-ink: #92400e;
 }
 
 @layer base {
@@ -58,7 +59,7 @@
     min-height: 100vh;
     background-color: var(--color-ivory);
     color: var(--color-charcoal);
-    line-height: 1.65;
+    line-height: 1.6;
     overflow-x: clip;
   }
 
@@ -69,7 +70,7 @@
     font-family: var(--font-display);
     color: var(--color-charcoal);
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.2;
   }
 
   ::selection {

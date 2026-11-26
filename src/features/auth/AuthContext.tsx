@@ -4,8 +4,12 @@ export interface UserProfile {
   id: string
   name: string
   email: string
+  age?: number | null
+  gender?: string
   ageGroup: 'under-18' | 'adult' | 'older-adult'
   preferredLanguage: 'en' | 'hi'
+  existingConditions?: string
+  allergies?: string
   medicalNotes: string
 }
 
@@ -19,13 +23,22 @@ interface AuthContextValue {
     name: string
     email: string
     password: string
+    age?: number | null
+    gender?: string
     ageGroup: UserProfile['ageGroup']
     preferredLanguage: UserProfile['preferredLanguage']
+    existingConditions?: string
+    allergies?: string
+    medicalNotes?: string
   }) => Promise<{ ok: boolean; error?: string }>
   updateProfile: (payload: {
     name: string
+    age?: number | null
+    gender?: string
     ageGroup: UserProfile['ageGroup']
     preferredLanguage: UserProfile['preferredLanguage']
+    existingConditions?: string
+    allergies?: string
     medicalNotes: string
   }) => Promise<{ ok: boolean; error?: string }>
   logout: () => Promise<void>
@@ -97,8 +110,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     name: string
     email: string
     password: string
+    age?: number | null
+    gender?: string
     ageGroup: UserProfile['ageGroup']
     preferredLanguage: UserProfile['preferredLanguage']
+    existingConditions?: string
+    allergies?: string
+    medicalNotes?: string
   }) => {
     try {
       const res = await fetch('/api/auth', {
@@ -127,8 +145,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const updateProfile = async (payload: {
     name: string
+    age?: number | null
+    gender?: string
     ageGroup: UserProfile['ageGroup']
     preferredLanguage: UserProfile['preferredLanguage']
+    existingConditions?: string
+    allergies?: string
     medicalNotes: string
   }) => {
     const res = await fetch('/api/auth', {

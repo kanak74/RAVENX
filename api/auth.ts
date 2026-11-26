@@ -10,8 +10,12 @@ interface StoredUser {
   name: string
   email: string
   passwordHash: string
+  age?: number | null
+  gender?: string
   ageGroup: 'under-18' | 'adult' | 'older-adult'
   preferredLanguage: 'en' | 'hi'
+  existingConditions?: string
+  allergies?: string
   medicalNotes: string
   createdAt: string
 }
@@ -223,9 +227,13 @@ export async function GET(request: Request): Promise<Response> {
           id: user.id,
           name: user.name,
           email: user.email,
+          age: user.age ?? null,
+          gender: user.gender ?? 'prefer-not-to-say',
           ageGroup: user.ageGroup,
           preferredLanguage: user.preferredLanguage,
-          medicalNotes: user.medicalNotes,
+          existingConditions: user.existingConditions ?? '',
+          allergies: user.allergies ?? '',
+          medicalNotes: user.medicalNotes ?? '',
         },
       })
     }
@@ -267,13 +275,25 @@ export async function POST(request: Request): Promise<Response> {
       const name = String(body.name ?? '').trim()
       const email = String(body.email ?? '').trim().toLowerCase()
       const password = String(body.password ?? '')
+      const rawAge = body.age !== undefined && body.age !== '' ? Number(body.age) : null
+      const age = rawAge !== null && Number.isFinite(rawAge) && rawAge >= 1 && rawAge <= 120 ? Math.round(rawAge) : null
+      const gender = String(body.gender ?? 'prefer-not-to-say').slice(0, 40)
       const ageGroup = (
-        body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
-          ? body.ageGroup
-          : 'adult'
+        age !== null
+          ? age < 18
+            ? 'under-18'
+            : age >= 65
+              ? 'older-adult'
+              : 'adult'
+          : body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
+            ? body.ageGroup
+            : 'adult'
       ) as StoredUser['ageGroup']
       const preferredLanguage: 'en' | 'hi' =
         body.preferredLanguage === 'hi' ? 'hi' : 'en'
+      const existingConditions = String(body.existingConditions ?? '').trim().slice(0, 400)
+      const allergies = String(body.allergies ?? '').trim().slice(0, 400)
+      const medicalNotes = String(body.medicalNotes ?? '').trim().slice(0, 1000)
 
       if (name.length < 2) {
         return jsonResponse({ error: 'Please enter your full name.' }, 400)
@@ -318,9 +338,13 @@ export async function POST(request: Request): Promise<Response> {
           name,
           email,
           passwordHash,
+          age,
+          gender,
           ageGroup,
           preferredLanguage,
-          medicalNotes: '',
+          existingConditions,
+          allergies,
+          medicalNotes,
           createdAt: new Date().toISOString(),
         })
       }
@@ -333,9 +357,13 @@ export async function POST(request: Request): Promise<Response> {
             id,
             name,
             email,
+            age,
+            gender,
             ageGroup,
             preferredLanguage,
-            medicalNotes: '',
+            existingConditions,
+            allergies,
+            medicalNotes,
           },
         },
         201,
@@ -400,9 +428,13 @@ export async function POST(request: Request): Promise<Response> {
               id: user.id,
               name: user.name,
               email: user.email,
+              age: user.age ?? null,
+              gender: user.gender ?? 'prefer-not-to-say',
               ageGroup: user.ageGroup,
               preferredLanguage: user.preferredLanguage,
-              medicalNotes: user.medicalNotes,
+              existingConditions: user.existingConditions ?? '',
+              allergies: user.allergies ?? '',
+              medicalNotes: user.medicalNotes ?? '',
             },
           },
           200,
@@ -418,13 +450,24 @@ export async function POST(request: Request): Promise<Response> {
       }
 
       const name = String(body.name ?? '').trim()
+      const rawAge = body.age !== undefined && body.age !== '' ? Number(body.age) : null
+      const age = rawAge !== null && Number.isFinite(rawAge) && rawAge >= 1 && rawAge <= 120 ? Math.round(rawAge) : null
+      const gender = String(body.gender ?? 'prefer-not-to-say').slice(0, 40)
       const ageGroup = (
-        body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
-          ? body.ageGroup
-          : 'adult'
+        age !== null
+          ? age < 18
+            ? 'under-18'
+            : age >= 65
+              ? 'older-adult'
+              : 'adult'
+          : body.ageGroup === 'under-18' || body.ageGroup === 'older-adult'
+            ? body.ageGroup
+            : 'adult'
       ) as StoredUser['ageGroup']
       const preferredLanguage: 'en' | 'hi' =
         body.preferredLanguage === 'hi' ? 'hi' : 'en'
+      const existingConditions = String(body.existingConditions ?? '').trim().slice(0, 400)
+      const allergies = String(body.allergies ?? '').trim().slice(0, 400)
       const medicalNotes = String(body.medicalNotes ?? '').slice(0, 1000)
 
       if (name.length < 2) {
@@ -450,8 +493,12 @@ export async function POST(request: Request): Promise<Response> {
         await blobWriteUser({
           ...existing,
           name,
+          age,
+          gender,
           ageGroup,
           preferredLanguage,
+          existingConditions,
+          allergies,
           medicalNotes,
         })
       }
@@ -462,8 +509,12 @@ export async function POST(request: Request): Promise<Response> {
           id: session.userId,
           name,
           email: session.email,
+          age,
+          gender,
           ageGroup,
           preferredLanguage,
+          existingConditions,
+          allergies,
           medicalNotes,
         },
       })

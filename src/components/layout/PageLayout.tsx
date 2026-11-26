@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react'
 import { MotionConfig } from 'framer-motion'
-import { AmbientBackground } from '../motion/AmbientBackground'
-import { InteractiveCursor } from '../motion/InteractiveCursor'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
@@ -13,7 +11,7 @@ export interface PageLayoutProps {
   isCheckInActive?: boolean
 }
 
-/** Top-level shell providing ambient background motion, desktop cursor layer, header, and footer. */
+/** Clean healthcare SaaS application shell with sticky header and safety footer. */
 export function PageLayout({
   children,
   onCheckSymptoms,
@@ -24,9 +22,6 @@ export function PageLayout({
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative flex min-h-screen flex-col bg-ivory text-charcoal">
-        <AmbientBackground />
-        <InteractiveCursor />
-
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-forest focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-paper"

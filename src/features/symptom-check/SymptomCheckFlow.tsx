@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Container } from '../../components/layout/Container'
 import { Section } from '../../components/layout/Section'
 import { Button } from '../../components/ui/Button'
+import { useAuth } from '../auth/AuthContext'
 import { CheckInProgress, type CheckInStep } from './CheckInProgress'
 import { getContextualQuestions } from './contextualQuestions'
 import { EmergencyAlertBanner } from './EmergencyAlertBanner'
@@ -47,6 +48,7 @@ export function SymptomCheckFlow({
   onOpenAuth,
   initialSymptomIds,
 }: SymptomCheckFlowProps) {
+  const { user } = useAuth()
   const prefersReduced = useReducedMotion()
   const [step, setStep] = useState<CheckInStep>(1)
   const [highestStepReached, setHighestStepReached] = useState<CheckInStep>(1)
@@ -54,6 +56,15 @@ export function SymptomCheckFlow({
     createInitialData(initialSymptomIds),
   )
   const [showAssessment, setShowAssessment] = useState(false)
+
+  useEffect(() => {
+    if (user?.ageGroup && !data.measurements.ageGroup) {
+      setData((prev) => ({
+        ...prev,
+        measurements: { ...prev.measurements, ageGroup: user.ageGroup },
+      }))
+    }
+  }, [user?.ageGroup, data.measurements.ageGroup])
 
   const emergencyAssessment = useMemo(
     () => evaluateEmergencySafety(data),
@@ -172,14 +183,35 @@ export function SymptomCheckFlow({
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Button variant="outline" size="sm" onClick={onExitCheckIn}>
-              ← Back to home guide
+              ← Back to home
             </Button>
 
-            {hasAnyInput ? (
-              <Button variant="ghost" size="sm" onClick={handleStartOver}>
-                Start over
-              </Button>
-            ) : null}
+            <div className="flex flex-wrap items-center gap-2">
+              {user ? (
+                <button
+                  type="button"
+                  onClick={onOpenAuth}
+                  className="cursor-pointer rounded-full border border-forest/20 bg-paper px-3 py-1 text-xs font-semibold text-forest hover:bg-sand"
+                >
+                  Profile: {user.name}
+                  {user.age ? ` (${user.age}y)` : ''}
+                </button>
+              ) : onOpenAuth ? (
+                <button
+                  type="button"
+                  onClick={onOpenAuth}
+                  className="cursor-pointer rounded-full border border-hairline bg-paper px-3 py-1 text-xs font-semibold text-slate hover:bg-sand"
+                >
+                  Step 1: Add Health Profile
+                </button>
+              ) : null}
+
+              {hasAnyInput ? (
+                <Button variant="ghost" size="sm" onClick={handleStartOver}>
+                  Start over
+                </Button>
+              ) : null}
+            </div>
           </div>
 
           {!showAssessment ? (
