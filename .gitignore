@@ -9,7 +9,11 @@ dist-ssr/
 # Environment & secrets
 .env
 .env.*
+!.env.example
 *.local
+
+# Vercel
+.vercel
 
 # Logs
 npm-debug.log*
