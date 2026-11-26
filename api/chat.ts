@@ -131,10 +131,9 @@ STRICT RULES:
 
     try {
       const candidateModels = [
+        'gemini-3.7-flash',
         'gemini-3.8-flash',
         'gemini-flash-latest',
-        'gemini-3-flash-preview',
-        'gemini-2.5-flash-lite',
       ]
 
       const contents = validMessages.slice(-12).map((m) => ({
@@ -150,7 +149,10 @@ STRICT RULES:
             systemInstruction,
             temperature: 0.3,
             maxOutputTokens: 1024,
-            abortSignal: controller.signal,
+            abortSignal: AbortSignal.any([
+              controller.signal,
+              AbortSignal.timeout(10000),
+            ]),
           },
         })
 
@@ -174,7 +176,10 @@ STRICT RULES:
         } catch (err) {
           lastErr = err
           const msg = err instanceof Error ? err.message : String(err)
-          if (!isRetryableModelError(msg)) {
+          if (
+            controller.signal.aborted ||
+            (!isRetryableModelError(msg) && !/abort|timeout/i.test(msg))
+          ) {
             throw err
           }
         }
