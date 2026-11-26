@@ -13,14 +13,14 @@ import {
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
 
-// ─── Types ─────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────
 
-export interface VoiceChatTurn {
+interface VoiceChatTurn {
   id: string
   role: 'user' | 'assistant'
   content: string
   emergencyDetected?: boolean
-  inputMode?: 'voice' | 'text'
+  inputMode: 'voice' | 'text'
 }
 
 type MicState = 'idle' | 'listening' | 'error' | 'unsupported'
@@ -31,16 +31,18 @@ export interface VoiceHealthAssistantProps {
   onStartSymptomCheck?: () => void
 }
 
-// ─── Browser-API helpers ────────────────────────────────────────────────────
+// ── Browser-API helpers ────────────────────────────────────────────────────
 
-function getSpeechRecognition(): SpeechRecognition | null {
+type SpeechRecognitionCtor = new () => SpeechRecognition
+
+function getSpeechRecognitionCtor(): SpeechRecognitionCtor | null {
   try {
-    const SR =
-      (window as unknown as { SpeechRecognition?: typeof SpeechRecognition; webkitSpeechRecognition?: typeof SpeechRecognition })
-        .SpeechRecognition ??
-      (window as unknown as { webkitSpeechRecognition?: typeof SpeechRecognition })
-        .webkitSpeechRecognition
-    return SR ? new SR() : null
+    // eslint is irrelevant here — `as unknown as Record` is the TS-safe way
+    const w = window as unknown as Record<string, unknown>
+    const Ctor = (w['SpeechRecognition'] ?? w['webkitSpeechRecognition']) as
+      | SpeechRecognitionCtor
+      | undefined
+    return Ctor ?? null
   } catch {
     return null
   }
@@ -52,7 +54,7 @@ function isTTSSupported(): boolean {
 
 const LANG_CODE: Record<'en' | 'hi', string> = { en: 'en-IN', hi: 'hi-IN' }
 
-function getVoice(lang: 'en' | 'hi'): SpeechSynthesisVoice | null {
+function pickVoice(lang: 'en' | 'hi'): SpeechSynthesisVoice | null {
   if (!isTTSSupported()) return null
   const voices = window.speechSynthesis.getVoices()
   if (!voices.length) return null
@@ -71,9 +73,9 @@ function getVoice(lang: 'en' | 'hi'): SpeechSynthesisVoice | null {
   )
 }
 
-// ─── Suggested prompts ──────────────────────────────────────────────────────
+// ── Suggested prompts ──────────────────────────────────────────────────────
 
-const SUGGESTED = {
+const SUGGESTED: Record<'en' | 'hi', string[]> = {
   en: [
     'I have a headache and mild fever since yesterday',
     'My throat hurts when I swallow',
@@ -90,7 +92,7 @@ const SUGGESTED = {
   ],
 }
 
-// ─── SoundWave animation ────────────────────────────────────────────────────
+// ── SoundWave animation ────────────────────────────────────────────────────
 
 function SoundWave({ active }: { active: boolean }) {
   const bars = [0.4, 0.7, 1.0, 0.85, 0.6, 0.9, 0.5, 0.75, 0.95, 0.65, 0.4, 0.8]
@@ -107,7 +109,13 @@ function SoundWave({ active }: { active: boolean }) {
           }
           transition={
             active
-              ? { duration: 0.75 + i * 0.06, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut', delay: i * 0.05 }
+              ? {
+                  duration: 0.75 + i * 0.06,
+                  repeat: Infinity,
+                  repeatType: 'reverse',
+                  ease: 'easeInOut',
+                  delay: i * 0.05,
+                }
               : { duration: 0.3 }
           }
           style={{ height: 32, originY: 'center' }}
@@ -117,7 +125,7 @@ function SoundWave({ active }: { active: boolean }) {
   )
 }
 
-// ─── Main Component ─────────────────────────────────────────────────────────
+// ── Main Component ─────────────────────────────────────────────────────────
 
 export function VoiceHealthAssistant({
   initialLanguage = 'en',
@@ -134,11 +142,17 @@ export function VoiceHealthAssistant({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [ttsEnabled, setTtsEnabled] = useState(true)
-  const [micSupported] = useState(() => Boolean(getSpeechRecognition()))
-  const [ttsSupported] = useState(isTTSSupported)
+
+  // Detect support once on mount — safe from SSR issues
+  const micSupported = useRef(false)
+  const ttsSupported = useRef(false)
+  useEffect(() => {
+    micSupported.current = Boolean(getSpeechRecognitionCtor())
+    ttsSupported.current = isTTSSupported()
+  }, [])
 
   const recognitionRef = useRef<SpeechRecognition | null>(null)
-  const lastSpokenRef = useRef<string>('')
+  const lastSpokenRef = useRef('')
   const chatEndRef = useRef<HTMLDivElement | null>(null)
 
   // Auto-scroll
@@ -146,62 +160,70 @@ export function VoiceHealthAssistant({
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 
-  // Load TTS voices async
+  // Prime TTS voice list (async in some browsers)
   useEffect(() => {
     if (!isTTSSupported()) return
     window.speechSynthesis.getVoices()
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices()
-    return () => { window.speechSynthesis.onvoiceschanged = null }
+    const handler = () => window.speechSynthesis.getVoices()
+    window.speechSynthesis.onvoiceschanged = handler
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null
+    }
   }, [])
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       recognitionRef.current?.abort()
-      window.speechSynthesis?.cancel()
+      if (isTTSSupported()) window.speechSynthesis.cancel()
     }
   }, [])
 
-  // ── TTS ──────────────────────────────────────────────────────────────────
+  // ── TTS ────────────────────────────────────────────────────────────────
 
   const speak = useCallback(
     (text: string) => {
-      if (!ttsSupported || !ttsEnabled) return
+      if (!isTTSSupported() || !ttsEnabled) return
       window.speechSynthesis.cancel()
       lastSpokenRef.current = text
       const utterance = new SpeechSynthesisUtterance(text)
-      const voice = getVoice(language)
+      const voice = pickVoice(language)
       if (voice) utterance.voice = voice
       utterance.lang = LANG_CODE[language]
       utterance.rate = 0.95
       utterance.onstart = () => setSpeakState('speaking')
       utterance.onend = () => setSpeakState('idle')
-      utterance.onerror = () => setSpeakState('idle')
+      // onerror must match SpeechSynthesisErrorEvent signature
+      utterance.onerror = (_ev: SpeechSynthesisErrorEvent) => setSpeakState('idle')
       setSpeakState('speaking')
       window.speechSynthesis.speak(utterance)
     },
-    [language, ttsEnabled, ttsSupported],
+    [language, ttsEnabled],
   )
 
-  const stopSpeaking = () => {
-    window.speechSynthesis?.cancel()
+  const stopSpeaking = useCallback(() => {
+    if (isTTSSupported()) window.speechSynthesis.cancel()
     setSpeakState('idle')
-  }
+  }, [])
 
-  // ── API call ─────────────────────────────────────────────────────────────
+  const replaySpeech = useCallback(() => {
+    if (lastSpokenRef.current) speak(lastSpokenRef.current)
+  }, [speak])
+
+  // ── API call ──────────────────────────────────────────────────────────
 
   const sendToAI = useCallback(
-    async (userText: string) => {
+    async (userText: string, mode: 'voice' | 'text') => {
       const trimmed = userText.trim()
       if (!trimmed || loading) return
 
-      const newUserTurn: VoiceChatTurn = {
-        id: Date.now().toString(),
+      const newTurn: VoiceChatTurn = {
+        id: String(Date.now()),
         role: 'user',
         content: trimmed,
-        inputMode,
+        inputMode: mode,
       }
-      const updated = [...messages, newUserTurn]
+      const updated = [...messages, newTurn]
       setMessages(updated)
       setLiveTranscript('')
       setEditableTranscript('')
@@ -227,19 +249,21 @@ export function VoiceHealthAssistant({
 
         if (!res.ok || !data.reply) {
           setError(
-            data.message ?? data.error ??
-            (language === 'hi'
-              ? 'AI सहायक अभी उपलब्ध नहीं है।'
-              : 'AI assistant is currently unavailable. Please try again.'),
+            data.message ??
+              data.error ??
+              (language === 'hi'
+                ? 'AI सहायक अभी उपलब्ध नहीं है।'
+                : 'AI assistant is currently unavailable. Please try again.'),
           )
           return
         }
 
         const aiTurn: VoiceChatTurn = {
-          id: (Date.now() + 1).toString(),
+          id: String(Date.now() + 1),
           role: 'assistant',
           content: data.reply,
           emergencyDetected: data.emergencyDetected,
+          inputMode: 'text',
         }
         setMessages((prev) => [...prev, aiTurn])
         speak(data.reply)
@@ -253,83 +277,107 @@ export function VoiceHealthAssistant({
         setLoading(false)
       }
     },
-    [loading, messages, language, inputMode, speak],
+    [loading, messages, language, speak],
   )
 
-  // ── Speech Recognition ───────────────────────────────────────────────────
+  // ── Speech Recognition ────────────────────────────────────────────────
 
   const startListening = useCallback(() => {
-    if (!micSupported) { setMicState('unsupported'); return }
+    const Ctor = getSpeechRecognitionCtor()
+    if (!Ctor) {
+      setMicState('unsupported')
+      return
+    }
     if (micState === 'listening') return
-    const recognition = getSpeechRecognition()
-    if (!recognition) { setMicState('unsupported'); return }
 
+    const recognition = new Ctor()
     recognition.lang = LANG_CODE[language]
     recognition.continuous = false
     recognition.interimResults = true
     recognition.maxAlternatives = 1
 
-    recognition.onstart = () => { setMicState('listening'); setLiveTranscript('') }
-    recognition.onresult = (event) => {
+    recognition.onstart = () => {
+      setMicState('listening')
+      setLiveTranscript('')
+    }
+
+    recognition.onresult = (ev: SpeechRecognitionEvent) => {
       let interim = ''
       let final = ''
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const t = event.results[i][0].transcript
-        if (event.results[i].isFinal) final += t
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const t = ev.results[i][0].transcript
+        if (ev.results[i].isFinal) final += t
         else interim += t
       }
       setLiveTranscript(interim)
-      if (final) setEditableTranscript((prev) => (prev ? prev + ' ' + final : final))
+      if (final) setEditableTranscript((prev) => (prev ? `${prev} ${final}` : final))
     }
-    recognition.onspeechend = () => recognition.stop()
+
     recognition.onend = () => {
       setMicState((prev) => (prev === 'listening' ? 'idle' : prev))
       setLiveTranscript('')
     }
-    recognition.onerror = (event) => {
-      if (event.error === 'not-allowed') {
+
+    recognition.onerror = (ev: SpeechRecognitionErrorEvent) => {
+      if (ev.error === 'not-allowed') {
         setMicState('error')
         setError(
           language === 'hi'
             ? 'माइक्रोफोन की अनुमति नहीं है। ब्राउज़र सेटिंग में माइक्रोफोन चालू करें।'
             : 'Microphone permission denied. Please allow microphone access in browser settings.',
         )
-      } else if (event.error !== 'no-speech' && event.error !== 'aborted') {
+      } else if (ev.error !== 'no-speech' && ev.error !== 'aborted') {
         setMicState('error')
-        setError(language === 'hi' ? `वाणी त्रुटि: ${event.error}` : `Speech error: ${event.error}. Try again.`)
+        setError(
+          language === 'hi'
+            ? `वाणी त्रुटि: ${ev.error}`
+            : `Speech error: ${ev.error}. Please try again.`,
+        )
       } else {
         setMicState('idle')
       }
     }
 
     recognitionRef.current = recognition
-    try { recognition.start() } catch {
+    try {
+      recognition.start()
+    } catch {
       setMicState('error')
-      setError(language === 'hi' ? 'माइक शुरू नहीं हो सका।' : 'Could not start microphone.')
+      setError(
+        language === 'hi'
+          ? 'माइक शुरू नहीं हो सका।'
+          : 'Could not start microphone.',
+      )
     }
-  }, [micSupported, micState, language])
+  }, [micState, language])
 
-  const stopListening = () => { recognitionRef.current?.stop(); setMicState('idle') }
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop()
+    setMicState('idle')
+  }, [])
 
-  const handleMicClick = () => {
+  const handleMicClick = useCallback(() => {
     setError('')
     if (micState === 'listening') stopListening()
     else startListening()
-  }
+  }, [micState, startListening, stopListening])
 
-  const handleSendVoice = () => {
+  const handleSendVoice = useCallback(() => {
     const text = editableTranscript.trim() || liveTranscript.trim()
-    if (text) void sendToAI(text)
-  }
+    if (text) void sendToAI(text, 'voice')
+  }, [editableTranscript, liveTranscript, sendToAI])
 
-  const handleSendText = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (textInput.trim()) void sendToAI(textInput)
-  }
+  const handleSendText = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault()
+      if (textInput.trim()) void sendToAI(textInput, 'text')
+    },
+    [textInput, sendToAI],
+  )
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     recognitionRef.current?.abort()
-    window.speechSynthesis?.cancel()
+    if (isTTSSupported()) window.speechSynthesis.cancel()
     setMessages([])
     setLiveTranscript('')
     setEditableTranscript('')
@@ -337,33 +385,41 @@ export function VoiceHealthAssistant({
     setError('')
     setMicState('idle')
     setSpeakState('idle')
-  }
+  }, [])
 
   const isListening = micState === 'listening'
   const hasTranscript = Boolean(editableTranscript.trim() || liveTranscript.trim())
+  const canUseVoice = micState !== 'unsupported'
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // ── Render ─────────────────────────────────────────────────────────────
+
   return (
     <section
       aria-labelledby="voice-assistant-heading"
       className="relative overflow-hidden rounded-3xl border border-hairline bg-paper shadow-[0_24px_64px_-16px_rgba(15,82,186,0.10)]"
     >
-      {/* Top ambient gradient */}
+      {/* Ambient top gradient */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-48 rounded-t-3xl"
-        style={{ background: 'linear-gradient(180deg,rgba(15,82,186,0.04) 0%,transparent 100%)' }}
+        style={{
+          background: 'linear-gradient(180deg,rgba(15,82,186,0.04) 0%,transparent 100%)',
+        }}
       />
 
-      {/* ── Header ─────────────────────────────────────────────── */}
+      {/* ── Header ─────────────────────────────────────────── */}
       <div className="relative flex flex-wrap items-start justify-between gap-4 border-b border-hairline px-6 py-5">
         <div className="space-y-1">
-          <Badge tone="forest" dotColor="#0d9488">AI Voice Health Assistant</Badge>
+          <Badge tone="forest" dotColor="#0d9488">
+            AI Voice Health Assistant
+          </Badge>
           <h2
             id="voice-assistant-heading"
             className="font-display text-xl font-bold text-charcoal sm:text-2xl"
           >
-            {language === 'hi' ? 'अपनी भावना के बारे में बात करें' : 'Talk About How You Feel'}
+            {language === 'hi'
+              ? 'अपनी भावना के बारे में बात करें'
+              : 'Talk About How You Feel'}
           </h2>
           <p className="text-xs text-stone">
             {language === 'hi'
@@ -374,13 +430,23 @@ export function VoiceHealthAssistant({
 
         <div className="flex flex-wrap items-center gap-2">
           {/* Language toggle */}
-          <div role="group" aria-label="Language" className="inline-flex rounded-xl border border-hairline bg-ivory p-1">
+          <div
+            role="group"
+            aria-label="Language"
+            className="inline-flex rounded-xl border border-hairline bg-ivory p-1"
+          >
             {(['en', 'hi'] as const).map((lang) => (
               <button
                 key={lang}
                 type="button"
-                onClick={() => { setLanguage(lang); window.speechSynthesis?.cancel(); setSpeakState('idle') }}
-                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${language === lang ? 'bg-forest text-paper' : 'text-slate hover:text-charcoal'}`}
+                onClick={() => {
+                  setLanguage(lang)
+                  if (isTTSSupported()) window.speechSynthesis.cancel()
+                  setSpeakState('idle')
+                }}
+                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  language === lang ? 'bg-forest text-paper' : 'text-slate hover:text-charcoal'
+                }`}
               >
                 {lang === 'en' ? 'English' : 'हिन्दी'}
               </button>
@@ -388,30 +454,57 @@ export function VoiceHealthAssistant({
           </div>
 
           {/* Input mode toggle */}
-          <div role="group" aria-label="Input mode" className="inline-flex rounded-xl border border-hairline bg-ivory p-1">
+          <div
+            role="group"
+            aria-label="Input mode"
+            className="inline-flex rounded-xl border border-hairline bg-ivory p-1"
+          >
             {(['voice', 'text'] as const).map((mode) => (
               <button
                 key={mode}
                 type="button"
                 onClick={() => setInputMode(mode)}
-                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${inputMode === mode ? 'bg-forest text-paper' : 'text-slate hover:text-charcoal'}`}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  inputMode === mode ? 'bg-forest text-paper' : 'text-slate hover:text-charcoal'
+                }`}
               >
-                {mode === 'voice'
-                  ? <><MicIcon className="h-3.5 w-3.5" /> {language === 'hi' ? 'आवाज़' : 'Voice'}</>
-                  : <><SparkleIcon className="h-3.5 w-3.5" /> {language === 'hi' ? 'टाइप' : 'Text'}</>}
+                {mode === 'voice' ? (
+                  <>
+                    <MicIcon className="h-3.5 w-3.5" />
+                    {language === 'hi' ? 'आवाज़' : 'Voice'}
+                  </>
+                ) : (
+                  <>
+                    <SparkleIcon className="h-3.5 w-3.5" />
+                    {language === 'hi' ? 'टाइप' : 'Text'}
+                  </>
+                )}
               </button>
             ))}
           </div>
 
           {/* TTS toggle */}
-          {ttsSupported && (
+          {ttsSupported.current && (
             <button
               type="button"
-              onClick={() => { setTtsEnabled((v) => !v); if (ttsEnabled) stopSpeaking() }}
+              onClick={() => {
+                setTtsEnabled((v) => !v)
+                if (ttsEnabled) stopSpeaking()
+              }}
               className="flex cursor-pointer items-center gap-1.5 rounded-xl border border-hairline bg-ivory px-3 py-1.5 text-xs font-semibold text-slate transition-colors hover:bg-sand"
             >
-              {ttsEnabled ? <SpeakerIcon className="h-3.5 w-3.5" /> : <SpeakerOffIcon className="h-3.5 w-3.5" />}
-              {ttsEnabled ? (language === 'hi' ? 'आवाज़ बंद' : 'Mute') : (language === 'hi' ? 'आवाज़ चालू' : 'Unmute')}
+              {ttsEnabled ? (
+                <SpeakerIcon className="h-3.5 w-3.5" />
+              ) : (
+                <SpeakerOffIcon className="h-3.5 w-3.5" />
+              )}
+              {ttsEnabled
+                ? language === 'hi'
+                  ? 'आवाज़ बंद'
+                  : 'Mute'
+                : language === 'hi'
+                  ? 'आवाज़ चालू'
+                  : 'Unmute'}
             </button>
           )}
 
@@ -427,7 +520,7 @@ export function VoiceHealthAssistant({
         </div>
       </div>
 
-      {/* ── Chat + Interaction Body ────────────────────────────── */}
+      {/* ── Chat + Interaction Body ─────────────────────────── */}
       <div className="relative flex flex-col gap-6 p-6">
 
         {/* Conversation history */}
@@ -449,13 +542,21 @@ export function VoiceHealthAssistant({
               >
                 <div className="mb-1.5 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
-                    {msg.role === 'user' && msg.inputMode === 'voice' && <MicIcon className="h-3 w-3 text-stone" />}
-                    {msg.emergencyDetected && <ShieldAlertIcon className="h-3.5 w-3.5 text-urgent" />}
+                    {msg.role === 'user' && msg.inputMode === 'voice' && (
+                      <MicIcon className="h-3 w-3 text-stone" />
+                    )}
+                    {msg.emergencyDetected === true && (
+                      <ShieldAlertIcon className="h-3.5 w-3.5 text-urgent" />
+                    )}
                     <span className="text-[11px] font-bold uppercase tracking-widest text-stone">
-                      {msg.role === 'user' ? (language === 'hi' ? 'आप' : 'You') : 'VITALORA AI'}
+                      {msg.role === 'user'
+                        ? language === 'hi'
+                          ? 'आप'
+                          : 'You'
+                        : 'VITALORA AI'}
                     </span>
                   </div>
-                  {msg.role === 'assistant' && ttsSupported && ttsEnabled && (
+                  {msg.role === 'assistant' && ttsSupported.current && ttsEnabled && (
                     <button
                       type="button"
                       onClick={() => speak(msg.content)}
@@ -467,12 +568,13 @@ export function VoiceHealthAssistant({
                   )}
                 </div>
                 <p className="whitespace-pre-wrap">{msg.content}</p>
-                {msg.emergencyDetected && (
+                {msg.emergencyDetected === true && (
                   <a
                     href="tel:112"
                     className="mt-3 inline-flex items-center gap-2 rounded-xl bg-urgent px-4 py-2 text-xs font-bold text-paper"
                   >
-                    📞 {language === 'hi' ? 'आपातकालीन कॉल 112' : 'Call Emergency 112'}
+                    📞{' '}
+                    {language === 'hi' ? 'आपातकालीन कॉल 112' : 'Call Emergency 112'}
                   </a>
                 )}
               </motion.div>
@@ -503,7 +605,7 @@ export function VoiceHealthAssistant({
           </div>
         )}
 
-        {/* Suggested prompts */}
+        {/* Suggested prompts (shown when empty) */}
         {messages.length === 0 && !isListening && (
           <div className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-wider text-stone">
@@ -514,7 +616,7 @@ export function VoiceHealthAssistant({
                 <button
                   key={s}
                   type="button"
-                  onClick={() => void sendToAI(s)}
+                  onClick={() => void sendToAI(s, 'text')}
                   disabled={loading}
                   className="cursor-pointer rounded-full border border-forest/20 bg-sage-mist/60 px-3.5 py-1.5 text-xs font-semibold text-forest transition-colors hover:bg-sage-mist disabled:opacity-40"
                 >
@@ -525,7 +627,7 @@ export function VoiceHealthAssistant({
           </div>
         )}
 
-        {/* ── VOICE MODE ──────────────────────────────────────── */}
+        {/* ── VOICE MODE ──────────────────────────────────── */}
         {inputMode === 'voice' && (
           <div className="flex flex-col items-center gap-5">
             {/* Wave + Mic button */}
@@ -537,7 +639,7 @@ export function VoiceHealthAssistant({
               <motion.button
                 type="button"
                 onClick={handleMicClick}
-                disabled={micState === 'unsupported' || loading}
+                disabled={!canUseVoice || loading}
                 whileTap={{ scale: 0.93 }}
                 className={`relative flex h-24 w-24 cursor-pointer items-center justify-center rounded-full border-4 shadow-lg transition-all duration-300 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-forest disabled:cursor-not-allowed disabled:opacity-40 ${
                   isListening
@@ -556,18 +658,25 @@ export function VoiceHealthAssistant({
                     <motion.div
                       className="absolute inset-0 rounded-full border-4 border-urgent"
                       animate={{ scale: [1, 1.9], opacity: [0.3, 0] }}
-                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.4 }}
+                      transition={{
+                        duration: 1.4,
+                        repeat: Infinity,
+                        ease: 'easeOut',
+                        delay: 0.4,
+                      }}
                     />
                   </>
                 )}
-                {isListening
-                  ? <MicOffIcon className="h-9 w-9" />
-                  : <MicIcon className="h-9 w-9" />}
+                {isListening ? (
+                  <MicOffIcon className="h-9 w-9" />
+                ) : (
+                  <MicIcon className="h-9 w-9" />
+                )}
               </motion.button>
 
               <AnimatePresence mode="wait">
                 <motion.p
-                  key={micState + String(loading)}
+                  key={`${micState}-${String(loading)}`}
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
@@ -575,17 +684,25 @@ export function VoiceHealthAssistant({
                   className="text-center text-sm font-semibold text-slate"
                 >
                   {micState === 'unsupported'
-                    ? (language === 'hi' ? 'यह ब्राउज़र वॉइस सपोर्ट नहीं करता' : 'Voice not supported in this browser')
+                    ? language === 'hi'
+                      ? 'यह ब्राउज़र वॉइस सपोर्ट नहीं करता'
+                      : 'Voice not supported in this browser'
                     : isListening
-                      ? (language === 'hi' ? '🎙️ सुन रहा हूँ… बोलें' : '🎙️ Listening… speak now')
+                      ? language === 'hi'
+                        ? '🎙️ सुन रहा हूँ… बोलें'
+                        : '🎙️ Listening… speak now'
                       : loading
-                        ? (language === 'hi' ? '⏳ जवाब तैयार हो रहा है…' : '⏳ Processing…')
-                        : (language === 'hi' ? 'माइक दबाएं और बोलें' : 'Press mic and speak your symptoms')}
+                        ? language === 'hi'
+                          ? '⏳ जवाब तैयार हो रहा है…'
+                          : '⏳ Processing…'
+                        : language === 'hi'
+                          ? 'माइक दबाएं और बोलें'
+                          : 'Press mic and speak your symptoms'}
                 </motion.p>
               </AnimatePresence>
             </div>
 
-            {/* Live transcript */}
+            {/* Live transcript panel */}
             <AnimatePresence>
               {(liveTranscript || editableTranscript) && (
                 <motion.div
@@ -598,25 +715,55 @@ export function VoiceHealthAssistant({
                     {language === 'hi' ? 'आपकी आवाज़ (संपादन योग्य)' : 'Your words — editable'}
                   </p>
                   <textarea
-                    value={editableTranscript + (liveTranscript ? ' ' + liveTranscript : '')}
+                    value={
+                      liveTranscript
+                        ? `${editableTranscript} ${liveTranscript}`.trim()
+                        : editableTranscript
+                    }
                     onChange={(e) => setEditableTranscript(e.target.value)}
                     rows={3}
                     className="w-full resize-none rounded-xl border border-hairline bg-paper px-3 py-2 text-sm text-charcoal focus:border-forest focus:outline-none"
-                    placeholder={language === 'hi' ? 'लाइव ट्रांसक्रिप्ट यहाँ दिखेगी…' : 'Live transcript appears here…'}
+                    placeholder={
+                      language === 'hi'
+                        ? 'लाइव ट्रांसक्रिप्ट यहाँ दिखेगी…'
+                        : 'Live transcript appears here…'
+                    }
                   />
                   {liveTranscript && (
                     <p className="text-xs italic text-stone">
-                      {language === 'hi' ? 'पहचान हो रही है: ' : 'Recognizing: '}{liveTranscript}
+                      {language === 'hi' ? 'पहचान हो रही है: ' : 'Recognizing: '}
+                      {liveTranscript}
                     </p>
                   )}
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="forest" size="sm" disabled={!hasTranscript || loading} onClick={handleSendVoice} rightIcon={<ArrowRightIcon className="h-3.5 w-3.5" />}>
+                    <Button
+                      variant="forest"
+                      size="sm"
+                      disabled={!hasTranscript || loading}
+                      onClick={handleSendVoice}
+                      rightIcon={<ArrowRightIcon className="h-3.5 w-3.5" />}
+                    >
                       {language === 'hi' ? 'AI को भेजें' : 'Send to AI'}
                     </Button>
-                    <button type="button" onClick={() => { setLiveTranscript(''); setEditableTranscript('') }} className="cursor-pointer rounded-xl border border-hairline px-3 py-1.5 text-xs font-semibold text-slate hover:bg-sand">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLiveTranscript('')
+                        setEditableTranscript('')
+                      }}
+                      className="cursor-pointer rounded-xl border border-hairline px-3 py-1.5 text-xs font-semibold text-slate hover:bg-sand"
+                    >
                       {language === 'hi' ? 'साफ़ करें' : 'Clear'}
                     </button>
-                    <button type="button" onClick={() => { setLiveTranscript(''); setEditableTranscript(''); startListening() }} className="cursor-pointer rounded-xl border border-hairline px-3 py-1.5 text-xs font-semibold text-stone hover:bg-sand">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLiveTranscript('')
+                        setEditableTranscript('')
+                        startListening()
+                      }}
+                      className="cursor-pointer rounded-xl border border-hairline px-3 py-1.5 text-xs font-semibold text-stone hover:bg-sand"
+                    >
                       {language === 'hi' ? 'फिर बोलें' : 'Re-record'}
                     </button>
                   </div>
@@ -635,17 +782,25 @@ export function VoiceHealthAssistant({
                 <span className="flex-1 text-xs font-semibold text-forest">
                   {language === 'hi' ? 'AI बोल रहा है…' : 'AI is speaking…'}
                 </span>
-                <button type="button" onClick={stopSpeaking} className="cursor-pointer rounded-lg border border-hairline px-2 py-1 text-xs font-semibold text-slate hover:bg-sand">
+                <button
+                  type="button"
+                  onClick={stopSpeaking}
+                  className="cursor-pointer rounded-lg border border-hairline px-2 py-1 text-xs font-semibold text-slate hover:bg-sand"
+                >
                   {language === 'hi' ? 'रोकें' : 'Stop'}
                 </button>
-                <button type="button" onClick={() => speak(lastSpokenRef.current)} className="cursor-pointer rounded-lg border border-hairline px-2 py-1 text-xs font-semibold text-slate hover:bg-sand">
+                <button
+                  type="button"
+                  onClick={replaySpeech}
+                  className="cursor-pointer rounded-lg border border-hairline px-2 py-1 text-xs font-semibold text-slate hover:bg-sand"
+                >
                   {language === 'hi' ? 'फिर सुनें' : 'Replay'}
                 </button>
               </motion.div>
             )}
 
             {/* Browser compatibility note */}
-            {!micSupported && (
+            {micState === 'unsupported' && (
               <div className="w-full rounded-2xl border border-amber-soft bg-amber-soft/70 px-4 py-3 text-xs text-amber-ink">
                 <strong>{language === 'hi' ? 'नोट: ' : 'Note: '}</strong>
                 {language === 'hi'
@@ -656,7 +811,7 @@ export function VoiceHealthAssistant({
           </div>
         )}
 
-        {/* ── TEXT MODE ────────────────────────────────────────── */}
+        {/* ── TEXT MODE ──────────────────────────────────── */}
         {inputMode === 'text' && (
           <form onSubmit={handleSendText} className="flex flex-col gap-2 sm:flex-row">
             <input
@@ -690,7 +845,9 @@ export function VoiceHealthAssistant({
             role="alert"
             className="rounded-xl border border-urgent/30 bg-urgent-soft px-4 py-3 text-sm text-charcoal"
           >
-            <span className="font-semibold text-urgent">{language === 'hi' ? 'त्रुटि: ' : 'Error: '}</span>
+            <span className="font-semibold text-urgent">
+              {language === 'hi' ? 'त्रुटि: ' : 'Error: '}
+            </span>
             {error}
           </motion.div>
         )}
@@ -704,7 +861,12 @@ export function VoiceHealthAssistant({
               : 'Health information only — not a substitute for professional medical care.'}
           </p>
           {onStartSymptomCheck && (
-            <Button variant="outline" size="sm" onClick={onStartSymptomCheck} rightIcon={<ArrowRightIcon className="h-3.5 w-3.5" />}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onStartSymptomCheck}
+              rightIcon={<ArrowRightIcon className="h-3.5 w-3.5" />}
+            >
               {language === 'hi' ? 'पूरा Symptom Check करें' : 'Full Symptom Check-In'}
             </Button>
           )}
