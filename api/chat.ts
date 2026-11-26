@@ -160,6 +160,11 @@ STRICT RULES:
       let lastErr: unknown = null
       const tried = new Set<string>()
 
+      const isRetryableModelError = (msg: string) =>
+        /404|not found|no longer available|unsupported|429|quota|resource_exhausted|limit:\s*0/i.test(
+          msg,
+        )
+
       for (const modelName of candidateModels) {
         tried.add(modelName)
         try {
@@ -170,7 +175,7 @@ STRICT RULES:
         } catch (err) {
           lastErr = err
           const msg = err instanceof Error ? err.message : String(err)
-          if (!/404|not found|no longer available|unsupported/i.test(msg)) {
+          if (!isRetryableModelError(msg)) {
             throw err
           }
         }
@@ -185,7 +190,9 @@ STRICT RULES:
           if (
             name.startsWith('gemini-') &&
             !tried.has(name) &&
-            !/(image|tts|audio|embedding|robotics|computer-use|deep-research|live)/i.test(name)
+            !/(image|tts|audio|embedding|robotics|computer-use|deep-research|live|omni)/i.test(
+              name,
+            )
           ) {
             discovered.push(name)
           }
@@ -198,7 +205,7 @@ STRICT RULES:
           return b.localeCompare(a)
         })
 
-        for (const modelName of discovered.slice(0, 8)) {
+        for (const modelName of discovered.slice(0, 12)) {
           try {
             usedModel = modelName
             response = await tryGenerate(modelName)
@@ -207,7 +214,7 @@ STRICT RULES:
           } catch (err) {
             lastErr = err
             const msg = err instanceof Error ? err.message : String(err)
-            if (!/404|not found|no longer available|unsupported/i.test(msg)) {
+            if (!isRetryableModelError(msg)) {
               throw err
             }
           }
