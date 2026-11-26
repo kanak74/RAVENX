@@ -79,11 +79,12 @@ async function blobWriteUser(user: StoredUser): Promise<void> {
 }
 
 function getSecret(): string {
-  return (
-    process.env.AUTH_SECRET ||
-    process.env.VERCEL_PROJECT_ID ||
-    'vitalora-session-secret'
-  )
+  const secret = process.env.AUTH_SECRET
+  if (secret) return secret
+  if (process.env.VERCEL_ENV === 'production') {
+    throw new Error('AUTH_SECRET_NOT_CONFIGURED')
+  }
+  return 'vitalora-local-dev-secret'
 }
 
 function hashPassword(password: string): string {

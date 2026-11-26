@@ -288,6 +288,9 @@ export function NearbyFacilities({
                       Tel: {f.phone}
                     </p>
                   ) : null}
+                  <p className="mt-1 text-[11px] text-stone/80">
+                    Public OpenStreetMap listing — verify hours by phone before visiting.
+                  </p>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
                   <a

@@ -62,13 +62,6 @@ export function Footer({ onCheckSymptoms, onNavigateSection }: FooterProps) {
               How it works
             </a>
             <a
-              href="#health-awareness"
-              onClick={(e) => handleLinkClick(e, 'health-awareness')}
-              className="transition-colors hover:text-charcoal"
-            >
-              Why it matters
-            </a>
-            <a
               href="#safety"
               onClick={(e) => handleLinkClick(e, 'safety')}
               className="transition-colors hover:text-charcoal"

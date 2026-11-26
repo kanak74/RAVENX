@@ -22,6 +22,12 @@ export interface Step5AssessmentResultProps {
   onOpenAuth?: () => void
 }
 
+function getQualitativeOverlap(pct: number): string {
+  if (pct >= 65) return 'Strong symptom overlap'
+  if (pct >= 30) return 'Moderate symptom overlap'
+  return 'Possible symptom overlap'
+}
+
 interface PredictApiResponse {
   status: 'ok' | 'emergency' | 'insufficient_data'
   insufficientData?: boolean
@@ -286,31 +292,26 @@ export function Step5AssessmentResult({
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <Badge tone="sand">ML Pattern Analysis</Badge>
+              <Badge tone="sand">Prototype ML Pattern Classifier (Demo Dataset)</Badge>
               <h2
                 id="ml-prediction-heading"
                 className="mt-1.5 font-display text-xl font-semibold text-charcoal sm:text-2xl"
               >
-                Possible conditions matching these symptoms
+                Symptom-pattern associations
               </h2>
             </div>
-            {mlResult?.modelInfo ? (
-              <span className="text-xs text-stone">
-                {mlResult.modelInfo.modelType} · {mlResult.modelInfo.datasetRows}{' '}
-                training cases
-              </span>
-            ) : null}
           </div>
 
           <p className="text-xs leading-relaxed text-stone">
-            Confidence bars show how closely your symptom pattern matches
-            historical cases in our dataset. They are{' '}
-            <strong>not confirmed medical probabilities or diagnoses</strong>.
+            These associations come from a prototype machine-learning classifier
+            trained on a <strong>synthetic demonstration dataset</strong> (not
+            clinically validated hospital data). They are{' '}
+            <strong>not diagnoses or medical probabilities</strong>.
           </p>
 
           {mlLoading ? (
             <p className="text-sm text-stone">
-              Running Python ML symptom analysis...
+              Checking symptom patterns...
             </p>
           ) : mlError ? (
             <p className="text-xs text-stone">{mlError}</p>
@@ -326,15 +327,8 @@ export function Step5AssessmentResult({
                       {pred.condition}
                     </h3>
                     <span className="rounded-full border border-forest/25 bg-sage-mist px-3 py-0.5 text-xs font-semibold text-forest">
-                      {pred.confidencePercent}% pattern match
+                      {getQualitativeOverlap(pred.confidencePercent)}
                     </span>
-                  </div>
-
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-sand">
-                    <div
-                      className="h-full rounded-full bg-forest transition-all"
-                      style={{ width: `${pred.confidencePercent}%` }}
-                    />
                   </div>
 
                   <p className="text-sm text-slate">{pred.summary}</p>

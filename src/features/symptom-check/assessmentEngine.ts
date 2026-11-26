@@ -384,14 +384,10 @@ function buildCareGuidance(
   }
 
   const monitorReasons: string[] = [
-    'None of the emergency warning signs included in this tool were reported.',
+    'No urgent warning signs were identified from the information you provided. This does not rule out a serious medical condition.',
   ]
   if (data.details.progression === 'better') {
     monitorReasons.push('You noted that your symptoms are starting to improve.')
-  } else {
-    monitorReasons.push(
-      'No check-in without a medical exam can confirm you are free of serious illness — seek care if anything gets worse or does not improve.',
-    )
   }
 
   return {
@@ -399,7 +395,7 @@ function buildCareGuidance(
     label:
       'Monitor your symptoms — Monitor how you feel and seek care if symptoms persist or worsen.',
     summary:
-      'Rest, watch how your symptoms change over the next 24 to 48 hours, and reach out to a doctor if you worsen, do not improve, or feel worried.',
+      'No urgent warning signs were identified from the information you provided. This does not rule out a serious medical condition. Watch how you feel over the next 24 to 48 hours and contact a doctor if symptoms worsen or do not improve.',
     reasons: monitorReasons,
   }
 }

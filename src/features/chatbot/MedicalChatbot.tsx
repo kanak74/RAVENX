@@ -256,20 +256,27 @@ export function MedicalChatbot({
       {error ? (
         <div
           role="alert"
-          className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-coral/35 bg-coral-soft/50 p-3 text-xs text-charcoal"
+          className="space-y-2 rounded-xl border border-coral/35 bg-coral-soft/50 p-3.5 text-xs text-charcoal"
         >
-          <span>{error}</span>
-          {failedMessage ? (
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => void sendMessage(failedMessage, true)}
-              disabled={loading}
-            >
-              {language === 'hi' ? 'पुनः प्रयास करें' : 'Retry'}
-            </Button>
-          ) : null}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="font-medium">{error}</span>
+            {failedMessage ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => void sendMessage(failedMessage, true)}
+                disabled={loading}
+              >
+                {language === 'hi' ? 'पुनः प्रयास करें' : 'Retry'}
+              </Button>
+            ) : null}
+          </div>
+          <p className="text-stone">
+            {language === 'hi'
+              ? 'आप ऊपर दिए गए लक्षण जांच (Symptom Checker) और 112 आपातकालीन मार्गदर्शन का उपयोग अभी भी कर सकते हैं।'
+              : 'While AI chat is offline, you can still use the deterministic Symptom Checker, PDF report export, and Nearby Care search.'}
+          </p>
         </div>
       ) : null}
 
